@@ -1,4 +1,4 @@
-import { getPostBySlug, postFiles } from "@lib/posts";
+import { getPostBySlug, getPostSlugs } from "@lib/posts";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { MDXRemote } from "next-mdx-remote";
 
@@ -21,7 +21,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = postFiles.map((slug) => ({ params: { slug } }));
+  const paths = getPostSlugs().map((slug) => ({
+    params: {
+      slug,
+    },
+  }));
 
   return {
     paths,
