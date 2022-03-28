@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next-remote-watch ./posts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -27,6 +27,7 @@
     "eslint-config-next": "12.1.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
+    "next-remote-watch": "^1.0.0",
     "prettier": "^2.6.1",
     "prettier-eslint": "^13.0.0",
     "prettier-plugin-organize-imports": "^2.3.4",
