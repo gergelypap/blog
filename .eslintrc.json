@@ -1,3 +1,9 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": ["next/core-web-vitals"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "padding-line-between-statements": ["error", { "blankLine": "always", "prev": "*", "next": "return" }]
+  }
 }
