@@ -5,8 +5,8 @@ export default function Header() {
     <header>
       <h1>@gpap</h1>
       <p>My developer blog. Because everybody has one.</p>
-      <Link href="/">
-        <a>Posts</a>
+      <Link href="/blog">
+        <a>Blog</a>
       </Link>
       <Link href="/about">
         <a>About</a>
