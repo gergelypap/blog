@@ -4,12 +4,14 @@ import type { AppProps } from "next/app";
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Header></Header>
-      <main>
-        <Component {...pageProps} />
-      </main>
-    </>
+    <div className="flex justify-center">
+      <div className="w-full max-w-xl">
+        <Header></Header>
+        <main className="p-5">
+          <Component {...pageProps} />
+        </main>
+      </div>
+    </div>
   );
 }
 
