@@ -9,10 +9,16 @@ const postFiles = fs.readdirSync(postsDirectory).map((path) => path.replace(/\.m
 
 export async function getPostBySlug(slug: string): Promise<Post> {
   const filename = postFiles.find((path) => path.slice(11) === slug);
+  if (!filename) {
+    throw new Error(`File ${slug} not found!`);
+  }
   const fullPath = join(postsDirectory, `${filename}.mdx`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
   const source = await serialize(content);
+
+  // Extract the creation date from the filename.
+  data.createdAt = filename.slice(0, 10);
 
   return {
     meta: data as PostMetadata,

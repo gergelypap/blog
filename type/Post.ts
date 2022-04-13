@@ -9,5 +9,7 @@ export interface Post {
 export interface PostMetadata {
   title: string;
   lead: string;
+  createdAt: string;
+  updatedAt?: string;
   tags: string[];
 }
