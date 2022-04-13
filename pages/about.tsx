@@ -1,7 +1,9 @@
+import PageTitle from "@components/PageTitle";
+
 export default function About() {
   return (
     <>
-      <h1>About</h1>
+      <PageTitle title="About" />
       <p>
         I am a full-stack web developer. This blog was made using the awesome{" "}
         <a href="https://nextjs.org" rel="noopener noreferrer">

@@ -1,3 +1,4 @@
+import PageTitle from "@components/PageTitle";
 import { Post } from "@type/Post";
 import Link from "next/link";
 
@@ -7,7 +8,7 @@ interface Props {
 }
 
 export default function PostTitle({ post, clickable = false }: Props) {
-  const title = <h1 className="text-2xl font-bold mb-2">{post.meta.title}</h1>;
+  const title = <PageTitle title={post.meta.title} />;
 
   if (clickable) {
     return (
