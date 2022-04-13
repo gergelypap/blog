@@ -5,7 +5,7 @@ import type { AppProps } from "next/app";
 function App({ Component, pageProps }: AppProps) {
   return (
     <div className="flex justify-center">
-      <div className="w-full max-w-xl">
+      <div className="w-full max-w-2xl">
         <Header></Header>
         <main className="p-5">
           <Component {...pageProps} />

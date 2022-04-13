@@ -1,0 +1,17 @@
+---
+title: Second post
+lead: This is the post lead.
+tags: ["general"]
+---
+
+Lorem ipsum `dolor` sit amet consectetur adipisicing elit. Quod id tenetur voluptas minima. Inventore ad iure facilis qui aut quod!
+
+```typescript
+export function prettyDate(dateString: string, locale = "en-US"): string {
+  return new Date(dateString).toLocaleString(locale, {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  });
+}
+```

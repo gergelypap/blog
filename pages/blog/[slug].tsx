@@ -1,9 +1,9 @@
+import PostContent from "@components/Post/PostContent";
 import PostDate from "@components/Post/PostDate";
 import PostTitle from "@components/Post/PostTitle";
 import { getPostBySlug, getPostSlugs } from "@lib/posts";
 import { Post } from "@type/Post";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { MDXRemote } from "next-mdx-remote";
 import Link from "next/link";
 
 interface Props {
@@ -17,7 +17,7 @@ export default function BlogPostPage({ post }: Props) {
     <section>
       <PostTitle post={post} />
       <PostDate post={post} />
-      <MDXRemote {...post.source} />
+      <PostContent post={post} />
       <Link href="/blog">
         <a>← Back</a>
       </Link>
