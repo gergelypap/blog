@@ -1,12 +1,19 @@
 import { getPostBySlug, getPostSlugs } from "@lib/posts";
+import { Post } from "@type/Post";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import Link from "next/link";
 
-export default function BlogPostPage({ post }) {
+interface Props {
+  post: Post;
+}
+
+type UrlParams = { slug: string };
+
+export default function BlogPostPage({ post }: Props) {
   return (
     <section>
-      <h1 className="text-2xl font-bold mb-5">{post.data.title}</h1>
+      <h1 className="text-2xl font-bold mb-5">{post.meta.title}</h1>
       <MDXRemote {...post.source} />
       <Link href="/blog">
         <a>← Back</a>
@@ -15,8 +22,9 @@ export default function BlogPostPage({ post }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = await getPostBySlug(params.slug);
+export const getStaticProps: GetStaticProps<Props, UrlParams> = async ({ params }) => {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const post = await getPostBySlug(params!.slug);
 
   return {
     props: {
