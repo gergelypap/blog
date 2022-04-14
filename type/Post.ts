@@ -1,9 +1,7 @@
-import { MDXRemoteProps } from "next-mdx-remote";
-
 export interface Post {
+  code: string;
   meta: PostMetadata;
   slug: string;
-  source: MDXRemoteProps;
 }
 
 export interface PostMetadata {

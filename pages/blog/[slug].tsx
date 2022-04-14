@@ -10,22 +10,26 @@ interface Props {
   post: Post;
 }
 
-type UrlParams = { slug: string };
-
 export default function BlogPostPage({ post }: Props) {
   return (
-    <section>
-      <PostTitle post={post} />
-      <PostDate post={post} />
-      <PostContent post={post} />
-      <Link href="/blog">
-        <a>← Back</a>
-      </Link>
-    </section>
+    <article>
+      <header>
+        <PostTitle post={post} />
+        <PostDate post={post} />
+      </header>
+      <section>
+        <PostContent mdxCode={post.code} />
+      </section>
+      <footer>
+        <Link href="/blog">
+          <a>← Back</a>
+        </Link>
+      </footer>
+    </article>
   );
 }
 
-export const getStaticProps: GetStaticProps<Props, UrlParams> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props, { slug: string }> = async ({ params }) => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const post = await getPostBySlug(params!.slug);
 

@@ -1,29 +1,26 @@
 import { Post, PostMetadata } from "@type/Post";
-import fs from "fs";
-import matter from "gray-matter";
-import { serialize } from "next-mdx-remote/serialize";
+import { readdirSync, readFileSync } from "fs";
+import { bundleMDX } from "mdx-bundler";
 import { join } from "path";
 
 const postsDirectory = join(process.cwd(), "posts");
-const postFiles = fs.readdirSync(postsDirectory).map((path) => path.replace(/\.mdx?$/i, ""));
+const postFiles = readdirSync(postsDirectory).map((path) => path.replace(/\.mdx?$/i, ""));
 
 export async function getPostBySlug(slug: string): Promise<Post> {
   const filename = postFiles.find((path) => path.slice(11) === slug);
   if (!filename) {
     throw new Error(`File ${slug} not found!`);
   }
-  const fullPath = join(postsDirectory, `${filename}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
-  const source = await serialize(content);
+  const source = readFileSync(join(postsDirectory, `${filename}.mdx`), "utf8");
+  const { code, frontmatter: meta } = await bundleMDX<PostMetadata>({ source });
 
   // Extract the creation date from the filename.
-  data.createdAt = filename.slice(0, 10);
+  meta.createdAt = filename.slice(0, 10);
 
   return {
-    meta: data as PostMetadata,
+    code,
+    meta,
     slug,
-    source,
   };
 }
 
