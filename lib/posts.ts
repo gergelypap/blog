@@ -4,7 +4,9 @@ import { bundleMDX } from "mdx-bundler";
 import { join } from "path";
 
 const postsDirectory = join(process.cwd(), "posts");
-const postFiles = readdirSync(postsDirectory).map((path) => path.replace(/\.mdx?$/i, ""));
+const postFiles = readdirSync(postsDirectory)
+  .filter((path) => path.includes(".mdx"))
+  .map((path) => path.replace(/\.mdx?$/i, ""));
 
 export async function getPostBySlug(slug: string): Promise<Post> {
   const filename = postFiles.find((path) => path.slice(11) === slug);
@@ -12,7 +14,11 @@ export async function getPostBySlug(slug: string): Promise<Post> {
     throw new Error(`File ${slug} not found!`);
   }
   const source = readFileSync(join(postsDirectory, `${filename}.mdx`), "utf8");
-  const { code, frontmatter: meta } = await bundleMDX<PostMetadata>({ source });
+  const { code, frontmatter: meta } = await bundleMDX<PostMetadata>({
+    source,
+    // This is needed so mdx-bundler knows where to resolve from.
+    cwd: process.cwd(),
+  });
 
   // Extract the creation date from the filename.
   meta.createdAt = filename.slice(0, 10);
