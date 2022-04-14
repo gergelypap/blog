@@ -14,3 +14,9 @@ p,
 pre {
   margin-bottom: theme("margin.5");
 }
+
+/* TODO: move this. */
+.rehype-code-title {
+  font-weight: theme("fontWeight.bold");
+  font-family: theme("fontFamily.mono");
+}

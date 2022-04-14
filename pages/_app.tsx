@@ -1,6 +1,8 @@
 import Header from "@components/Header";
 import "@styles/globals.css";
 import type { AppProps } from "next/app";
+// TODO: Support dark and light mode, load only on blog post pages.
+import "prism-themes/themes/prism-one-dark.css";
 
 function App({ Component, pageProps }: AppProps) {
   return (
