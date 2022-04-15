@@ -7,7 +7,7 @@ import "prism-themes/themes/prism-one-dark.css";
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider forcedTheme={Component.theme || undefined} attribute="class">
+    <ThemeProvider attribute="class">
       <div className="flex justify-center">
         <div className="w-full max-w-2xl">
           <Header></Header>
