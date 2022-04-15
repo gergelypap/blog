@@ -28,7 +28,7 @@ export async function getPostBySlug(slug: string): Promise<PostType> {
   };
 }
 
-export async function getPosts(limit = Infinity) {
+export async function getPosts(limit = Infinity): Promise<PostType[]> {
   const loadPosts = getPostSlugs().map(async (slug) => await getPostBySlug(slug));
   const posts = await Promise.all(loadPosts);
 
@@ -48,4 +48,10 @@ export function getPostSlugs(): string[] {
 
     return path.slice(11);
   });
+}
+
+export async function getPostsByTag(tag: string): Promise<PostType[]> {
+  const posts = await getPosts();
+
+  return posts.filter((post) => post.meta.tags.includes(tag));
 }
