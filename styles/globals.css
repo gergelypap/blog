@@ -15,8 +15,19 @@ pre {
   margin-bottom: theme("margin.5");
 }
 
-/* TODO: move this. */
+/* Code blocks */
+@import "~prism-themes/themes/prism-one-dark.css";
+
+code:not(.code-highlight) {
+  @apply bg-gray-300 rounded-md py-0.5 px-1 dark:bg-gray-700 dark:text-gray-200;
+}
+
 .rehype-code-title {
   font-weight: theme("fontWeight.bold");
   font-family: theme("fontFamily.mono");
+  font-size: theme("fontSize.sm");
+}
+
+.code-highlight {
+  font-size: theme("fontSize.sm");
 }
