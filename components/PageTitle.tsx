@@ -1,3 +1,7 @@
-export default function PageTitle({ title }: { title: string }) {
-  return <h1 className="text-2xl font-bold mb-2">{title}</h1>;
+interface Props {
+  text: string;
+}
+
+export default function PageTitle({ text }: Props) {
+  return <h1 className="text-2xl font-bold mb-3">{text}</h1>;
 }

@@ -1,4 +1,4 @@
-import PostContent from "@components/Post/PostContent";
+import MDXComponent from "@components/MDXComponent";
 import PostDate from "@components/Post/PostDate";
 import PostTitle from "@components/Post/PostTitle";
 import { getPostBySlug, getPostSlugs } from "@lib/posts";
@@ -18,7 +18,7 @@ export default function BlogPostPage({ post }: Props) {
         <PostDate post={post} />
       </header>
       <section>
-        <PostContent mdxCode={post.code} />
+        <MDXComponent code={post.code} />
       </section>
       <footer>
         <Link href="/blog">

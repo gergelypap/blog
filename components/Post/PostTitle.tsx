@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function PostTitle({ post, clickable = false }: Props) {
-  const title = <PageTitle title={post.meta.title} />;
+  const title = <PageTitle text={post.meta.title} />;
 
   if (clickable) {
     return (
