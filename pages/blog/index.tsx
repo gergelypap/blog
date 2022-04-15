@@ -19,9 +19,6 @@ export default function BlogPostsPage({ posts }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getPosts();
-  posts.sort((a, b) => {
-    return +new Date(b.meta.createdAt) - +new Date(a.meta.createdAt);
-  });
 
   return {
     props: {

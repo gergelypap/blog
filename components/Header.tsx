@@ -15,10 +15,10 @@ export default function Header() {
       <p className="my-5 text-gray-400">My developer blog. Because everybody has one.</p>
       <nav>
         <Link href="/blog">
-          <a className="mr-5 inline-block">Blog</a>
+          <a className="font-semibold mr-5 inline-block">Blog</a>
         </Link>
         <Link href="/about">
-          <a className="mr-5 inline-block">About</a>
+          <a className="font-semibold mr-5 inline-block">About</a>
         </Link>
       </nav>
     </header>

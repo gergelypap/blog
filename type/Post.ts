@@ -1,16 +1,16 @@
 import type { ReadTimeResults } from "reading-time";
 
-export interface PostType {
+export type PostType = {
   code: string;
   meta: PostMetadata;
-  slug: string;
+  permalink: string;
   readingTime: ReadTimeResults;
-}
+};
 
-export interface PostMetadata {
+export type PostMetadata = {
   title: string;
   lead: string;
   createdAt: string;
   updatedAt?: string;
   tags: string[];
-}
+};

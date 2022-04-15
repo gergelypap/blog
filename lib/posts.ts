@@ -23,15 +23,20 @@ export async function getPostBySlug(slug: string): Promise<PostType> {
   return {
     code,
     meta,
-    slug,
+    permalink: `/blog/${slug}`,
     readingTime: readingTime(fileContents),
   };
 }
 
-export async function getPosts() {
-  const posts = getPostSlugs().map(async (slug) => await getPostBySlug(slug));
+export async function getPosts(limit = Infinity) {
+  const loadPosts = getPostSlugs().map(async (slug) => await getPostBySlug(slug));
+  const posts = await Promise.all(loadPosts);
 
-  return Promise.all(posts);
+  posts.sort((a, b) => {
+    return +new Date(b.meta.createdAt) - +new Date(a.meta.createdAt);
+  });
+
+  return posts.slice(0, limit);
 }
 
 export function getPostSlugs(): string[] {

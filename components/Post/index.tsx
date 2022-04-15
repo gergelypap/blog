@@ -25,7 +25,7 @@ export default function Post({ post, full = false }: Props) {
             <a>← Back</a>
           </Link>
         ) : (
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={post.permalink}>
             <a>Read more →</a>
           </Link>
         )}

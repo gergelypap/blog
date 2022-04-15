@@ -12,8 +12,8 @@ export default function PostTitle({ post, clickable = false }: Props) {
 
   if (clickable) {
     return (
-      <Link href={`/blog/${post.slug}`}>
-        <a className="text-inherit">{title}</a>
+      <Link href={post.permalink}>
+        <a className="text-inherit inline-block">{title}</a>
       </Link>
     );
   }
