@@ -1,6 +1,7 @@
 import { PostMetadata, PostType } from "@type/Post";
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
+import readingTime from "reading-time";
 import { parseMDX } from "./mdx";
 
 const postsDirectory = join(process.cwd(), "posts");
@@ -23,6 +24,7 @@ export async function getPostBySlug(slug: string): Promise<PostType> {
     code,
     meta,
     slug,
+    readingTime: readingTime(fileContents),
   };
 }
 
