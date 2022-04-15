@@ -7,7 +7,7 @@ interface Props {
 
 export default function PostDate({ post }: Props) {
   return (
-    <span className="text-sm text-gray-500 inline-block mb-5">
+    <span className="text-sm text-gray-400 inline-block mb-5">
       <time title={`Published at ${prettyDate(post.meta.createdAt)}`} dateTime={post.meta.createdAt}>
         {prettyDate(post.meta.createdAt)}
       </time>
