@@ -3,5 +3,5 @@ interface Props {
 }
 
 export default function PageTitle({ text }: Props) {
-  return <h1 className="text-2xl font-bold mb-3">{text}</h1>;
+  return <h1 className="text-2xl font-bold mb-2.5">{text}</h1>;
 }

@@ -13,7 +13,7 @@ export default function PostTitle({ post, clickable = false }: Props) {
   if (clickable) {
     return (
       <Link href={`/blog/${post.slug}`}>
-        <a className="text-inherit hover:no-underline">{title}</a>
+        <a className="text-inherit">{title}</a>
       </Link>
     );
   }

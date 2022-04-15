@@ -14,7 +14,7 @@ export default function ThemeSwitch() {
 
   return (
     <button
-      className="w-10 h-10 bg-gray-200 rounded-lg dark:bg-gray-600 flex items-center justify-center  hover:ring-2 ring-gray-300  transition-all"
+      className="w-10 h-10 bg-gray-300 dark:bg-gray-700 rounded-lg flex items-center justify-center  hover:ring-2 ring-gray-400  transition-all"
       aria-label={`Switch to ${isLight ? "dark" : "light"} theme`}
       title={`Switch to ${isLight ? "dark" : "light"} theme`}
       onClick={() => setTheme(isLight ? "dark" : "light")}

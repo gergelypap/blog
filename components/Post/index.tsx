@@ -14,12 +14,12 @@ export default function Post({ post, full = false }: Props) {
   return (
     <article className="mb-10">
       <PostTitle post={post} clickable={!full} />
-      <header className="text-gray-500 text-sm mb-5">
+      <header className="text-gray-400 text-sm mb-5">
         <PostDate post={post} showUpdated={full} />
         <ReadingTime data={post.readingTime} />
       </header>
       <section>{full ? <MDXComponent code={post.code} /> : <p>{post.meta.lead}</p>}</section>
-      <footer>
+      <footer className="mt-5">
         {full ? (
           <Link href="/blog">
             <a>← Back</a>

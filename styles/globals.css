@@ -17,6 +17,12 @@
   src: local("SF Mono"), url("/fonts/SFMono.woff2") format("woff2");
 }
 
+@layer base {
+  body {
+    @apply text-gray-900 dark:text-gray-300 bg-gray-100 dark:bg-gray-900;
+  }
+}
+
 ::selection {
   @apply bg-green-400 text-black;
 }
@@ -94,11 +100,11 @@ ol {
 @import "~prism-themes/themes/prism-one-dark.css";
 
 code:not(.code-highlight) {
-  @apply bg-gray-300 rounded-md py-0.5 px-1 dark:bg-gray-700 dark:text-gray-200;
+  @apply bg-gray-300 rounded-md py-0.5 px-1.5 dark:bg-gray-700 dark:text-gray-200 text-sm;
 }
 
 .rehype-code-title {
-  @apply font-mono inline-block py-2 px-3 rounded-t-md text-xs;
+  @apply font-mono inline-block py-2 px-3 rounded-t-md text-xs text-gray-300 font-bold;
   background: hsl(220, 13%, 18%);
 
   + pre[class*="language-"] {
