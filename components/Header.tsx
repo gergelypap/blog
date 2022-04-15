@@ -1,3 +1,4 @@
+import { APP_NAME, GITHUB_USERNAME } from "@utils/constants";
 import Link from "next/link";
 import ThemeSwitch from "./ThemeSwitch";
 
@@ -9,17 +10,20 @@ export default function Header() {
       </div>
       <h1 className="h-10 text-3xl font-bold">
         <Link href="/">
-          <a className="inline-block text-inherit hover:no-underline">@gpap</a>
+          <a className="inline-block text-inherit hover:no-underline">{APP_NAME}</a>
         </Link>
       </h1>
       <p className="my-5 text-gray-400">My developer blog. Because everybody has one.</p>
-      <nav>
+      <nav className="font-semibold">
         <Link href="/blog">
-          <a className="font-semibold mr-5 inline-block">Blog</a>
+          <a className="mr-5 inline-block">Blog</a>
         </Link>
         <Link href="/about">
-          <a className="font-semibold mr-5 inline-block">About</a>
+          <a className="mr-5 inline-block">About</a>
         </Link>
+        <a href={`https://github.com/${GITHUB_USERNAME}`} rel="noopener noreferrer" target="_blank">
+          Github
+        </a>
       </nav>
     </header>
   );
