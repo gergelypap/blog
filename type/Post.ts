@@ -1,4 +1,4 @@
-export interface Post {
+export interface PostType {
   code: string;
   meta: PostMetadata;
   slug: string;

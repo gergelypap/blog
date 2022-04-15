@@ -1,9 +1,9 @@
 import PageTitle from "@components/PageTitle";
-import { Post } from "@type/Post";
+import { PostType } from "@type/Post";
 import Link from "next/link";
 
 interface Props {
-  post: Post;
+  post: PostType;
   clickable?: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { Post, PostMetadata } from "@type/Post";
+import { PostMetadata, PostType } from "@type/Post";
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
 import { parseMDX } from "./mdx";
@@ -8,7 +8,7 @@ const postFiles = readdirSync(postsDirectory)
   .filter((path) => path.includes(".mdx"))
   .map((path) => path.replace(/\.mdx?$/i, ""));
 
-export async function getPostBySlug(slug: string): Promise<Post> {
+export async function getPostBySlug(slug: string): Promise<PostType> {
   const filename = postFiles.find((path) => path.slice(11) === slug);
   if (!filename) {
     throw new Error(`File ${slug} not found!`);
