@@ -1,7 +1,9 @@
 import Post from "@components/Post";
 import { getPosts } from "@lib/posts";
 import { PostType } from "@type/Post";
+import { APP_NAME } from "@utils/constants";
 import type { GetStaticProps } from "next";
+import Head from "next/head";
 
 interface Props {
   posts: PostType[];
@@ -9,11 +11,16 @@ interface Props {
 
 export default function BlogPostsPage({ posts }: Props) {
   return (
-    <section>
-      {posts.map((post, i) => (
-        <Post key={i} post={post} />
-      ))}
-    </section>
+    <>
+      <Head>
+        <title>Blog / {APP_NAME}</title>
+      </Head>
+      <section>
+        {posts.map((post, i) => (
+          <Post key={i} post={post} />
+        ))}
+      </section>
+    </>
   );
 }
 

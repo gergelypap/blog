@@ -1,7 +1,9 @@
 import Post from "@components/Post";
 import { getPosts } from "@lib/posts";
 import type { PostType } from "@type/Post";
+import { APP_NAME } from "@utils/constants";
 import type { GetStaticProps } from "next";
+import Head from "next/head";
 
 interface Props {
   posts: PostType[];
@@ -10,6 +12,9 @@ interface Props {
 export default function Home({ posts }: Props) {
   return (
     <>
+      <Head>
+        <title>{APP_NAME}</title>
+      </Head>
       <h1 className="inline-block mb-10 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent font-extrabold text-3xl">
         Latest posts
       </h1>
