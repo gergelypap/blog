@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Inter";
+  font-weight: 100 1000;
+  font-stretch: 25% 150%;
+  font-display: optional;
+  src: local("Inter"), url("/fonts/Inter.woff2") format("woff2 supports variations"),
+    url("/fonts/Inter.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "SF Mono";
+  font-display: optional;
+  src: local("SF Mono"), url("/fonts/SFMono.woff2") format("woff2");
+}
+
 a {
   color: theme("colors.blue.500");
 
@@ -28,6 +43,8 @@ code:not(.code-highlight) {
   font-size: theme("fontSize.sm");
 }
 
-.code-highlight {
-  font-size: theme("fontSize.sm");
+code[class*="language-"],
+pre[class*="language-"] {
+  font-size: theme("fontSize.xs");
+  font-family: theme("fontFamily.mono");
 }
