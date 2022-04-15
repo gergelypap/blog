@@ -14,7 +14,7 @@ export default function Post({ post, full = false }: Props) {
   return (
     <article className="mb-10">
       <PostTitle post={post} clickable={!full} />
-      <header className="text-gray-400 text-sm">
+      <header className="text-gray-500 text-sm mb-5">
         <PostDate post={post} showUpdated={full} />
         <ReadingTime data={post.readingTime} />
       </header>

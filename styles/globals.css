@@ -17,17 +17,77 @@
   src: local("SF Mono"), url("/fonts/SFMono.woff2") format("woff2");
 }
 
+::selection {
+  @apply bg-green-400 text-black;
+}
+
 a {
-  color: theme("colors.blue.500");
+  @apply text-blue-500;
 
   &:hover {
-    text-decoration: underline;
+    @apply underline;
   }
 }
 
 p,
+ul,
+ol,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+details,
 pre {
-  margin-bottom: theme("margin.5");
+  @apply mb-5;
+}
+
+h1 {
+  @apply text-2xl font-bold;
+}
+
+h2 {
+  @apply text-xl font-bold;
+}
+
+h3 {
+  @apply text-lg font-bold;
+}
+
+h4 {
+  @apply text-base font-bold;
+}
+
+h5 {
+  @apply text-sm font-bold;
+}
+
+h6 {
+  @apply text-xs font-bold;
+}
+
+blockquote {
+  @apply pl-5 border-l-2 border-l-gray-300 dark:border-l-gray-700 text-gray-500;
+}
+
+hr {
+  @apply border-t-2 border-t-gray-300 dark:border-t-gray-700;
+}
+
+ul,
+ol {
+  @apply pl-5;
+}
+
+ul {
+  @apply list-disc;
+}
+
+ol {
+  @apply list-decimal;
 }
 
 /* Code blocks */
@@ -38,13 +98,19 @@ code:not(.code-highlight) {
 }
 
 .rehype-code-title {
-  font-weight: theme("fontWeight.bold");
-  font-family: theme("fontFamily.mono");
-  font-size: theme("fontSize.sm");
+  @apply font-mono inline-block py-2 px-3 rounded-t-md text-xs;
+  background: hsl(220, 13%, 18%);
+
+  + pre[class*="language-"] {
+    border-top-left-radius: 0;
+  }
 }
 
 code[class*="language-"],
 pre[class*="language-"] {
-  font-size: theme("fontSize.xs");
-  font-family: theme("fontFamily.mono");
+  @apply text-xs font-mono;
+}
+
+pre[class*="language-"] {
+  @apply mb-5 rounded-md mt-0;
 }

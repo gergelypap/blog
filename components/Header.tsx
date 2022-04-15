@@ -12,7 +12,7 @@ export default function Header() {
           <a className="inline-block text-inherit hover:no-underline">@gpap</a>
         </Link>
       </h1>
-      <p className="my-5 text-gray-400 ">My developer blog. Because everybody has one.</p>
+      <p className="my-5 text-gray-500 ">My developer blog. Because everybody has one.</p>
       <nav className="">
         <Link href="/blog">
           <a className="mr-5 inline-block">Blog</a>
