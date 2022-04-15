@@ -1,9 +1,7 @@
 import { Post, PostMetadata } from "@type/Post";
 import { readdirSync, readFileSync } from "fs";
-import { bundleMDX } from "mdx-bundler";
 import { join } from "path";
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypePrism from "rehype-prism-plus";
+import { parseMDX } from "./mdx";
 
 const postsDirectory = join(process.cwd(), "posts");
 const postFiles = readdirSync(postsDirectory)
@@ -15,17 +13,8 @@ export async function getPostBySlug(slug: string): Promise<Post> {
   if (!filename) {
     throw new Error(`File ${slug} not found!`);
   }
-  const source = readFileSync(join(postsDirectory, `${filename}.mdx`), "utf8");
-  const { code, frontmatter: meta } = await bundleMDX<PostMetadata>({
-    source,
-    // This is needed so mdx-bundler knows where to resolve from.
-    cwd: process.cwd(),
-    mdxOptions: (options) => {
-      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeCodeTitles, rehypePrism];
-
-      return options;
-    },
-  });
+  const fileContents = readFileSync(join(postsDirectory, `${filename}.mdx`), "utf8");
+  const { code, meta } = await parseMDX<PostMetadata>(fileContents);
 
   // Extract the creation date from the filename.
   meta.createdAt = filename.slice(0, 10);
