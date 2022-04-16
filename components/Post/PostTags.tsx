@@ -4,12 +4,12 @@ interface Props {
   tags: string[];
 }
 
-export default function PostCategory({ tags }: Props) {
+export default function PostTags({ tags }: Props) {
   return (
     <span className="ml-5">
-      Category:{" "}
+      Tags:{" "}
       {tags.map((tag, i) => (
-        <Link key={i} href={`/category/${tag}`}>
+        <Link key={i} href={`/tags/${tag}`}>
           <a>{tag}</a>
         </Link>
       ))}

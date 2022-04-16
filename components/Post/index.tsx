@@ -1,8 +1,8 @@
 import MDXComponent from "@components/MDXComponent";
 import { PostType } from "@type/Post";
 import Link from "next/link";
-import PostCategory from "./PostCategory";
 import PostDate from "./PostDate";
+import PostTags from "./PostTags";
 import PostTitle from "./PostTitle";
 import ReadingTime from "./ReadingTime";
 
@@ -18,7 +18,7 @@ export default function Post({ post, full = false }: Props) {
       <header className="text-gray-400 text-sm">
         <PostDate post={post} showUpdated={full} />
         <ReadingTime data={post.readingTime} />
-        {full && <PostCategory tags={post.meta.tags} />}
+        {full && <PostTags tags={post.meta.tags} />}
       </header>
       <section className="my-5">{full ? <MDXComponent code={post.code} /> : <p>{post.meta.lead}</p>}</section>
       <footer>

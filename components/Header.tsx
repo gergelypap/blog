@@ -18,6 +18,9 @@ export default function Header() {
         <Link href="/blog">
           <a className="mr-5 inline-block">Blog</a>
         </Link>
+        <Link href="/tags">
+          <a className="mr-5 inline-block">Tags</a>
+        </Link>
         <Link href="/about">
           <a className="mr-5 inline-block">About</a>
         </Link>

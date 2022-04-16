@@ -13,15 +13,15 @@ interface Props {
   tag: string;
 }
 
-export default function CategoryPage({ content, tag }: Props) {
+export default function TagsPage({ content, tag }: Props) {
   return (
     <>
       <Head>
         <title>
-          Category: {tag} / {APP_NAME}
+          Tags: {tag} / {APP_NAME}
         </title>
       </Head>
-      <PageTitle text={`Category: ${tag}`} />
+      <PageTitle text={`Tags: ${tag}`} />
       {content.posts.map((post, i) => (
         <Post key={i} post={post} />
       ))}
