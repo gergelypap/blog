@@ -16,6 +16,7 @@ export default function TagsListingPage({ tags }: Props) {
         <title>Tags / {APP_NAME}</title>
       </Head>
       <PageTitle text="Tags" />
+      <p>Find all content filtered by tags.</p>
       <section className="flex flex-wrap gap-5">
         {tags.map(([tag, count]) => (
           <Link

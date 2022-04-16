@@ -8,7 +8,7 @@ function App({ Component, pageProps }: AppProps) {
     <ThemeProvider attribute="class">
       <div className="flex justify-center">
         <div className="w-full max-w-2xl">
-          <Header></Header>
+          <Header />
           <main className="p-5">
             <Component {...pageProps} />
           </main>

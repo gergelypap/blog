@@ -16,7 +16,7 @@ export default function Spotify() {
   }, []);
 
   return (
-    <div className="text-sm flex">
+    <div className="text-sm flex select-none">
       <svg className="w-8 mr-3 flex-shrink-0" viewBox="0 0 168 168">
         <path
           fill="#1ED760"

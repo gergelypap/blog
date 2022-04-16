@@ -1,4 +1,3 @@
-import PageTitle from "@components/PageTitle";
 import Post from "@components/Post";
 import { getPosts } from "@lib/posts";
 import { PostType } from "@type/Post";
@@ -16,7 +15,6 @@ export default function BlogPostsPage({ posts }: Props) {
       <Head>
         <title>Blog / {APP_NAME}</title>
       </Head>
-      <PageTitle text="All posts" />
       <section>
         {posts.map((post, i) => (
           <Post key={i} post={post} />
