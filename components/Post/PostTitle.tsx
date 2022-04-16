@@ -1,6 +1,6 @@
+import Link from "@components/Link";
 import PageTitle from "@components/PageTitle";
 import { PostType } from "@type/Post";
-import Link from "next/link";
 
 interface Props {
   post: PostType;
@@ -16,8 +16,8 @@ export default function PostTitle({ post, clickable = false }: Props) {
 
   if (clickable) {
     return (
-      <Link href={post.permalink}>
-        <a className="text-inherit inline-block">{title}</a>
+      <Link className="text-inherit inline-block" href={post.permalink}>
+        {title}
       </Link>
     );
   }

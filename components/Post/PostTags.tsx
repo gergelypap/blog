@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@components/Link";
 
 interface Props {
   tags: string[];
@@ -10,7 +10,7 @@ export default function PostTags({ tags }: Props) {
       Tags:{" "}
       {tags.map((tag, i) => (
         <Link key={i} href={`/tags/${tag}`}>
-          <a>{tag}</a>
+          {tag}
         </Link>
       ))}
     </span>

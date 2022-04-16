@@ -1,6 +1,6 @@
+import Link from "@components/Link";
 import MDXComponent from "@components/MDXComponent";
 import { PostType } from "@type/Post";
-import Link from "next/link";
 import PostDate from "./PostDate";
 import PostTags from "./PostTags";
 import PostTitle from "./PostTitle";
@@ -21,17 +21,7 @@ export default function Post({ post, full = false }: Props) {
         {full && <PostTags tags={post.meta.tags} />}
       </header>
       <section className="my-5">{full ? <MDXComponent code={post.code} /> : <p>{post.meta.lead}</p>}</section>
-      <footer>
-        {full ? (
-          <Link href="/blog">
-            <a>← Back</a>
-          </Link>
-        ) : (
-          <Link href={post.permalink}>
-            <a>Read more →</a>
-          </Link>
-        )}
-      </footer>
+      <footer>{full ? <Link href="/blog">← Back</Link> : <Link href={post.permalink}>Read more →</Link>}</footer>
     </article>
   );
 }
