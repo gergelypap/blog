@@ -1,3 +1,4 @@
+import LinkButton from "@components/LinkButton";
 import PageTitle from "@components/PageTitle";
 import { APP_NAME } from "@utils/constants";
 import Head from "next/head";
@@ -16,6 +17,7 @@ export default function About() {
         </a>{" "}
         framework, Tailwind and MDX as a learning project.
       </p>
+      <LinkButton href="https://www.buymeacoffee.com/gpap1" text="☕ Buy me a coffee!" />
     </>
   );
 }
