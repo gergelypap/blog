@@ -16,10 +16,10 @@ export default function TagsListingPage({ tags }: Props) {
         <title>Tags / {APP_NAME}</title>
       </Head>
       <PageTitle text="Tags" />
-      <section>
+      <section className="flex flex-wrap gap-5">
         {tags.map(([tag, count]) => (
           <Link key={tag} href={`/tags/${tag}`}>
-            <a className="mr-5 bg-gray-300 rounded-full text-gray-600 dark:bg-gray-700 dark:text-gray-300 py-1 px-2 text-sm  hover:ring-2 ring-gray-400 hover:no-underline transition-all">
+            <a className="bg-gray-300 rounded-full text-gray-600 dark:bg-gray-700 dark:text-gray-300 py-1 px-2 text-sm  hover:ring-2 ring-gray-400 hover:no-underline transition-all">
               {tag} ({count})
             </a>
           </Link>
