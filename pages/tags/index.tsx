@@ -34,7 +34,10 @@ export default function TagsListingPage({ tags }: Props) {
 export const getStaticProps: GetStaticProps = async () => {
   const tags: { [key: string]: number } = {};
   for (const tag of TAGS) {
-    tags[`${tag}`] = (await getPostsByTag(tag)).length;
+    const posts = await getPostsByTag(tag);
+    if (posts.length > 0) {
+      tags[`${tag}`] = posts.length;
+    }
   }
 
   return {
