@@ -1,5 +1,6 @@
 import { APP_NAME, GITHUB_USERNAME } from "@utils/constants";
 import Link from "next/link";
+import Spotify from "./Spotify";
 import ThemeSwitch from "./ThemeSwitch";
 
 export default function Header() {
@@ -13,8 +14,8 @@ export default function Header() {
           <a className="inline-block text-inherit hover:no-underline">{APP_NAME}</a>
         </Link>
       </h1>
-      <p className="my-5 text-gray-400">My developer blog. Because everybody has one.</p>
-      <nav className="font-semibold">
+      <p className="my-5 text-gray-500">My developer blog. Because everybody has one.</p>
+      <nav className="font-semibold mb-7">
         <Link href="/blog">
           <a className="mr-5 inline-block">Blog</a>
         </Link>
@@ -28,6 +29,7 @@ export default function Header() {
           Github
         </a>
       </nav>
+      <Spotify />
     </header>
   );
 }
