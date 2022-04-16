@@ -22,7 +22,6 @@ export default function CategoryPage({ content, tag }: Props) {
         </title>
       </Head>
       <PageTitle text={`Category: ${tag}`} />
-      <h1>Posts ({content.posts.length})</h1>
       {content.posts.map((post, i) => (
         <Post key={i} post={post} />
       ))}
