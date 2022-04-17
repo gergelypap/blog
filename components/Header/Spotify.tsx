@@ -23,7 +23,7 @@ export default function Spotify() {
   }, [isFocused]);
 
   return (
-    <div className="text-sm flex select-none">
+    <div className="text-sm flex cursor-default mb-3">
       <svg className="w-8 mr-3 flex-shrink-0" viewBox="0 0 168 168">
         <path
           fill="#1ED760"
@@ -34,7 +34,7 @@ export default function Spotify() {
         <div className="text-gray-800 dark:text-gray-300 flex flex-col justify-center truncate h-10">
           <span className="font-bold">I’m listening to</span>
           <a className="text-current" href={song.url} target="_blank" rel="noopener noreferrer">
-            <span className="text-gray-400 truncate block">
+            <span className="text-gray-500 dark:text-gray-400 truncate block">
               {song.artist} – {song.title}
             </span>
           </a>

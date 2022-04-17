@@ -17,6 +17,7 @@
     "next": "^12.1.5",
     "next-themes": "^0.1.1",
     "prism-themes": "^1.9.0",
+    "psn-api": "^2.7.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "reading-time": "^1.5.0",

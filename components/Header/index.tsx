@@ -1,3 +1,4 @@
+import PlayStation from "@components/PlayStation";
 import { APP_NAME } from "@utils/constants";
 import Link from "../Link";
 import Nav from "./Nav";
@@ -17,6 +18,7 @@ export default function Header() {
       </h1>
       <Nav />
       <Spotify />
+      <PlayStation />
     </header>
   );
 }
