@@ -36,11 +36,11 @@ export default function PlayStation() {
 
       {game ? (
         <div className="text-gray-800 dark:text-gray-300 flex flex-col justify-center truncate h-10">
-          <span title={`Played at ${game.playedAt}`}>
-            Last played <span className="font-semibold">{game.title}</span> on {game.platform} {game.playedAt}
+          <span className="truncate">
+            Played <span className="font-semibold">{game.title}</span> on {game.platform} {game.playedAt}
           </span>
           <span className="text-gray-500 dark:text-gray-400 truncate">
-            Latest trophy earned:
+            Last trophy earned:
             <span className="ml-1 font-semibold" title={game.latestTrophy.type}>
               <TrophyIcon type={game.latestTrophy.type} /> {game.latestTrophy.name}
             </span>
