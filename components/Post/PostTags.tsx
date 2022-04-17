@@ -6,8 +6,7 @@ interface Props {
 
 export default function PostTags({ tags }: Props) {
   return (
-    <span className="ml-5">
-      Tags:{" "}
+    <span>
       {tags.map((tag, i) => (
         <Link key={i} href={`/tags/${tag}`}>
           {tag}

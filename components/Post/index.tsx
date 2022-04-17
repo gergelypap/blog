@@ -1,9 +1,9 @@
 import Link from "@components/Link";
 import MDXComponent from "@components/MDXComponent";
+import PageTitle from "@components/PageTitle";
 import { PostType } from "@type/Post";
 import PostDate from "./PostDate";
 import PostTags from "./PostTags";
-import PostTitle from "./PostTitle";
 import ReadingTime from "./ReadingTime";
 
 interface Props {
@@ -14,9 +14,15 @@ interface Props {
 export default function Post({ post, full = false }: Props) {
   return (
     <article className="mb-10">
-      <PostTitle post={post} clickable={!full} />
-      <header className="text-gray-400 text-sm">
-        <PostDate post={post} showUpdated={full} />
+      {full ? (
+        <PageTitle>{post.meta.title}</PageTitle>
+      ) : (
+        <Link href={post.permalink}>
+          <h1 className="text-2xl font-normal text-gray-900">{post.meta.title}</h1>
+        </Link>
+      )}
+      <header className="text-gray-500 dark:text-gray-400 text-sm">
+        <PostDate post={post} />
         <ReadingTime data={post.readingTime} />
         {full && <PostTags tags={post.meta.tags} />}
       </header>

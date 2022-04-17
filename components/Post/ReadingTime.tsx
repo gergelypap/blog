@@ -8,7 +8,7 @@ export default function ReadingTime({ data }: Props) {
   const coffees = data.minutes < 5 ? "☕" : data.minutes < 10 ? "☕☕" : "☕☕☕";
 
   return (
-    <span className="ml-5">
+    <span className="mr-5">
       {coffees} {data.text}
     </span>
   );

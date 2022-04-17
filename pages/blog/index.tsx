@@ -24,8 +24,8 @@ export default function BlogPostsPage({ posts }: Props) {
       <section>
         <input
           className="block w-full px-4 py-2 text-gray-900 border  border-gray-200 rounded-md dark:border-gray-900 focus:ring-gray-900 focus:border-gray-900 dark:bg-gray-700 dark:text-gray-100 mb-10"
-          aria-label="Search posts"
-          placeholder="Search posts..."
+          aria-label="Filter posts"
+          placeholder="Filter posts..."
           type="search"
           onChange={(e) => setSearchValue(e.target.value)}
         />

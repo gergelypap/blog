@@ -16,7 +16,7 @@ export default function Home({ posts }: Props) {
       <Head>
         <title>{APP_NAME}</title>
       </Head>
-      <PageTitle text="Latest posts" />
+      <PageTitle>Latest blog posts</PageTitle>
       <section className="sm:grid sm:grid-cols-2 sm:gap-10">
         {posts.map((post, i) => (
           <Post key={i} post={post} />

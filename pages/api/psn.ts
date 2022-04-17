@@ -1,5 +1,5 @@
 import getLastPlayedGame from "@lib/psn";
-import { formatDistance } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(404);
   }
 
-  lastPlayedGame.playedAt = formatDistance(new Date(lastPlayedGame.playedAt), new Date(), { addSuffix: true });
+  lastPlayedGame.playedAt = formatDistanceToNow(new Date(lastPlayedGame.playedAt), { addSuffix: true });
 
   res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=3600");
 

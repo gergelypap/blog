@@ -3,20 +3,16 @@ import { prettyDate } from "utils/date";
 
 interface Props {
   post: PostType;
-  showUpdated?: boolean;
 }
 
-export default function PostDate({ post, showUpdated = false }: Props) {
+export default function PostDate({ post }: Props) {
+  let hoverText = `Published at ${prettyDate(post.meta.createdAt)}`;
+  if (post.meta.updatedAt) hoverText += ` and updated at ${prettyDate(post.meta.updatedAt)}`;
+
   return (
-    <span className="inline-block">
-      <time title={`Published at ${prettyDate(post.meta.createdAt)}`} dateTime={post.meta.createdAt}>
-        {prettyDate(post.meta.createdAt)}
-      </time>
-      {showUpdated && post.meta.updatedAt && (
-        <time className="italic ml-5" dateTime={post.meta.updatedAt}>
-          Updated at {prettyDate(post.meta.updatedAt)}
-        </time>
-      )}
-    </span>
+    <time className="mr-5" title={hoverText} dateTime={post.meta.createdAt}>
+      {prettyDate(post.meta.createdAt)}
+      {post.meta.updatedAt && "*"}
+    </time>
   );
 }

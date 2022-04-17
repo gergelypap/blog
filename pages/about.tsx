@@ -9,7 +9,7 @@ export default function About() {
       <Head>
         <title>About / {APP_NAME}</title>
       </Head>
-      <PageTitle text="About" />
+      <PageTitle>About</PageTitle>
       <p>
         I am a full-stack web developer. This blog was made using the awesome{" "}
         <a href="https://nextjs.org" rel="noopener noreferrer">

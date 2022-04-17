@@ -21,7 +21,7 @@ export default function TagsPage({ content, tag }: Props) {
           Tags: {tag} / {APP_NAME}
         </title>
       </Head>
-      <PageTitle text={`Tags: ${tag}`} />
+      <PageTitle>Tagged as: {tag}</PageTitle>
       {content.posts.map((post, i) => (
         <Post key={i} post={post} />
       ))}
