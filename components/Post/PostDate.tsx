@@ -10,7 +10,7 @@ export default function PostDate({ post }: Props) {
   if (post.meta.updatedAt) hoverText += ` and updated at ${prettyDate(post.meta.updatedAt)}`;
 
   return (
-    <time className="mr-5" title={hoverText} dateTime={post.meta.createdAt}>
+    <time title={hoverText} dateTime={post.meta.createdAt}>
       {prettyDate(post.meta.createdAt)}
       {post.meta.updatedAt && "*"}
     </time>

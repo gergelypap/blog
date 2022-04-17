@@ -21,9 +21,11 @@ export default function Post({ post, full = false }: Props) {
           <h1 className="text-2xl font-normal text-gray-900">{post.meta.title}</h1>
         </Link>
       )}
-      <header className="text-gray-500 dark:text-gray-400 text-sm">
-        <PostDate post={post} />
-        <ReadingTime data={post.readingTime} />
+      <header className="text-gray-500 dark:text-gray-400 text-sm flex flex-col sm:flex-row gap-5">
+        <div className="flex gap-5">
+          <PostDate post={post} />
+          <ReadingTime data={post.readingTime} />
+        </div>
         {full && <PostTags tags={post.meta.tags} />}
       </header>
       <section className="my-5">{full ? <MDXComponent code={post.code} /> : <p>{post.meta.lead}</p>}</section>

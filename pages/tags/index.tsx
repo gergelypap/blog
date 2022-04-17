@@ -1,12 +1,11 @@
-import Link from "@components/Link";
 import PageTitle from "@components/PageTitle";
-import { getPostsByTag } from "@lib/posts";
+import Tag from "@components/Tag";
 import { APP_NAME, TAGS } from "@utils/constants";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 
 interface Props {
-  tags: [string, number][];
+  tags: string[];
 }
 
 export default function TagsListingPage({ tags }: Props) {
@@ -17,15 +16,9 @@ export default function TagsListingPage({ tags }: Props) {
       </Head>
       <PageTitle>Tags</PageTitle>
       <p>Find all content filtered by tags.</p>
-      <section className="flex flex-wrap gap-5">
-        {tags.map(([tag, count]) => (
-          <Link
-            className="bg-gray-300 rounded-full text-gray-600 dark:bg-gray-700 dark:text-gray-300 py-1 px-2 text-sm  hover:ring-2 ring-gray-400 hover:no-underline transition-all"
-            key={tag}
-            href={`/tags/${tag}`}
-          >
-            {tag} ({count})
-          </Link>
+      <section className="flex flex-wrap gap-3">
+        {tags.map((tag, i) => (
+          <Tag key={i} name={tag} />
         ))}
       </section>
     </>
@@ -33,17 +26,9 @@ export default function TagsListingPage({ tags }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const tags: { [key: string]: number } = {};
-  for (const tag of TAGS) {
-    const posts = await getPostsByTag(tag);
-    if (posts.length > 0) {
-      tags[`${tag}`] = posts.length;
-    }
-  }
-
   return {
     props: {
-      tags: Object.entries(tags),
+      tags: TAGS,
     },
   };
 };

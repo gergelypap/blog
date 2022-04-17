@@ -1,4 +1,4 @@
-import Link from "@components/Link";
+import Tag from "@components/Tag";
 
 interface Props {
   tags: string[];
@@ -6,11 +6,9 @@ interface Props {
 
 export default function PostTags({ tags }: Props) {
   return (
-    <span>
+    <span className="flex flex-wrap gap-3">
       {tags.map((tag, i) => (
-        <Link key={i} href={`/tags/${tag}`}>
-          {tag}
-        </Link>
+        <Tag key={i} name={tag} />
       ))}
     </span>
   );
