@@ -10,10 +10,10 @@ const npsso = process.env.PSN_AUTH_TOKEN;
 
 export default async function getLastPlayedGame() {
   const accessCode = await exchangeNpssoForCode(npsso as string);
-  const authorization = await exchangeCodeForAccessToken(accessCode);
+  const auth = await exchangeCodeForAccessToken(accessCode);
 
   // Get the user's games.
-  const userTitles = await getUserTitles({ accessToken: authorization.accessToken }, "me");
+  const userTitles = await getUserTitles({ accessToken: auth.accessToken }, "me");
 
   // Find the first game which has any earned trophies.
   const lastPlayedTitle = userTitles.trophyTitles.find(
@@ -21,12 +21,12 @@ export default async function getLastPlayedGame() {
   );
 
   if (!lastPlayedTitle) {
-    return undefined;
+    throw new Error("Could not fetch last played title.");
   }
 
   // Get the user's trophies for the latest played game.
   const { trophies: userTrophies } = await getUserTrophiesEarnedForTitle(
-    { accessToken: authorization.accessToken },
+    { accessToken: auth.accessToken },
     "me",
     lastPlayedTitle.npCommunicationId,
     "all",
@@ -40,28 +40,18 @@ export default async function getLastPlayedGame() {
 
   // Get the trophy information for the game, because it contains details about the trophy.
   const { trophies } = await getTitleTrophies(
-    { accessToken: authorization.accessToken },
+    { accessToken: auth.accessToken },
     lastPlayedTitle.npCommunicationId,
     "all",
     { npServiceName: "trophy" }
   );
 
   // Finally get the trophy's details, like name and icon.
-  const trophyDetails = trophies.find((trophy) => trophy.trophyId == lastEarnedTrophy.trophyId);
+  const trophy = trophies.find((trophy) => trophy.trophyId == lastEarnedTrophy.trophyId);
 
-  if (!trophyDetails) {
-    return undefined;
+  if (!trophy) {
+    throw new Error("Could not fetch trophy details.");
   }
 
-  return {
-    title: lastPlayedTitle.trophyTitleName,
-    platform: lastPlayedTitle.trophyTitlePlatform,
-    playedAt: lastPlayedTitle.lastUpdatedDateTime,
-    latestTrophy: {
-      name: trophyDetails.trophyName,
-      text: trophyDetails.trophyDetail,
-      icon: trophyDetails.trophyIconUrl,
-      type: trophyDetails.trophyType,
-    },
-  };
+  return { lastPlayedTitle, trophy };
 }
