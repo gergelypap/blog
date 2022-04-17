@@ -4,6 +4,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const lastPlayedGame = await getLastPlayedGame();
+
+  if (!lastPlayedGame) {
+    return res.status(404);
+  }
+
   lastPlayedGame.playedAt = formatDistance(new Date(lastPlayedGame.playedAt), new Date(), { addSuffix: true });
 
   res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=3600");

@@ -53,7 +53,7 @@ export default function PlayStation() {
   );
 }
 
-function TrophyIcon({ type }: { type: "bronze" | "silver" | "gold" | "platinum" }) {
+function TrophyIcon({ type }: { type: string | "bronze" | "silver" | "gold" | "platinum" }) {
   let color;
   switch (type) {
     case "bronze":

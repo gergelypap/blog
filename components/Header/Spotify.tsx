@@ -1,4 +1,3 @@
-import type { SpotifySong } from "@type/Spotify";
 import useWindowFocused from "hooks/useWindowFocused";
 import { useEffect, useState } from "react";
 
