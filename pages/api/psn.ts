@@ -1,10 +1,10 @@
 import getLastPlayedGame from "@lib/psn";
-import { prettyDate } from "@utils/date";
+import { formatDistance } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const lastPlayedGame = await getLastPlayedGame();
-  lastPlayedGame.playedAt = prettyDate(lastPlayedGame.playedAt);
+  lastPlayedGame.playedAt = formatDistance(new Date(lastPlayedGame.playedAt), new Date(), { addSuffix: true });
 
   res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=3600");
 

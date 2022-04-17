@@ -2,6 +2,13 @@ import type { SpotifySong } from "@type/Spotify";
 import useWindowFocused from "hooks/useWindowFocused";
 import { useEffect, useState } from "react";
 
+export type SpotifySong = {
+  isPlaying: boolean;
+  title: string;
+  artist: string;
+  url: string;
+};
+
 export default function Spotify() {
   const isFocused = useWindowFocused();
   const [song, setSong] = useState<SpotifySong>();

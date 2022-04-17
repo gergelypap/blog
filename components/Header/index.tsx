@@ -1,4 +1,4 @@
-import PlayStation from "@components/PlayStation";
+import PlayStation from "@components/Header/PlayStation";
 import { APP_NAME } from "@utils/constants";
 import Link from "../Link";
 import Nav from "./Nav";
