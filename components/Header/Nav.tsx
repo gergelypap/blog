@@ -17,8 +17,8 @@ export default function Nav() {
       {links.map((link, i) => (
         <Link
           className={`mr-5 select-none ${
-            router.pathname === link.path
-              ? "text-gray-900 dark:text-gray-300  pointer-events-none font-semibold"
+            router.pathname === link.path || router.pathname.startsWith(link.path)
+              ? "text-gray-900 dark:text-gray-300 font-semibold hover:no-underline"
               : "text-blue-500"
           }`}
           key={i}
