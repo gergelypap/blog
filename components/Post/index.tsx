@@ -18,7 +18,9 @@ export default function Post({ post, full = false }: Props) {
         <PageTitle>{post.meta.title}</PageTitle>
       ) : (
         <Link href={post.permalink}>
-          <h1 className="text-2xl font-normal text-gray-900">{post.meta.title}</h1>
+          <h1 className="text-2xl text-gray-900 dark:text-gray-200 inline-block hover:underline font-bold">
+            {post.meta.title}
+          </h1>
         </Link>
       )}
       <header className="text-gray-500 dark:text-gray-400 text-sm flex flex-col sm:flex-row gap-5">
