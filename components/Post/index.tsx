@@ -9,16 +9,17 @@ import ReadingTime from "./ReadingTime";
 interface Props {
   post: PostType;
   full?: boolean;
+  className?: string;
 }
 
-export default function Post({ post, full = false }: Props) {
+export default function Post({ post, full = false, className = undefined }: Props) {
   return (
-    <article className="mb-10">
+    <article className={[`mb-10`, className].join(" ")}>
       {full ? (
         <PageTitle>{post.meta.title}</PageTitle>
       ) : (
         <Link href={post.permalink}>
-          <h1 className="text-2xl text-gray-900 dark:text-gray-200 inline-block hover:underline font-bold">
+          <h1 className="text-2xl  text-gray-900 dark:text-gray-200 inline-block hover:underline font-bold">
             {post.meta.title}
           </h1>
         </Link>
