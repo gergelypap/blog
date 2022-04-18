@@ -7,6 +7,7 @@ const eslintCommand = (filenames) => {
 };
 
 module.exports = {
-  "*": ["prettier --ignore-unknown --write"],
+  "*.{ts,tsx}": [() => packageJson.scripts["lint-types"]],
   "*.{js,jsx,ts,tsx,md,mdx}": [eslintCommand],
+  "*": ["prettier --ignore-unknown --write"],
 };
