@@ -11,6 +11,8 @@ class MyDocument extends Document {
         <Head>
           <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
           <link rel="preload" href="/fonts/SFMono.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" href="/api/spotify" as="fetch" crossOrigin="anonymous" />
+          <link rel="preload" href="/api/psn" as="fetch" crossOrigin="anonymous" />
         </Head>
         <body>
           <Main />
