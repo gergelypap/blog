@@ -9,12 +9,16 @@ import ReadingTime from "./ReadingTime";
 interface Props {
   post: PostType;
   full?: boolean;
-  className?: string;
+  fadeUp?: boolean;
+  id?: number;
 }
 
-export default function Post({ post, full = false, className = undefined }: Props) {
+export default function Post({ post, full = false, fadeUp = false, id = undefined }: Props) {
   return (
-    <article className={[`mb-10`, className].join(" ")}>
+    <article
+      className={[`mb-10`, fadeUp && "animate-fade-up opacity-0"].join(" ")}
+      style={fadeUp && id ? { animationDelay: `${id * 100}ms`, animationFillMode: "forwards" } : undefined}
+    >
       {full ? (
         <PageTitle>{post.meta.title}</PageTitle>
       ) : (

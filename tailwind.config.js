@@ -11,18 +11,21 @@ module.exports = {
     extend: {
       keyframes: {
         "fade-up": {
-          from: {
+          "0%": {
             opacity: 0,
             transform: "translateY(1rem)",
           },
-          to: {
+          "60%": {
+            transform: "translateY(-0.25rem)",
+          },
+          "100%": {
             opacity: 1,
             transform: "translateY(0)",
           },
         },
       },
       animation: {
-        "fade-up": "fade-up .15s ease-in",
+        "fade-up": "fade-up .15s ease-in-out",
       },
     },
   },

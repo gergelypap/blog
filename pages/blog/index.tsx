@@ -31,7 +31,7 @@ export default function BlogPostsPage({ posts }: Props) {
         />
         {!filteredPosts.length && <p>No posts found.</p>}
         {filteredPosts.map((post, i) => (
-          <Post className="animate-fade-up" key={i} post={post} />
+          <Post key={i} id={i + 1} post={post} fadeUp />
         ))}
       </section>
     </>
