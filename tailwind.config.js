@@ -23,9 +23,18 @@ module.exports = {
             transform: "translateY(0)",
           },
         },
+        "fade-in": {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
       },
       animation: {
-        "fade-up": "fade-up .15s ease-in-out",
+        "fade-up": "fade-up .3s ease-in-out",
+        "fade-in": "fade-in .15s ease-in",
       },
     },
   },

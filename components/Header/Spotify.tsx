@@ -30,7 +30,7 @@ export default function Spotify() {
       <SpotifyIcon className="w-8 mr-3 flex-shrink-0" />
       <div className="flex flex-col justify-center h-10 truncate">
         {data?.isPlaying && (
-          <div className="text-gray-800 dark:text-gray-300">
+          <div className="text-gray-800 dark:text-gray-300 animate-fade-in">
             <span className="font-semibold">I’m listening to</span>
             <a className="text-current" href={data.url} target="_blank" rel="noopener noreferrer">
               <div className="text-gray-500 dark:text-gray-400 truncate">
@@ -41,7 +41,7 @@ export default function Spotify() {
         )}
         {!data && !error && "Fetching..."}
         {error && <span className="text-red-600 font-semibold">Could not fetch from Spotify. Retrying...</span>}
-        {!error && data && !data.isPlaying && <span className="font-semibold">Not playing</span>}
+        {!error && data && !data.isPlaying && <span className="font-semibold animate-fade-in">Not playing</span>}
       </div>
     </div>
   );

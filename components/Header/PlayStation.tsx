@@ -56,7 +56,7 @@ export default function PlayStation() {
         {!data && !error && "Fetching..."}
         {error && <span className="text-red-600 font-semibold">Could not fetch from PSN. Retrying...</span>}
         {data && (
-          <div className="truncate">
+          <div className="truncate animate-fade-in">
             My latest trophy:
             <span className="ml-1 font-semibold" title={data.latestTrophy.type}>
               <TrophyIcon type={data.latestTrophy.type} /> {data.latestTrophy.name}
