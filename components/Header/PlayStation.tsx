@@ -1,8 +1,8 @@
+import fetcher from "@utils/fetcher";
 import { TrophyType } from "psn-api/dist/models/trophy-type.model";
-import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 type PSNResponse = {
-  success: boolean;
   title: string;
   platform: string;
   playedAt: string;
@@ -12,6 +12,18 @@ type PSNResponse = {
     icon: string;
     type: TrophyType;
   };
+};
+
+const PSNIcon = ({ className }: { className: string }) => {
+  return (
+    <svg className={className} viewBox="0 0 1024 1024">
+      <circle cx="512" cy="512" r="512" fill="#0070d1" />
+      <path
+        d="M242.37 595.7c-21.06 14-14 40.72 30.89 53.36a302.24 302.24 0 0 0 146 11.23c2.81 0 5.62-1.4 7-1.4v-47.75l-47.74 15.45c-18.25 5.62-36.51 7-54.76 2.81-14-4.21-11.23-12.64 5.62-19.66L426.32 576v-52l-134.8 46.34a181.6 181.6 0 0 0-49.15 25.36zm325.77-210.63v136.21c57.57 28.08 102.51 0 102.51-73 0-74.42-26.68-108.12-103.91-134.8-40.72-14-82.85-26.68-125-35.1v405.78l98.29 29.49V372.43c0-15.45 0-26.68 11.23-22.47 15.48 4.22 16.88 19.66 16.88 35.11zM750.69 563.4c-40.72-14-84.25-19.66-126.38-15.45-22.47 1.4-43.53 7-63.19 14l-4.21 1.4v54.76l91.27-33.7c18.25-5.62 36.51-7 54.76-2.81 14 4.21 11.23 12.64-5.62 19.66l-140.42 52v53.36L750.69 635c14-5.62 26.68-12.64 37.91-23.87 9.83-14.03 5.62-33.69-37.91-47.73z"
+        fill="#fff"
+      />
+    </svg>
+  );
 };
 
 const TrophyIcon = ({ type }: { type: TrophyType }) => {
@@ -33,43 +45,28 @@ const TrophyIcon = ({ type }: { type: TrophyType }) => {
 };
 
 export default function PlayStation() {
-  const [game, setGame] = useState<PSNResponse>();
-
-  useEffect(() => {
-    async function fetchApi() {
-      const response = await fetch("/api/psn").then((data) => data.json());
-      setGame(response);
-    }
-    fetchApi();
-  }, []);
+  const { data, error } = useSWR<PSNResponse>("/api/psn", fetcher, {
+    errorRetryCount: 5,
+  });
 
   return (
     <div className="text-sm flex cursor-default">
-      <svg className="w-8 mr-3 flex-shrink-0" viewBox="0 0 1024 1024">
-        <circle cx="512" cy="512" r="512" fill="#0070d1" />
-        <path
-          d="M242.37 595.7c-21.06 14-14 40.72 30.89 53.36a302.24 302.24 0 0 0 146 11.23c2.81 0 5.62-1.4 7-1.4v-47.75l-47.74 15.45c-18.25 5.62-36.51 7-54.76 2.81-14-4.21-11.23-12.64 5.62-19.66L426.32 576v-52l-134.8 46.34a181.6 181.6 0 0 0-49.15 25.36zm325.77-210.63v136.21c57.57 28.08 102.51 0 102.51-73 0-74.42-26.68-108.12-103.91-134.8-40.72-14-82.85-26.68-125-35.1v405.78l98.29 29.49V372.43c0-15.45 0-26.68 11.23-22.47 15.48 4.22 16.88 19.66 16.88 35.11zM750.69 563.4c-40.72-14-84.25-19.66-126.38-15.45-22.47 1.4-43.53 7-63.19 14l-4.21 1.4v54.76l91.27-33.7c18.25-5.62 36.51-7 54.76-2.81 14 4.21 11.23 12.64-5.62 19.66l-140.42 52v53.36L750.69 635c14-5.62 26.68-12.64 37.91-23.87 9.83-14.03 5.62-33.69-37.91-47.73z"
-          fill="#fff"
-        />
-      </svg>
-
-      {!game && <div className="h-10 flex flex-col justify-center">Fetching...</div>}
-      {game && !game.success && (
-        <div className="h-10 flex flex-col justify-center text-red-600">Failed to fetch from PSN.</div>
-      )}
-      {game && game.success && (
-        <div className="text-gray-800 dark:text-gray-300 flex flex-col justify-center truncate h-10">
-          <span className="truncate">
+      <PSNIcon className="w-8 mr-3 flex-shrink-0" />
+      <div className="flex flex-col justify-center h-10 truncate">
+        {!data && !error && "Fetching..."}
+        {error && <span className="text-red-600 font-semibold">Could not fetch from PSN. Retrying...</span>}
+        {data && (
+          <div className="truncate">
             My latest trophy:
-            <span className="ml-1 font-semibold" title={game.latestTrophy.type}>
-              <TrophyIcon type={game.latestTrophy.type} /> {game.latestTrophy.name}
+            <span className="ml-1 font-semibold" title={data.latestTrophy.type}>
+              <TrophyIcon type={data.latestTrophy.type} /> {data.latestTrophy.name}
             </span>
-          </span>
-          <span className="truncate text-gray-500 dark:text-gray-400">
-            {game.title} ({game.platform}) – {game.playedAt}
-          </span>
-        </div>
-      )}
+            <div className="truncate text-gray-500 dark:text-gray-400">
+              {data.title} ({data.platform}) – {data.playedAt}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
