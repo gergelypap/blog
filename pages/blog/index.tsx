@@ -31,7 +31,7 @@ export default function BlogPostsPage({ posts }: Props) {
         />
         {!filteredPosts.length && <p>No posts found.</p>}
         {filteredPosts.map((post, i) => (
-          <Post key={i} id={i + 1} post={post} fadeUp />
+          <Post key={i} id={++i} post={post} fadeUp />
         ))}
       </section>
     </>

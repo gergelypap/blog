@@ -23,7 +23,7 @@ export default function TagsPage({ content, tag }: Props) {
       </Head>
       <PageTitle>Tagged as: {tag}</PageTitle>
       {content.posts.length > 0 ? (
-        content.posts.map((post, i) => <Post key={i} id={i + 1} post={post} fadeUp />)
+        content.posts.map((post, i) => <Post key={i} id={++i} post={post} fadeUp />)
       ) : (
         <p>No posts found.</p>
       )}
