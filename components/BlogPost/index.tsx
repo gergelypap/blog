@@ -16,8 +16,8 @@ interface Props {
 export default function Post({ post, full = false, fadeUp = false, id = undefined }: Props) {
   return (
     <article
-      className={[`mb-10`, fadeUp && "animate-fade-up opacity-0"].join(" ")}
-      style={fadeUp && id ? { animationDelay: `${id * 100}ms`, animationFillMode: "forwards" } : undefined}
+      className={[`mb-10`, fadeUp && "animate-fade-up [animation-fill-mode:forwards] opacity-0"].join(" ")}
+      style={fadeUp && id ? { animationDelay: `${id * 100}ms` } : undefined}
     >
       {full ? (
         <PageTitle>{post.meta.title}</PageTitle>

@@ -1,6 +1,5 @@
 /** @type import("tailwindcss/tailwind-config").TailwindConfig */
 module.exports = {
-  mode: "jit",
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./posts/**/*.{md,mdx}"],
   darkMode: "class",
   theme: {
@@ -14,9 +13,6 @@ module.exports = {
           "0%": {
             opacity: 0,
             transform: "translateY(1rem)",
-          },
-          "60%": {
-            transform: "translateY(-0.25rem)",
           },
           "100%": {
             opacity: 1,
@@ -33,7 +29,7 @@ module.exports = {
         },
       },
       animation: {
-        "fade-up": "fade-up .3s ease-in-out",
+        "fade-up": "fade-up .25s ease-in-out",
         "fade-in": "fade-in .15s ease-in",
       },
     },

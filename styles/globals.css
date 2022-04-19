@@ -21,102 +21,103 @@
   body {
     @apply text-gray-900 dark:text-gray-300 bg-gray-100 dark:bg-gray-900;
   }
-}
 
-::selection {
-  @apply bg-green-400 text-black;
-}
+  ::selection {
+    @apply bg-green-400 text-black;
+  }
 
-a {
-  @apply text-blue-600 dark:text-blue-500;
+  a {
+    @apply text-blue-600 dark:text-blue-500;
 
-  &:hover {
-    @apply underline;
+    &:hover {
+      @apply underline;
+    }
+  }
+
+  p,
+  ul,
+  ol,
+  dl,
+  hr,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  details,
+  pre {
+    @apply mb-5;
+  }
+
+  h1 {
+    @apply text-2xl font-bold;
+  }
+
+  h2 {
+    @apply text-xl font-bold;
+  }
+
+  h3 {
+    @apply text-lg font-bold;
+  }
+
+  h4 {
+    @apply text-base font-bold;
+  }
+
+  h5 {
+    @apply text-sm font-bold;
+  }
+
+  h6 {
+    @apply text-xs font-bold;
+  }
+
+  blockquote {
+    @apply pl-5 border-l-2 border-l-gray-300 dark:border-l-gray-700 text-gray-500;
+  }
+
+  hr {
+    @apply border-t-2 border-t-gray-300 dark:border-t-gray-700;
+  }
+
+  ul,
+  ol {
+    @apply pl-5;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
   }
 }
 
-p,
-ul,
-ol,
-dl,
-hr,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-details,
-pre {
-  @apply mb-5;
-}
+@layer components {
+  @import "~prism-themes/themes/prism-one-dark.css";
 
-h1 {
-  @apply text-2xl font-bold;
-}
-
-h2 {
-  @apply text-xl font-bold;
-}
-
-h3 {
-  @apply text-lg font-bold;
-}
-
-h4 {
-  @apply text-base font-bold;
-}
-
-h5 {
-  @apply text-sm font-bold;
-}
-
-h6 {
-  @apply text-xs font-bold;
-}
-
-blockquote {
-  @apply pl-5 border-l-2 border-l-gray-300 dark:border-l-gray-700 text-gray-500;
-}
-
-hr {
-  @apply border-t-2 border-t-gray-300 dark:border-t-gray-700;
-}
-
-ul,
-ol {
-  @apply pl-5;
-}
-
-ul {
-  @apply list-disc;
-}
-
-ol {
-  @apply list-decimal;
-}
-
-/* Code blocks */
-@import "~prism-themes/themes/prism-one-dark.css";
-
-code:not(.code-highlight) {
-  @apply bg-gray-300 rounded-md py-0.5 px-1.5 dark:bg-gray-700 dark:text-gray-200 text-sm;
-}
-
-.rehype-code-title {
-  @apply font-mono inline-block py-2 px-3 rounded-t-md text-xs text-gray-300 font-bold;
-  background: hsl(220, 13%, 18%);
-
-  + pre[class*="language-"] {
-    border-top-left-radius: 0;
+  code:not(.code-highlight) {
+    @apply bg-gray-300 rounded-md py-0.5 px-1.5 dark:bg-gray-700 dark:text-gray-200 text-sm;
   }
-}
 
-code[class*="language-"],
-pre[class*="language-"] {
-  @apply text-xs font-mono;
-}
+  .rehype-code-title {
+    @apply font-mono inline-block py-2 px-3 rounded-t-md text-xs text-gray-300 font-bold;
+    background: hsl(220, 13%, 18%);
 
-pre[class*="language-"] {
-  @apply mb-5 rounded-md mt-0;
+    + pre[class*="language-"] {
+      border-top-left-radius: 0;
+    }
+  }
+
+  code[class*="language-"],
+  pre[class*="language-"] {
+    @apply text-xs font-mono;
+  }
+
+  pre[class*="language-"] {
+    @apply mb-5 rounded-md mt-0;
+  }
 }
