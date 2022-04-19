@@ -15,7 +15,7 @@ function App({ Component, pageProps }: AppProps) {
             <DefaultSeo
               openGraph={{
                 title: APP_NAME,
-                description: "Site about coding, scripting and more by @gpap",
+                description: "My website about coding, scripting and more.",
                 type: "website",
                 locale: "en_US",
                 url: APP_URL,
