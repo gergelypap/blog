@@ -27,7 +27,7 @@ export default function TagsPage({ content, tag }: Props) {
         <Tag
           link={false}
           name={tag}
-          className="text-base -translate-y-1 ml-1 bg-gradient-to-br from-green-500 to-blue-500 font-light !text-white"
+          className="!text-base -translate-y-1 ml-1 bg-gradient-to-br from-green-500 to-blue-500 !text-white"
         />
       </PageTitle>
       {content.posts.length > 0 ? (
