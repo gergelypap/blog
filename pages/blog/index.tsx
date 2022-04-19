@@ -1,4 +1,5 @@
 import BlogPost from "@components/BlogPost";
+import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import { getPosts } from "@lib/posts";
 import Config from "@utils/config";
@@ -18,7 +19,7 @@ export default function BlogPostsPage({ posts }: Props) {
   );
 
   return (
-    <>
+    <DefaultLayout>
       <Head>
         <title>Blog | {Config.appName}</title>
       </Head>
@@ -37,7 +38,7 @@ export default function BlogPostsPage({ posts }: Props) {
           <p>No posts found.</p>
         )}
       </section>
-    </>
+    </DefaultLayout>
   );
 }
 

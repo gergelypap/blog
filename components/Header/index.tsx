@@ -8,7 +8,7 @@ import ThemeSwitch from "./ThemeSwitch";
 
 export default function Header() {
   return (
-    <header className="p-5">
+    <header className="p-5 pb-10">
       <div className="float-right">
         <ThemeSwitch />
       </div>

@@ -1,4 +1,5 @@
 import BlogPost from "@components/BlogPost";
+import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import { getPosts } from "@lib/posts";
 import Config from "@utils/config";
@@ -12,7 +13,7 @@ interface Props {
 
 export default function Home({ posts }: Props) {
   return (
-    <>
+    <DefaultLayout>
       <Head>
         <title>{Config.appName}</title>
       </Head>
@@ -26,7 +27,7 @@ export default function Home({ posts }: Props) {
       ) : (
         <p>No posts yet.</p>
       )}
-    </>
+    </DefaultLayout>
   );
 }
 

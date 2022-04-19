@@ -1,4 +1,3 @@
-import Header from "@components/Header";
 import "@styles/globals.css";
 import Config from "@utils/config";
 import { DefaultSeo } from "next-seo";
@@ -33,15 +32,8 @@ const SEO = {
 function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
-      <div className="flex justify-center">
-        <div className="w-full max-w-2xl">
-          <Header />
-          <main className="p-5">
-            <DefaultSeo {...SEO} />
-            <Component {...pageProps} />
-          </main>
-        </div>
-      </div>
+      <DefaultSeo {...SEO} />
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 }

@@ -1,4 +1,5 @@
 import BlogPost from "@components/BlogPost";
+import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import Tag from "@components/Tag";
 import { getPostsByTag } from "@lib/posts";
@@ -16,7 +17,7 @@ interface Props {
 
 export default function TagsPage({ content, tag }: Props) {
   return (
-    <>
+    <DefaultLayout>
       <Head>
         <title>
           Tags: {tag} | {Config.appName}
@@ -35,7 +36,7 @@ export default function TagsPage({ content, tag }: Props) {
       ) : (
         <p>No posts found.</p>
       )}
-    </>
+    </DefaultLayout>
   );
 }
 

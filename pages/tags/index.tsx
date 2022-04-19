@@ -1,3 +1,4 @@
+import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import Tag from "@components/Tag";
 import Config from "@utils/config";
@@ -10,7 +11,7 @@ interface Props {
 
 export default function TagsListingPage({ tags }: Props) {
   return (
-    <>
+    <DefaultLayout>
       <Head>
         <title>Tags | {Config.appName}</title>
       </Head>
@@ -27,7 +28,7 @@ export default function TagsListingPage({ tags }: Props) {
       ) : (
         <p>No tags yet.</p>
       )}
-    </>
+    </DefaultLayout>
   );
 }
 

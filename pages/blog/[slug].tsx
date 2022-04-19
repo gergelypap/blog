@@ -1,4 +1,5 @@
 import BlogPost from "@components/BlogPost";
+import DefaultLayout from "@components/Layout/DefaultLayout";
 import { getPostBySlug, getPostSlugs } from "@lib/posts";
 import Config from "@utils/config";
 import type { Post } from "@utils/types";
@@ -12,7 +13,7 @@ interface Props {
 
 export default function BlogPostPage({ post }: Props) {
   return (
-    <>
+    <DefaultLayout>
       <Head>
         <title>
           {post.meta.title} | {Config.appName}
@@ -42,7 +43,7 @@ export default function BlogPostPage({ post }: Props) {
         description={post.meta.lead}
       />
       <BlogPost post={post} full />
-    </>
+    </DefaultLayout>
   );
 }
 

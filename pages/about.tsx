@@ -1,3 +1,4 @@
+import DefaultLayout from "@components/Layout/DefaultLayout";
 import Link from "@components/Link";
 import PageTitle from "@components/PageTitle";
 import Config from "@utils/config";
@@ -5,7 +6,7 @@ import Head from "next/head";
 
 export default function About() {
   return (
-    <>
+    <DefaultLayout>
       <Head>
         <title>About | {Config.appName}</title>
       </Head>
@@ -24,6 +25,6 @@ export default function About() {
       >
         ☕ Buy me a coffee!
       </Link>
-    </>
+    </DefaultLayout>
   );
 }
