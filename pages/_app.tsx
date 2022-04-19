@@ -20,6 +20,14 @@ function App({ Component, pageProps }: AppProps) {
                 locale: "en_US",
                 url: APP_URL,
                 site_name: APP_NAME,
+                images: [
+                  {
+                    url: `${APP_URL}/img/me.webp`,
+                    width: 230,
+                    height: 230,
+                    alt: "Avatar",
+                  },
+                ],
               }}
               twitter={{
                 handle: "@gergelypap",
