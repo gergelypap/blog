@@ -1,9 +1,7 @@
-import PlayStation from "@components/Header/PlayStation";
 import Config from "@utils/config";
 import Image from "next/image";
 import Link from "../Link";
 import Nav from "./Nav";
-import Spotify from "./Spotify";
 import ThemeSwitch from "./ThemeSwitch";
 
 export default function Header() {
@@ -26,8 +24,6 @@ export default function Header() {
         </div>
       </Link>
       <Nav />
-      <Spotify />
-      <PlayStation />
     </header>
   );
 }

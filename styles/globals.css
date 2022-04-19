@@ -23,7 +23,7 @@
   }
 
   #__next {
-    @apply flex flex-col max-w-2xl w-full mx-auto;
+    @apply flex flex-col max-w-2xl w-full mx-auto min-h-[100vh];
   }
 
   ::selection {
