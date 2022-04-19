@@ -1,23 +1,23 @@
 import Header from "@components/Header";
 import "@styles/globals.css";
-import { APP_DESCRIPTION, APP_NAME, APP_URL } from "@utils/constants";
+import Config from "@utils/config";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 
 const SEO = {
-  title: APP_NAME,
-  description: APP_DESCRIPTION,
+  title: Config.appName,
+  description: Config.appDescription,
   openGraph: {
-    title: APP_NAME,
-    description: APP_DESCRIPTION,
+    title: Config.appName,
+    description: Config.appDescription,
     type: "website",
     locale: "en_US",
-    url: APP_URL,
-    site_name: APP_NAME,
+    url: Config.appUrl,
+    site_name: Config.appName,
     images: [
       {
-        url: `${APP_URL}/img/me.webp`,
+        url: `${Config.appUrl}/img/me.webp`,
         width: 230,
         height: 230,
         alt: "Avatar",

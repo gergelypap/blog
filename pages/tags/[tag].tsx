@@ -2,7 +2,7 @@ import BlogPost from "@components/BlogPost";
 import PageTitle from "@components/PageTitle";
 import Tag from "@components/Tag";
 import { getPostsByTag } from "@lib/posts";
-import { APP_NAME, TAGS } from "@utils/constants";
+import Config from "@utils/config";
 import type { Post } from "@utils/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
@@ -19,7 +19,7 @@ export default function TagsPage({ content, tag }: Props) {
     <>
       <Head>
         <title>
-          Tags: {tag} | {APP_NAME}
+          Tags: {tag} | {Config.appName}
         </title>
       </Head>
       <PageTitle>
@@ -41,20 +41,21 @@ export default function TagsPage({ content, tag }: Props) {
 
 export const getStaticProps: GetStaticProps<Props, { tag: string }> = async ({ params }) => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const posts = await getPostsByTag(params!.tag);
+  const tag = params!.tag;
+  const posts = await getPostsByTag(tag);
 
   return {
     props: {
       content: {
         posts,
       },
-      tag: params!.tag,
+      tag,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = TAGS.map((tag) => ({
+  const paths = Config.tags.map((tag) => ({
     params: {
       tag,
     },

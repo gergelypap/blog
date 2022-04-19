@@ -1,12 +1,12 @@
 import Link from "@components/Link";
-import { GITHUB_USERNAME } from "@utils/constants";
+import Config from "@utils/config";
 import { useRouter } from "next/router";
 
 const links = [
   { title: "Blog", path: "/blog" },
   { title: "Tags", path: "/tags" },
   { title: "About", path: "/about" },
-  { title: "Github", path: `https://github.com/${GITHUB_USERNAME}` },
+  { title: "Github", path: `https://github.com/${Config.githubUsername}` },
 ];
 
 export default function Nav() {

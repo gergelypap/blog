@@ -1,6 +1,6 @@
 import PageTitle from "@components/PageTitle";
 import Tag from "@components/Tag";
-import { APP_NAME, TAGS } from "@utils/constants";
+import Config from "@utils/config";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 
@@ -12,7 +12,7 @@ export default function TagsListingPage({ tags }: Props) {
   return (
     <>
       <Head>
-        <title>Tags | {APP_NAME}</title>
+        <title>Tags | {Config.appName}</title>
       </Head>
       <PageTitle>Tags</PageTitle>
       {tags.length ? (
@@ -34,7 +34,7 @@ export default function TagsListingPage({ tags }: Props) {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      tags: TAGS,
+      tags: Config.tags,
     },
   };
 };

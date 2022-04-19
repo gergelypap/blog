@@ -1,13 +1,13 @@
 import Link from "@components/Link";
 import PageTitle from "@components/PageTitle";
-import { APP_NAME } from "@utils/constants";
+import Config from "@utils/config";
 import Head from "next/head";
 
 export default function About() {
   return (
     <>
       <Head>
-        <title>About | {APP_NAME}</title>
+        <title>About | {Config.appName}</title>
       </Head>
       <PageTitle>About</PageTitle>
       <p>

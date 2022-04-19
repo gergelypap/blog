@@ -1,5 +1,5 @@
 import PlayStation from "@components/Header/PlayStation";
-import { APP_NAME } from "@utils/constants";
+import Config from "@utils/config";
 import Image from "next/image";
 import Link from "../Link";
 import Nav from "./Nav";
@@ -22,7 +22,7 @@ export default function Header() {
             alt="Avatar"
             priority
           />
-          <h1 className="mb-0 text-3xl inline-block text-gray-900 dark:text-gray-200">{APP_NAME}</h1>
+          <h1 className="mb-0 text-3xl inline-block text-gray-900 dark:text-gray-200">{Config.appName}</h1>
         </div>
       </Link>
       <Nav />

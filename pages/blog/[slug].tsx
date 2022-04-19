@@ -1,6 +1,6 @@
 import BlogPost from "@components/BlogPost";
 import { getPostBySlug, getPostSlugs } from "@lib/posts";
-import { APP_NAME, APP_URL } from "@utils/constants";
+import Config from "@utils/config";
 import type { Post } from "@utils/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ArticleJsonLd, NextSeo } from "next-seo";
@@ -15,27 +15,27 @@ export default function BlogPostPage({ post }: Props) {
     <>
       <Head>
         <title>
-          {post.meta.title} | {APP_NAME}
+          {post.meta.title} | {Config.appName}
         </title>
       </Head>
 
       <NextSeo
         title={post.meta.title}
-        titleTemplate={`%s | ${APP_NAME}`}
+        titleTemplate={`%s | ${Config.appName}`}
         description={post.meta.lead}
-        canonical={`${APP_URL}${post.permalink}`}
+        canonical={`${Config.appUrl}${post.permalink}`}
         openGraph={{
-          site_name: APP_NAME,
-          url: `${APP_URL}${post.permalink}`,
+          site_name: Config.appName,
+          url: `${Config.appUrl}${post.permalink}`,
           title: post.meta.title,
           description: post.meta.lead,
         }}
       />
       <ArticleJsonLd
         type="Blog"
-        url={`${APP_URL}${post.permalink}`}
+        url={`${Config.appUrl}${post.permalink}`}
         title={post.meta.title}
-        images={[`${APP_URL}/img/me.webp`]}
+        images={[`${Config.appUrl}/img/me.webp`]}
         datePublished={post.meta.createdAt}
         dateModified={post.meta.updatedAt || undefined}
         authorName="Gergely Pap"

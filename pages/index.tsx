@@ -1,7 +1,7 @@
 import BlogPost from "@components/BlogPost";
 import PageTitle from "@components/PageTitle";
 import { getPosts } from "@lib/posts";
-import { APP_NAME } from "@utils/constants";
+import Config from "@utils/config";
 import type { Post } from "@utils/types";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
@@ -14,7 +14,7 @@ export default function Home({ posts }: Props) {
   return (
     <>
       <Head>
-        <title>{APP_NAME}</title>
+        <title>{Config.appName}</title>
       </Head>
       <PageTitle>Latest blog posts</PageTitle>
       {posts.length ? (

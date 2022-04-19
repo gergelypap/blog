@@ -1,7 +1,7 @@
 import BlogPost from "@components/BlogPost";
 import PageTitle from "@components/PageTitle";
 import { getPosts } from "@lib/posts";
-import { APP_NAME } from "@utils/constants";
+import Config from "@utils/config";
 import type { Post } from "@utils/types";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
@@ -20,7 +20,7 @@ export default function BlogPostsPage({ posts }: Props) {
   return (
     <>
       <Head>
-        <title>Blog | {APP_NAME}</title>
+        <title>Blog | {Config.appName}</title>
       </Head>
       <section>
         <PageTitle>All blog posts</PageTitle>
