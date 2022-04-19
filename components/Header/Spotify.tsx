@@ -33,7 +33,7 @@ export default function Spotify() {
           <div className="text-gray-800 dark:text-gray-300 animate-fade-in">
             <span className="font-semibold">I’m listening to</span>
             <a className="text-current" href={data.url} target="_blank" rel="noopener noreferrer">
-              <div className="text-gray-500 dark:text-gray-400 truncate">
+              <div className="text-gray-600 dark:text-gray-400 truncate">
                 {data.artist} – {data.title}
               </div>
             </a>

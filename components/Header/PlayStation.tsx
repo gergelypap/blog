@@ -61,7 +61,7 @@ export default function PlayStation() {
             <span className="ml-1 font-semibold" title={data.latestTrophy.type}>
               <TrophyIcon type={data.latestTrophy.type} /> {data.latestTrophy.name}
             </span>
-            <div className="truncate text-gray-500 dark:text-gray-400">
+            <div className="truncate text-gray-600 dark:text-gray-400">
               {data.title} ({data.platform}) – {data.playedAt}
             </div>
           </div>

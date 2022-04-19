@@ -28,7 +28,7 @@ export default function Post({ post, full = false, fadeUp = false, id = undefine
           </h1>
         </Link>
       )}
-      <header className="text-gray-500 dark:text-gray-400 text-sm flex flex-col sm:flex-row gap-5">
+      <header className="text-gray-600 dark:text-gray-400 text-sm flex flex-col sm:flex-row gap-5">
         <div className="flex gap-5">
           <PostDate post={post} />
           <ReadingTime data={post.readingTime} />
