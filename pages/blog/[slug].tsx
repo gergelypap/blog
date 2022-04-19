@@ -1,12 +1,12 @@
-import Post from "@components/Post";
+import BlogPost from "@components/BlogPost";
 import { getPostBySlug, getPostSlugs } from "@lib/posts";
-import { PostType } from "@type/Post";
 import { APP_NAME } from "@utils/constants";
+import type { Post } from "@utils/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 
 interface Props {
-  post: PostType;
+  post: Post;
 }
 
 export default function BlogPostPage({ post }: Props) {
@@ -17,7 +17,7 @@ export default function BlogPostPage({ post }: Props) {
           {post.meta.title} / {APP_NAME}
         </title>
       </Head>
-      <Post post={post} full />
+      <BlogPost post={post} full />
     </>
   );
 }

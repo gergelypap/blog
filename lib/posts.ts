@@ -1,4 +1,4 @@
-import { PostMetadata, PostType } from "@type/Post";
+import type { Post, PostMetadata } from "@utils/types";
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
 import readingTime from "reading-time";
@@ -9,7 +9,7 @@ const postFiles = readdirSync(postsDirectory)
   .filter((path) => path.includes(".mdx"))
   .map((path) => path.replace(/\.mdx?$/i, ""));
 
-export async function getPostBySlug(slug: string): Promise<PostType> {
+export async function getPostBySlug(slug: string): Promise<Post> {
   const filename = postFiles.find((path) => path.slice(11) === slug);
   if (!filename) {
     throw new Error(`File ${slug} not found!`);
@@ -28,7 +28,7 @@ export async function getPostBySlug(slug: string): Promise<PostType> {
   };
 }
 
-export async function getPosts(limit = Infinity): Promise<PostType[]> {
+export async function getPosts(limit = Infinity): Promise<Post[]> {
   const loadPosts = getPostSlugs().map(async (slug) => await getPostBySlug(slug));
   const posts = await Promise.all(loadPosts);
 
@@ -50,7 +50,7 @@ export function getPostSlugs(): string[] {
   });
 }
 
-export async function getPostsByTag(tag: string): Promise<PostType[]> {
+export async function getPostsByTag(tag: string): Promise<Post[]> {
   const posts = await getPosts();
 
   return posts.filter((post) => post.meta.tags.includes(tag));

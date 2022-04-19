@@ -1,13 +1,13 @@
 import Link from "@components/Link";
 import MDXComponent from "@components/MDXComponent";
 import PageTitle from "@components/PageTitle";
-import { PostType } from "@type/Post";
+import type { Post } from "@utils/types";
 import PostDate from "./PostDate";
 import PostTags from "./PostTags";
 import ReadingTime from "./ReadingTime";
 
 interface Props {
-  post: PostType;
+  post: Post;
   full?: boolean;
   fadeUp?: boolean;
   id?: number;

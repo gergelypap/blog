@@ -1,13 +1,13 @@
+import BlogPost from "@components/BlogPost";
 import PageTitle from "@components/PageTitle";
-import Post from "@components/Post";
 import { getPosts } from "@lib/posts";
-import type { PostType } from "@type/Post";
 import { APP_NAME } from "@utils/constants";
+import type { Post } from "@utils/types";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 
 interface Props {
-  posts: PostType[];
+  posts: Post[];
 }
 
 export default function Home({ posts }: Props) {
@@ -19,7 +19,7 @@ export default function Home({ posts }: Props) {
       <PageTitle>Latest blog posts</PageTitle>
       <section className="sm:grid sm:grid-cols-2 sm:gap-10">
         {posts.map((post, i) => (
-          <Post key={i} post={post} id={++i} fadeUp />
+          <BlogPost key={i} post={post} id={++i} fadeUp />
         ))}
       </section>
     </>

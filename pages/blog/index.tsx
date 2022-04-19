@@ -1,13 +1,13 @@
-import Post from "@components/Post";
+import BlogPost from "@components/BlogPost";
 import { getPosts } from "@lib/posts";
-import { PostType } from "@type/Post";
 import { APP_NAME } from "@utils/constants";
+import type { Post } from "@utils/types";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { useState } from "react";
 
 interface Props {
-  posts: PostType[];
+  posts: Post[];
 }
 
 export default function BlogPostsPage({ posts }: Props) {
@@ -31,7 +31,7 @@ export default function BlogPostsPage({ posts }: Props) {
         />
         {!filteredPosts.length && <p>No posts found.</p>}
         {filteredPosts.map((post, i) => (
-          <Post key={i} id={++i} post={post} fadeUp />
+          <BlogPost key={i} id={++i} post={post} fadeUp />
         ))}
       </section>
     </>

@@ -1,6 +1,6 @@
 import type { ReadTimeResults } from "reading-time";
 
-export type PostType = {
+export type Post = {
   code: string;
   meta: PostMetadata;
   permalink: string;

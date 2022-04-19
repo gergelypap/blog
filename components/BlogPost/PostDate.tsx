@@ -1,8 +1,8 @@
-import { PostType } from "@type/Post";
+import type { Post } from "@utils/types";
 import { prettyDate } from "utils/date";
 
 interface Props {
-  post: PostType;
+  post: Post;
 }
 
 export default function PostDate({ post }: Props) {

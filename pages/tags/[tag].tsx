@@ -1,14 +1,14 @@
+import BlogPost from "@components/BlogPost";
 import PageTitle from "@components/PageTitle";
-import Post from "@components/Post";
 import { getPostsByTag } from "@lib/posts";
-import { PostType } from "@type/Post";
 import { APP_NAME, TAGS } from "@utils/constants";
+import type { Post } from "@utils/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 
 interface Props {
   content: {
-    posts: PostType[];
+    posts: Post[];
   };
   tag: string;
 }
@@ -23,7 +23,7 @@ export default function TagsPage({ content, tag }: Props) {
       </Head>
       <PageTitle>Tagged as: {tag}</PageTitle>
       {content.posts.length > 0 ? (
-        content.posts.map((post, i) => <Post key={i} id={++i} post={post} fadeUp />)
+        content.posts.map((post, i) => <BlogPost key={i} id={++i} post={post} fadeUp />)
       ) : (
         <p>No posts found.</p>
       )}
