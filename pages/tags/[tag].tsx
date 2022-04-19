@@ -18,7 +18,7 @@ export default function TagsPage({ content, tag }: Props) {
     <>
       <Head>
         <title>
-          Tags: {tag} / {APP_NAME}
+          Tags: {tag} | {APP_NAME}
         </title>
       </Head>
       <PageTitle>Tagged as: {tag}</PageTitle>

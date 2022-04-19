@@ -19,7 +19,7 @@ export default function BlogPostsPage({ posts }: Props) {
   return (
     <>
       <Head>
-        <title>Blog / {APP_NAME}</title>
+        <title>Blog | {APP_NAME}</title>
       </Head>
       <section>
         <input

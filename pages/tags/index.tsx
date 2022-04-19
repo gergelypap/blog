@@ -12,7 +12,7 @@ export default function TagsListingPage({ tags }: Props) {
   return (
     <>
       <Head>
-        <title>Tags / {APP_NAME}</title>
+        <title>Tags | {APP_NAME}</title>
       </Head>
       <PageTitle>Tags</PageTitle>
       <p>Find all content filtered by tags.</p>

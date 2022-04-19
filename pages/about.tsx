@@ -7,7 +7,7 @@ export default function About() {
   return (
     <>
       <Head>
-        <title>About / {APP_NAME}</title>
+        <title>About | {APP_NAME}</title>
       </Head>
       <PageTitle>About</PageTitle>
       <p>

@@ -1,3 +1,4 @@
+import { APP_DESCRIPTION } from "@utils/constants";
 import Document, { DocumentContext, Head, Html, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
@@ -9,6 +10,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <meta name="description" content={APP_DESCRIPTION} />
           <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
           <link rel="preload" href="/fonts/SFMono.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
           <link rel="preload" href="/api/spotify" as="fetch" crossOrigin="anonymous" />

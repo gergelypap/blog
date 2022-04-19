@@ -1,9 +1,34 @@
 import Header from "@components/Header";
 import "@styles/globals.css";
-import { APP_NAME, APP_URL } from "@utils/constants";
+import { APP_DESCRIPTION, APP_NAME, APP_URL } from "@utils/constants";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
+
+const SEO = {
+  title: APP_NAME,
+  description: APP_DESCRIPTION,
+  openGraph: {
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
+    type: "website",
+    locale: "en_US",
+    url: APP_URL,
+    site_name: APP_NAME,
+    images: [
+      {
+        url: `${APP_URL}/img/me.webp`,
+        width: 230,
+        height: 230,
+        alt: "Avatar",
+      },
+    ],
+  },
+  twitter: {
+    handle: "@gergelypap",
+    cardType: "summary_large_image",
+  },
+};
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,29 +37,7 @@ function App({ Component, pageProps }: AppProps) {
         <div className="w-full max-w-2xl">
           <Header />
           <main className="p-5">
-            <DefaultSeo
-              openGraph={{
-                title: APP_NAME,
-                description: "My website about coding, scripting and more.",
-                type: "website",
-                locale: "en_US",
-                url: APP_URL,
-                site_name: APP_NAME,
-                images: [
-                  {
-                    url: `${APP_URL}/img/me.webp`,
-                    width: 230,
-                    height: 230,
-                    alt: "Avatar",
-                  },
-                ],
-              }}
-              twitter={{
-                handle: "@gergelypap",
-                site: "@gergelypap",
-                cardType: "summary",
-              }}
-            />
+            <DefaultSeo {...SEO} />
             <Component {...pageProps} />
           </main>
         </div>
