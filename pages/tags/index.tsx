@@ -15,12 +15,18 @@ export default function TagsListingPage({ tags }: Props) {
         <title>Tags | {APP_NAME}</title>
       </Head>
       <PageTitle>Tags</PageTitle>
-      <p>Find all content filtered by tags.</p>
-      <section className="flex flex-wrap gap-3">
-        {tags.map((tag, i) => (
-          <Tag key={i} name={tag} />
-        ))}
-      </section>
+      {tags.length ? (
+        <>
+          <p>Find all content filtered by tags.</p>
+          <section className="flex flex-wrap gap-3">
+            {tags.map((tag, i) => (
+              <Tag key={i} name={tag} />
+            ))}
+          </section>
+        </>
+      ) : (
+        <p>No tags yet.</p>
+      )}
     </>
   );
 }

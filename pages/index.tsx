@@ -17,11 +17,15 @@ export default function Home({ posts }: Props) {
         <title>{APP_NAME}</title>
       </Head>
       <PageTitle>Latest blog posts</PageTitle>
-      <section className="sm:grid sm:grid-cols-2 sm:gap-10">
-        {posts.map((post, i) => (
-          <BlogPost key={i} post={post} id={++i} fadeUp />
-        ))}
-      </section>
+      {posts.length ? (
+        <section className="sm:grid sm:grid-cols-2 sm:gap-10">
+          {posts.map((post, i) => (
+            <BlogPost key={i} post={post} id={++i} fadeUp />
+          ))}
+        </section>
+      ) : (
+        <p>No posts yet.</p>
+      )}
     </>
   );
 }

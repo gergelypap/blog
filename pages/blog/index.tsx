@@ -1,4 +1,5 @@
 import BlogPost from "@components/BlogPost";
+import PageTitle from "@components/PageTitle";
 import { getPosts } from "@lib/posts";
 import { APP_NAME } from "@utils/constants";
 import type { Post } from "@utils/types";
@@ -22,17 +23,19 @@ export default function BlogPostsPage({ posts }: Props) {
         <title>Blog | {APP_NAME}</title>
       </Head>
       <section>
+        <PageTitle>All blog posts</PageTitle>
         <input
           className="block w-full px-4 py-2 text-gray-900 border border-gray-200 rounded-md dark:border-gray-900 focus:ring-gray-900 focus:border-gray-900 dark:bg-gray-700 dark:text-gray-100 mb-10"
           aria-label="Filter posts"
-          placeholder="Filter posts..."
+          placeholder="Filter..."
           type="search"
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        {!filteredPosts.length && <p>No posts found.</p>}
-        {filteredPosts.map((post, i) => (
-          <BlogPost key={i} id={++i} post={post} fadeUp />
-        ))}
+        {filteredPosts.length ? (
+          filteredPosts.map((post, i) => <BlogPost key={i} id={++i} post={post} fadeUp />)
+        ) : (
+          <p>No posts found.</p>
+        )}
       </section>
     </>
   );
