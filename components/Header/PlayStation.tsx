@@ -54,9 +54,9 @@ export default function PlayStation() {
       <PSNIcon className="w-8 mr-3 flex-shrink-0" />
       <div className="flex flex-col justify-center h-10 truncate">
         {!data && !error && "Fetching..."}
-        {error && <span className="text-red-600 font-semibold">Could not fetch from PSN. Retrying...</span>}
+        {error && <span className="text-red-600">Could not fetch from PSN. Retrying...</span>}
         {data && !error && (
-          <div className="truncate animate-fade-in">
+          <div className="truncate">
             My latest trophy:
             <span className="ml-1 font-semibold" title={data.latestTrophy.type}>
               <TrophyIcon type={data.latestTrophy.type} /> {data.latestTrophy.name}
