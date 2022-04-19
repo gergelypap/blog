@@ -29,7 +29,7 @@ export default function Spotify() {
     <div className="text-sm flex cursor-default mb-3">
       <SpotifyIcon className="w-8 mr-3 flex-shrink-0" />
       <div className="flex flex-col justify-center h-10 truncate">
-        {data?.isPlaying && (
+        {!error && data?.isPlaying && (
           <div className="text-gray-800 dark:text-gray-300 animate-fade-in">
             <span className="font-semibold">I’m listening to</span>
             <a className="text-current" href={data.url} target="_blank" rel="noopener noreferrer">
