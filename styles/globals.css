@@ -100,28 +100,26 @@
   }
 }
 
-@layer components {
-  @import "~prism-themes/themes/prism-one-dark.css";
+@import "~prism-themes/themes/prism-one-dark.css";
 
-  code:not(.code-highlight) {
-    @apply bg-gray-300 rounded-md py-0.5 px-1.5 dark:bg-gray-700 dark:text-gray-200 text-sm;
+code:not(.code-highlight) {
+  @apply bg-gray-300 rounded-md py-0.5 px-1.5 dark:bg-gray-700 dark:text-gray-200 text-sm;
+}
+
+.rehype-code-title {
+  @apply font-mono inline-block py-2 px-3 rounded-t-md text-xs text-gray-300 font-bold;
+  background: hsl(220, 13%, 18%);
+
+  + pre[class*="language-"] {
+    border-top-left-radius: 0;
   }
+}
 
-  .rehype-code-title {
-    @apply font-mono inline-block py-2 px-3 rounded-t-md text-xs text-gray-300 font-bold;
-    background: hsl(220, 13%, 18%);
+code[class*="language-"],
+pre[class*="language-"] {
+  @apply text-xs font-mono;
+}
 
-    + pre[class*="language-"] {
-      border-top-left-radius: 0;
-    }
-  }
-
-  code[class*="language-"],
-  pre[class*="language-"] {
-    @apply text-xs font-mono;
-  }
-
-  pre[class*="language-"] {
-    @apply mb-5 rounded-md mt-0;
-  }
+pre[class*="language-"] {
+  @apply mb-5 rounded-md mt-0;
 }
