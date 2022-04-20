@@ -43,7 +43,6 @@ export default function Footer() {
         </FooterBlock>
         <FooterBlock title="Entertainment">
           <FooterLink href="https://open.spotify.com/user/irrt95n0lyd0a1i56rlmmpu8g" text="Spotify" />
-          <FooterLink href="https://www.youtube.com/user/Gege42/" text="YouTube" />
         </FooterBlock>
       </div>
     </footer>
