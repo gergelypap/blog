@@ -4,7 +4,7 @@
   "description": "My website about coding, scripting and more.",
   "dir": "auto",
   "lang": "en-US",
-  "display": "minimal-ui",
+  "display": "standalone",
   "orientation": "any",
   "scope": "/",
   "start_url": "/?homescreen=1",
