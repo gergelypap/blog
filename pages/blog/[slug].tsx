@@ -36,7 +36,7 @@ export default function BlogPostPage({ post }: Props) {
         type="Blog"
         url={`${Config.appUrl}${post.permalink}`}
         title={post.meta.title}
-        images={[`${Config.appUrl}/img/me.webp`]}
+        images={[`${Config.appUrl}/logo.svg`]}
         datePublished={post.meta.createdAt}
         dateModified={post.meta.updatedAt || undefined}
         authorName="Gergely Pap"

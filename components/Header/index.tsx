@@ -14,10 +14,10 @@ export default function Header() {
         <div className="flex gap-3">
           <Image
             className="mr-5 block rounded-full ring-gray-400"
-            src="/img/me.webp"
+            src="/logo.svg"
             height="40"
             width="40"
-            alt="Avatar"
+            alt="Logo"
             priority
           />
           <h1 className="mb-0 text-3xl inline-block text-gray-900 dark:text-gray-200">{Config.appName}</h1>

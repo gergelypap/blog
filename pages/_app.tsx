@@ -16,7 +16,7 @@ const SEO = {
     site_name: Config.appName,
     images: [
       {
-        url: `${Config.appUrl}/img/me.webp`,
+        url: `${Config.appUrl}/logo.svg`,
         width: 230,
         height: 230,
         alt: "Avatar",
