@@ -1,6 +1,7 @@
 import {
   exchangeCodeForAccessToken,
   exchangeNpssoForCode,
+  exchangeRefreshTokenForAuthTokens,
   getTitleTrophies,
   getUserTitles,
   getUserTrophiesEarnedForTitle,
@@ -8,9 +9,22 @@ import {
 
 const npsso = process.env.PSN_AUTH_TOKEN;
 
-export default async function getLastPlayedGame() {
+async function authorize() {
   const accessCode = await exchangeNpssoForCode(npsso as string);
-  const auth = await exchangeCodeForAccessToken(accessCode);
+  let auth = await exchangeCodeForAccessToken(accessCode);
+  const now = new Date();
+  const expirationDate = new Date(now.getTime() + auth.expiresIn * 1000).toISOString();
+  const isAccessTokenExpired = new Date(expirationDate).getTime() < now.getTime();
+
+  if (isAccessTokenExpired) {
+    auth = await exchangeRefreshTokenForAuthTokens(auth.refreshToken);
+  }
+
+  return auth;
+}
+
+export default async function getLastPlayedGame() {
+  const auth = await authorize();
 
   // Get the user's games.
   const userTitles = await getUserTitles({ accessToken: auth.accessToken }, "me");
