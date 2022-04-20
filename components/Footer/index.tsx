@@ -1,5 +1,5 @@
-import PlayStation from "@components/Header/PlayStation";
-import Spotify from "@components/Header/Spotify";
+import PlayStation from "@components/Footer/PlayStation";
+import Spotify from "@components/Footer/Spotify";
 import Link from "@components/Link";
 import React from "react";
 
