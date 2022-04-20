@@ -10,6 +10,7 @@
     "test-dev": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "lint": "next lint --dir . --ext mdx --ext ts --ext tsx --ext js --ext jsx",
     "lint-types": "tsc --noemit",
+    "generate-icons": "ts-node scripts/generate-icons.ts",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -45,6 +46,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-sonarjs": "^0.13.0",
+    "favicons": "^7.0.0-beta.4",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.8",
