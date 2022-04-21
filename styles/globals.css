@@ -119,7 +119,7 @@
   border-bottom: 0;
 
   + .prism-code {
-    margin-top: -2px;
+    margin-top: -1px;
     border-top-left-radius: 0;
   }
 }

@@ -3,7 +3,7 @@ const Config = {
   appUrl: "https://gpap.vercel.app",
   appDescription: "My website about coding, scripting and more.",
   githubUsername: "gergelypap",
-  tags: ["javascript", "react", "php", "meta", "scripting"],
+  tags: ["js", "meta", "gaming"],
   backgroundColor: "#111827",
   themeColor: "#f9fafb",
   language: "en-US",

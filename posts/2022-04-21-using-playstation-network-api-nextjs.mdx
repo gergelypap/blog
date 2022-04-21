@@ -1,0 +1,316 @@
+---
+title: Using the PlayStation Network API with Next.js
+lead: In this article you can read about how to leverage the PSN API to display game and trophy related info on your website, particularly via NextJS.
+tags: ["js", "gaming"]
+---
+
+import PlayStation from "./components/Footer/PlayStation";
+
+See my PSN widget in the footer? In case you missed it, here it is:
+
+<div className="mb-5 max-w-xs mx-auto border-2 p-2 rounded-lg border-gray-300 dark:border-gray-700 shadow-lg">
+  <PlayStation />
+</div>
+
+Cool, huh? We will learn about how to create this for your own purpose.
+
+When I found [Lee Robinson's article](https://leerob.io/blog/spotify-api-nextjs) about how to use the Spotify API to display the song he is listening to, I instantly wanted to <del>steal</del> have that thing on my site. After implementing the widget—and messing around with it like a careless child—I started to think about what else could I display dynamically. As a gamer, the answer was simple: why not my last earned trophy on PlayStation Network?
+
+So obviously I google'd around with my excuisite googling skills (typing `npm psn` <kbd>↵ ENTER</kbd> that is), I found out there _is_ an API for Sony's entertainment platform.
+
+## Prerequisites
+
+This tutorial focuses on Next.js, but you can implement it on any JavaScript site. You will need:
+
+- A PlayStation™ Network account (duh)
+- JavaScript knowledge
+- The [`psn-api`](https://psn-api.achievements.app/) library
+
+Throughout this article, I am using TypeScript code, as every JS developer should. If you are not familiar, it's time to [learn it](https://www.typescriptlang.org/docs/handbook/intro.html).
+
+Let's go!
+
+## Authenticating with PlayStation Network
+
+First, we need a so-called SSO token from the PSN servers. Using this token, we can get an access code with the psn-api node library.
+
+I won't go into much details here, because the process is [well-documented in its docs](https://psn-api.achievements.app/authentication/authenticating-manually). Just make sure you have acquired a valid SSO token. The best possible way is to store it in an environment variable in a `.env` file, which is auto-loaded by Next.js.
+
+```ini:.env
+PSN_SSO_TOKEN=<your 64 character token>
+```
+
+> Do **NOT** check this into version control! It should be kept in secret, and manually provided in the environment you are hosting your site in.
+
+Now that we have the SSO token, let's create a file where we will authorize with PSN:
+
+```typescript:lib/psn.ts
+import {
+  exchangeCodeForAccessToken,
+  exchangeNpssoForCode,
+  exchangeRefreshTokenForAuthTokens,
+} from "psn-api";
+
+const token = process.env.PSN_SSO_TOKEN;
+
+async function authorize() {
+  const accessCode = await exchangeNpssoForCode(token as string);
+  let auth = await exchangeCodeForAccessToken(accessCode);
+
+  // Check if the access code is expired.
+  const now = new Date();
+  const expirationDate = new Date(now.getTime() + auth.expiresIn * 1000).toISOString();
+  const isAccessTokenExpired = new Date(expirationDate).getTime() < now.getTime();
+
+  // If expired, get another one with the refresh token.
+  if (isAccessTokenExpired) {
+    auth = await exchangeRefreshTokenForAuthTokens(auth.refreshToken);
+  }
+
+  return auth;
+}
+```
+
+Great! Now the servers of PSN will recognize our queries.
+
+## Fetching data
+
+Getting the last earned trophy data is a bit tricky, because we have to do multiple fetch calls to get there:
+
+1. First, we fetch all the games our account is associated with, and find the first game that has collected any trophies.
+2. Then, fetch all the user's trophies for that game, and find the latest one.
+3. Finally, fetch the game's trophy list and extract the previously fetched trophy with its id, to get more data about it.
+
+Getting the games (titles, as PSN calls them) is easy:
+
+```typescript
+const userTitles = await getUserTitles({ accessToken: auth.accessToken }, "me");
+```
+
+> Notice how we are using a special `me` string. This will tell PSN that it is the logged in user session making the request. However, it could be substituted with any other PSN account id.
+
+This will return an object, like:
+
+```json
+{
+  "trophyTitles": [
+    {
+      "npServiceName": "trophy",
+      "npCommunicationId": "NPWR00132_00",
+      "trophySetVersion": "01.02",
+      "trophyTitleName": "GTA IV",
+      "trophyTitleDetail": "Grand Theft Auto IV Trophies",
+      "trophyTitleIconUrl": "https://image.api.playstation.com/trophy/np/NPWR00132_00_00418E3A341F6601FE2B592B96542E57D66D440367/5A7D06DD11D58892AFD1A5681FEEAB33F5C050A6.PNG",
+      "trophyTitlePlatform": "PS3",
+      "hasTrophyGroups": true,
+      "definedTrophies": { "bronze": 57, "silver": 5, "gold": 3, "platinum": 1 },
+      "progress": 1,
+      "earnedTrophies": { "bronze": 1, "silver": 0, "gold": 0, "platinum": 0 },
+      "hiddenFlag": false,
+      "lastUpdatedDateTime": "2022-04-17T06:50:25Z"
+    }
+    // ...
+  ],
+  "totalItemCount": 24
+}
+```
+
+The results are ordered by `lastUpdatedDateTime`, so the first result will be the title for which a trophy was recently earned (or synced for the first time in the case of a game with 0% progress). Now we should find the latest game by checking each `earnedTrophies` object until we find at least one trophy.
+
+```typescript
+const lastPlayedTitle = userTitles.trophyTitles.find(
+  (title) => Object.values(title.earnedTrophies).filter(Boolean).length > 0
+);
+```
+
+Great! We now have the last game we earned a trophy for. Let's get the complete trophy list of the user or that game.
+
+```typescript
+const allUserTrophiesForTitle = await getUserTrophiesEarnedForTitle(
+  { accessToken: auth.accessToken },
+  "me",
+  lastPlayedTitle.npCommunicationId,
+  "all",
+  { npServiceName: "trophy" }
+);
+```
+
+> For PS3, PS4 or PS Vita, we have to provide an additional `{ npServiceName: "trophy" }` parameter as well. PS5 games do not require this.
+
+From the previous request, we also got an `npCommunicationId`, which is basically a unique ID of the PSN games, such as `NPWR00132_00` for GTA IV. With this, we have a result like:
+
+```json
+{
+  "trophySetVersion": "01.02",
+  "hasTrophyGroups": true,
+  "lastUpdatedDateTime": "2022-04-17T06:50:25Z",
+  "trophies": [
+    {
+      "trophyId": 0,
+      "trophyHidden": true,
+      "earned": false,
+      "trophyType": "platinum",
+      "trophyRare": 0,
+      "trophyEarnedRate": "0.2"
+    },
+    {
+      "trophyId": 1,
+      "trophyHidden": false,
+      "earned": true,
+      "earnedDateTime": "2022-04-17T06:23:25Z",
+      "trophyType": "bronze",
+      "trophyRare": 3,
+      "trophyEarnedRate": "63.9"
+    }
+    // ...
+  ],
+  "rarestTrophies": [ ... ],
+  "totalItemCount": 66
+}
+```
+
+See how the `trophies` array contains all trophies for that game. Those which we earned have an `earnedDateTime` value, which we can use to get the latest trophy:
+
+```typescript
+const lastEarnedTrophy = allUserTrophiesForTitle.trophies
+  .filter((trophy) => trophy.earned)
+  .sort((a, b) => +new Date(a.earnedDateTime as string) - +new Date(b.earnedDateTime as string))[0];
+```
+
+> The `+` operator before the `Date` object is really just to cast it to a number type, so Typescript will not complain about the arithmetic operation we are doing here.
+
+Almost there! Lastly, we have to fetch all the trophies for the title. Yes, we kinda did this before, but on another endpoint, which did not return all the trophy details we need for our handy widget.
+
+```typescript
+const allTitleTrophies = await getTitleTrophies(
+  { accessToken: auth.accessToken },
+  lastPlayedTitle.npCommunicationId,
+  "all",
+  { npServiceName: "trophy" }
+);
+```
+
+The response looks like this:
+
+```json
+{
+  "trophySetVersion": "01.02",
+  "hasTrophyGroups": true,
+  "trophies": [
+    {
+      "trophyId": 0,
+      "trophyHidden": true,
+      "trophyType": "platinum",
+      "trophyName": "Taking A Liberty",
+      "trophyDetail": "Sorry for taking liberties with your time.\n\n",
+      "trophyIconUrl": "https://image.api.playstation.com/trophy/np/NPWR00132_00_00418E3A341F6601FE2B592B96542E57D66D440367/026F5F1F79ABB9E4D62DFBA1702CBFC7D5B19EF8.PNG",
+      "trophyGroupId": "default"
+    },
+    {
+      "trophyId": 1,
+      "trophyHidden": false,
+      "trophyType": "bronze",
+      "trophyName": "Off The Boat",
+      "trophyDetail": "You have completed the first mission.",
+      "trophyIconUrl": "https://image.api.playstation.com/trophy/np/NPWR00132_00_00418E3A341F6601FE2B592B96542E57D66D440367/19AD250BDB2560C6615BBB3A7B1989ECE1AF121E.PNG",
+      "trophyGroupId": "default"
+    }
+    // ...
+  ],
+  "totalItemCount": 66
+}
+```
+
+From this list, we just have to find the one we have fetched in a previous step, by comparing their IDs:
+
+```typescript
+const trophy = allTitleTrophies.trophies.find((trophy) => trophy.trophyId === lastEarnedTrophy.trophyId);
+```
+
+The only thing remaining is to return `lastPlayedTitle` and `trophy` from this whole function.
+
+# Creating an API route in Next.js
+
+Since we managed to get all the data, we can use the built-in [API route support](https://nextjs.org/docs/api-routes/introduction) of Next.js to query the PSN API. Create a `pages/api/latestTrophy.ts` file, with something like this:
+
+```typescript
+import getLastPlayedGame from "@lib/psn";
+import { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { lastPlayedTitle, trophy } = await getLastPlayedGame();
+
+  // Caching the results for 1 day, but revalidate after 1 hour.
+  res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=3600");
+
+  return res.status(200).json({
+    title: lastPlayedTitle.trophyTitleName,
+    platform: lastPlayedTitle.trophyTitlePlatform,
+    playedAt: lastPlayedTitle.lastUpdatedDateTime,
+    latestTrophy: {
+      name: trophy.trophyName,
+      text: trophy.trophyDetail,
+      icon: trophy.trophyIconUrl,
+      type: trophy.trophyType,
+    },
+  });
+}
+```
+
+Querying the application's `/api/latestTrophy` endpoint, we now have a response like this:
+
+```json
+{
+  "title": "GTA IV",
+  "platform": "PS3",
+  "playedAt": "2022-04-17T06:50:25Z",
+  "latestTrophy": {
+    "name": "Off The Boat",
+    "text": "You have completed the first mission.",
+    "icon": "https://image.api.playstation.com/trophy/np/NPWR00132_00_00418E3A341F6601FE2B592B96542E57D66D440367/19AD250BDB2560C6615BBB3A7B1989ECE1AF121E.PNG",
+    "type": "bronze"
+  }
+}
+```
+
+# Building the component
+
+Finally, the fun stuff. With the API endpoint, we can build a simple React component. Something like this, and I leave the styling up to you:
+
+```tsx:components/PSNWidget.tsx
+export default function PSNWidget() {
+  const [game, setGame] = useState();
+
+  useEffect(() => {
+    async function fetchTrophy() {
+      const response = await fetch("/api/psn/latestTrophy");
+      const json = await response.json();
+      setGame(json);
+    }
+    fetchTrophy();
+  }, []);
+
+  if (!game) {
+    return "Fetching...";
+  }
+  return (
+    <div>
+      <span>Latest trophy earned in {data.title} ({data.platform}) at {data.playedAt}</span>
+      <br />
+      <img src={data.latestTrophy.icon} alt="Trophy icon" /> {data.latestTrophy.name} ({data.latestTrophy.type})
+    </div>
+  );
+}
+```
+
+> I highly recommend using a data fetcher library like [`swr`](https://swr.vercel.app/), for better error handling, auto revalidation on focus, and much more.
+
+You can find the entire code in the [repo of this blog](https://github.com/gergelypap/blog).
+
+---
+
+Resources used for this article:
+
+- [https://psn-api.achievements.app/](https://psn-api.achievements.app/)
+- [https://andshrew.github.io/PlayStation-Trophies/#/](https://andshrew.github.io/PlayStation-Trophies/#/)
+- [https://leerob.io/blog/spotify-api-nextjs](https://leerob.io/blog/spotify-api-nextjs)
