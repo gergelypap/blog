@@ -7,7 +7,7 @@ import {
   getUserTrophiesEarnedForTitle,
 } from "psn-api";
 
-const npsso = process.env.PSN_AUTH_TOKEN;
+const npsso = process.env.PSN_SSO_TOKEN;
 
 async function authorize() {
   const accessCode = await exchangeNpssoForCode(npsso as string);
@@ -61,7 +61,7 @@ export default async function getLastPlayedGame() {
   );
 
   // Finally get the trophy's details, like name and icon.
-  const trophy = trophies.find((trophy) => trophy.trophyId == lastEarnedTrophy.trophyId);
+  const trophy = trophies.find((trophy) => trophy.trophyId === lastEarnedTrophy.trophyId);
 
   if (!trophy) {
     throw new Error("Could not fetch trophy details.");

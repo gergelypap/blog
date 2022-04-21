@@ -8,7 +8,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=3600");
 
   return res.status(200).json({
-    success: true,
     title: lastPlayedTitle.trophyTitleName,
     platform: lastPlayedTitle.trophyTitlePlatform,
     playedAt: formatDistanceToNow(new Date(lastPlayedTitle.lastUpdatedDateTime), { addSuffix: true }),
