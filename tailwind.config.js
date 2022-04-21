@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ["Inter", "sans-serif"],
-      mono: ["SF Mono", "Consolas", "monospace"],
+      mono: ["ui-monospace", "Consolas", "monospace"],
     },
     extend: {
       keyframes: {

@@ -1,5 +1,5 @@
 import Link from "@components/Link";
-import MDXComponent from "@components/MDXComponent";
+import MDX from "@components/MDX";
 import PageTitle from "@components/PageTitle";
 import type { Post } from "@utils/types";
 import PostDate from "./PostDate";
@@ -35,7 +35,7 @@ export default function Post({ post, full = false, fadeUp = false, id = undefine
         </div>
         {full && <PostTags tags={post.meta.tags} />}
       </header>
-      <section className="my-5">{full ? <MDXComponent code={post.code} /> : <p>{post.meta.lead}</p>}</section>
+      <section className="my-5">{full ? <MDX code={post.code} /> : <p>{post.meta.lead}</p>}</section>
       <footer>{full ? <Link href="/blog">← Back</Link> : <Link href={post.permalink}>Read more →</Link>}</footer>
     </article>
   );

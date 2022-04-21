@@ -19,11 +19,11 @@
 
 @layer base {
   body {
-    @apply text-gray-900 dark:text-gray-300 bg-gray-100 dark:bg-gray-900;
+    @apply text-gray-900 dark:text-gray-300 bg-gray-100 dark:bg-gray-900 leading-relaxed;
   }
 
   #__next {
-    @apply flex flex-col max-w-2xl w-full mx-auto min-h-[100vh];
+    @apply flex flex-col max-w-3xl w-full mx-auto min-h-[100vh];
   }
 
   ::selection {
@@ -98,28 +98,32 @@
   ol {
     @apply list-decimal;
   }
-}
 
-@import "~prism-themes/themes/prism-one-dark.css";
+  kbd {
+    @apply bg-gray-200 dark:bg-gray-600 rounded-sm px-1 py-[.1rem] border-2 text-xs text-gray-600 dark:text-gray-300 whitespace-nowrap;
+    border: 1px solid theme("colors.gray.400");
+    box-shadow: 0 1px theme("colors.gray.400");
+  }
 
-code:not(.code-highlight) {
-  @apply bg-gray-300 rounded-md py-0.5 px-1.5 dark:bg-gray-700 dark:text-gray-200 text-sm;
+  code {
+    @apply bg-gray-300 dark:bg-gray-700 rounded-md py-0.5 px-1.5 text-gray-700 dark:text-gray-300 text-sm;
+
+    a & {
+      @apply !text-blue-500 dark:!text-blue-400;
+    }
+  }
 }
 
 .rehype-code-title {
-  @apply font-mono inline-block py-2 px-3 rounded-t-md text-xs text-gray-300 font-bold;
-  background: hsl(220, 13%, 18%);
+  @apply font-mono text-sm inline-block py-2 px-3 rounded-t-md dark:text-gray-300 border-2 border-gray-300 dark:border-gray-700 select-none;
+  border-bottom: 0;
 
-  + pre[class*="language-"] {
+  + .prism-code {
+    margin-top: -2px;
     border-top-left-radius: 0;
   }
 }
 
-code[class*="language-"],
-pre[class*="language-"] {
-  @apply text-xs font-mono;
-}
-
-pre[class*="language-"] {
-  @apply mb-5 rounded-md mt-0;
+.prism-code {
+  @apply dark:!bg-gray-900 !bg-gray-100 mb-5 rounded-md mt-0 border-2 border-gray-300 dark:border-gray-700 leading-relaxed text-sm rounded-md p-5 overflow-auto;
 }

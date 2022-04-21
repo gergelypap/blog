@@ -1,12 +1,17 @@
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
+import CodeSnippet from "./CodeSnippet";
 
 interface Props {
   code: string;
 }
 
-export default function MDXComponent({ code }: Props) {
+const components = {
+  pre: CodeSnippet,
+};
+
+export default function MDX({ code }: Props) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
-  return <Component />;
+  return <Component components={components} />;
 }
