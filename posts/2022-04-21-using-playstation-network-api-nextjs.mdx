@@ -224,7 +224,9 @@ The response looks like this:
 From this list, we just have to find the one we have fetched in a previous step, by comparing their IDs:
 
 ```typescript
-const trophy = allTitleTrophies.trophies.find((trophy) => trophy.trophyId === lastEarnedTrophy.trophyId);
+const trophy = allTitleTrophies.trophies.find(
+  (trophy) => trophy.trophyId === lastEarnedTrophy.trophyId
+);
 ```
 
 The only thing remaining is to return `lastPlayedTitle` and `trophy` from this whole function.
@@ -295,9 +297,12 @@ export default function PSNWidget() {
   }
   return (
     <div>
-      <span>Latest trophy earned in {data.title} ({data.platform}) at {data.playedAt}</span>
+      <span>
+        Latest trophy earned in {data.title} ({data.platform}) at {data.playedAt}
+      </span>
       <br />
-      <img src={data.latestTrophy.icon} alt="Trophy icon" /> {data.latestTrophy.name} ({data.latestTrophy.type})
+      <img src={data.latestTrophy.icon} alt="Trophy icon" /> {data.latestTrophy.name} (
+      {data.latestTrophy.type})
     </div>
   );
 }
