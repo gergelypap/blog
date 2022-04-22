@@ -5,20 +5,18 @@ import readingTime from "reading-time";
 import { parseMDX } from "./mdx";
 
 const postsDirectory = join(process.cwd(), "posts");
-const postFiles = readdirSync(postsDirectory)
-  .filter((path) => path.includes(".mdx"))
-  .map((path) => path.replace(/\.mdx?$/i, ""));
+const postDirs = readdirSync(postsDirectory);
 
 export async function getPostBySlug(slug: string): Promise<Post> {
-  const filename = postFiles.find((path) => path.slice(11) === slug);
-  if (!filename) {
+  const dirname = postDirs.find((path) => path.slice(11) === slug);
+  if (!dirname) {
     throw new Error(`File ${slug} not found!`);
   }
-  const fileContents = readFileSync(join(postsDirectory, `${filename}.mdx`), "utf8");
+  const fileContents = readFileSync(join(postsDirectory, dirname, "index.mdx"), "utf8");
   const { code, meta } = await parseMDX<PostMetadata>(fileContents);
 
-  // Extract the creation date from the filename.
-  meta.createdAt = filename.slice(0, 10);
+  // Extract the creation date from the dirname.
+  meta.createdAt = dirname.slice(0, 10);
 
   return {
     code,
@@ -40,7 +38,7 @@ export async function getPosts(limit = Infinity): Promise<Post[]> {
 }
 
 export function getPostSlugs(): string[] {
-  return postFiles.map((path) => {
+  return postDirs.map((path) => {
     // Ensure files are in correct format.
     if (!/^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/.test(path)) {
       throw new Error(`Post file '${path}' has wrong filename format.`);
