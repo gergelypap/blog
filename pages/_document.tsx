@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang={Config.language}>
         <Head>
           {/* Preload fonts and api fetch requests. */}
           <meta name="description" content={Config.appDescription} />

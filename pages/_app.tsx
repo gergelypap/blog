@@ -11,7 +11,7 @@ const SEO = {
     title: Config.appName,
     description: Config.appDescription,
     type: "website",
-    locale: "en_US",
+    locale: Config.language.replace("-", "_"),
     url: Config.appUrl,
     site_name: Config.appName,
     images: [
