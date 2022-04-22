@@ -30,13 +30,22 @@ export default function BlogPostPage({ post }: Props) {
           url: `${Config.appUrl}${post.permalink}`,
           title: post.meta.title,
           description: post.meta.lead,
+          images: [
+            {
+              url: `${Config.appUrl}/img/default-thumbnail.jpg`,
+              width: 1145,
+              height: 599,
+              alt: post.meta.title,
+              type: "image/jpeg",
+            },
+          ],
         }}
       />
       <ArticleJsonLd
         type="Blog"
         url={`${Config.appUrl}${post.permalink}`}
         title={post.meta.title}
-        images={[`${Config.appUrl}/logo.svg`]}
+        images={[`${Config.appUrl}/img/default-thumbnail.jpg`]}
         datePublished={post.meta.createdAt}
         dateModified={post.meta.updatedAt || undefined}
         authorName="Gergely Pap"
