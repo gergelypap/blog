@@ -12,9 +12,10 @@ const npsso = process.env.PSN_SSO_TOKEN;
 async function authorize() {
   const accessCode = await exchangeNpssoForCode(npsso as string);
   let auth = await exchangeCodeForAccessToken(accessCode);
-  const now = new Date();
-  const expirationDate = new Date(now.getTime() + auth.expiresIn * 1000).toISOString();
-  const isAccessTokenExpired = new Date(expirationDate).getTime() < now.getTime();
+
+  const now = Date.now();
+  const expirationDate = new Date(now + auth.expiresIn * 1000);
+  const isAccessTokenExpired = expirationDate.getTime() < now;
 
   if (isAccessTokenExpired) {
     auth = await exchangeRefreshTokenForAuthTokens(auth.refreshToken);
@@ -30,9 +31,7 @@ export default async function getLastPlayedGame() {
   const userTitles = await getUserTitles({ accessToken: auth.accessToken }, "me");
 
   // Find the first game which has any earned trophies.
-  const lastPlayedTitle = userTitles.trophyTitles.find(
-    (title) => Object.values(title.earnedTrophies).filter(Boolean).length > 0
-  );
+  const lastPlayedTitle = userTitles.trophyTitles.find((title) => Object.values(title.earnedTrophies).some(Boolean));
 
   if (!lastPlayedTitle) {
     throw new Error("Could not fetch last played title.");

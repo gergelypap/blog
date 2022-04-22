@@ -58,9 +58,9 @@ async function authorize() {
   let auth = await exchangeCodeForAccessToken(accessCode);
 
   // Check if the access code is expired.
-  const now = new Date();
-  const expirationDate = new Date(now.getTime() + auth.expiresIn * 1000).toISOString();
-  const isAccessTokenExpired = new Date(expirationDate).getTime() < now.getTime();
+  const now = Date.now();
+  const expirationDate = new Date(now + auth.expiresIn * 1000);
+  const isAccessTokenExpired = expirationDate.getTime() < now;
 
   // If expired, get another one with the refresh token.
   if (isAccessTokenExpired) {
@@ -103,7 +103,12 @@ This will return an object, like:
       "trophyTitleIconUrl": "https://image.api.playstation.com/trophy/np/NPWR00132_00_00418E3A341F6601FE2B592B96542E57D66D440367/5A7D06DD11D58892AFD1A5681FEEAB33F5C050A6.PNG",
       "trophyTitlePlatform": "PS3",
       "hasTrophyGroups": true,
-      "definedTrophies": { "bronze": 57, "silver": 5, "gold": 3, "platinum": 1 },
+      "definedTrophies": {
+        "bronze": 57,
+        "silver": 5,
+        "gold": 3,
+        "platinum": 1
+      },
       "progress": 1,
       "earnedTrophies": { "bronze": 1, "silver": 0, "gold": 0, "platinum": 0 },
       "hiddenFlag": false,
@@ -118,8 +123,8 @@ This will return an object, like:
 The results are ordered by `lastUpdatedDateTime`, so the first result will be the title for which a trophy was recently earned (or synced for the first time in the case of a game with 0% progress). Now we should find the latest game by checking each `earnedTrophies` object until we find at least one trophy.
 
 ```typescript
-const lastPlayedTitle = userTitles.trophyTitles.find(
-  (title) => Object.values(title.earnedTrophies).filter(Boolean).length > 0
+const lastPlayedTitle = userTitles.trophyTitles.find((title) =>
+  Object.values(title.earnedTrophies).some(Boolean)
 );
 ```
 
@@ -174,7 +179,7 @@ See how the `trophies` array contains all trophies for that game. Those which we
 ```typescript
 const lastEarnedTrophy = allUserTrophiesForTitle.trophies
   .filter((trophy) => trophy.earned)
-  .sort((a, b) => +new Date(a.earnedDateTime as string) - +new Date(b.earnedDateTime as string))[0];
+  .sort((a, b) => +new Date(a.earnedDateTime) - +new Date(b.earnedDateTime as string))[0];
 ```
 
 > The `+` operator before the `Date` object is really just to cast it to a number type, so Typescript will not complain about the arithmetic operation we are doing here.
