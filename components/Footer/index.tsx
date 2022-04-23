@@ -14,9 +14,14 @@ function FooterBlock({ title, children }: { title: string; children: React.React
 
 function FooterLink({ href, text }: { href: string; text: string | React.ReactNode }) {
   return (
-    <Link className="text-gray-500 dark:text-gray-500" href={href}>
-      {text}
-    </Link>
+    <span>
+      <Link
+        className="text-gray-500 dark:text-gray-500 hover:text-gray-900 hover:no-underline transition-colors"
+        href={href}
+      >
+        {text}
+      </Link>
+    </span>
   );
 }
 
