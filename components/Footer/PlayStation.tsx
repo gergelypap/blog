@@ -5,12 +5,13 @@ import useSWR from "swr";
 type PSNResponse = {
   title: string;
   platform: string;
-  playedAt: string;
+  syncedAt: string;
   latestTrophy: {
     name: string;
     text: string;
     icon: string;
     type: TrophyType;
+    earnedAt: string;
   };
 };
 
@@ -62,7 +63,7 @@ export default function PlayStation() {
               <TrophyIcon type={data.latestTrophy.type} /> {data.latestTrophy.name}
             </span>
             <div className="truncate text-gray-600 dark:text-gray-400">
-              {data.title} ({data.platform}) – {data.playedAt}
+              {data.title} ({data.platform}) – {data.latestTrophy.earnedAt}
             </div>
           </div>
         )}

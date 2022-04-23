@@ -42,7 +42,8 @@ export default async function getLastPlayedGame() {
 
   const lastEarnedTrophy = userTrophies
     .filter((trophy) => trophy.earned)
-    .sort((a, b) => +new Date(a.earnedDateTime as string) - +new Date(b.earnedDateTime as string))[0];
+    .sort((a, b) => +new Date(b.earnedDateTime as string) - +new Date(a.earnedDateTime as string))[0];
+
   const { trophies } = await getTitleTrophies(
     { accessToken: auth.accessToken },
     lastPlayedTitle.npCommunicationId,
@@ -50,10 +51,11 @@ export default async function getLastPlayedGame() {
     { npServiceName: "trophy" }
   );
 
-  const trophy = trophies.find((trophy) => trophy.trophyId === lastEarnedTrophy.trophyId);
-  if (!trophy) {
+  const trophyDetails = trophies.find((trophy) => trophy.trophyId === lastEarnedTrophy.trophyId);
+
+  if (!trophyDetails) {
     throw new Error("Could not fetch trophy details.");
   }
 
-  return { lastPlayedTitle, trophy };
+  return { lastPlayedTitle, lastEarnedTrophy, trophyDetails };
 }

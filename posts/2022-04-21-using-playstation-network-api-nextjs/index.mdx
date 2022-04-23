@@ -181,7 +181,7 @@ See how the `trophies` array contains all trophies for that game. Those which we
 ```typescript
 const lastEarnedTrophy = allUserTrophiesForTitle.trophies
   .filter((trophy) => trophy.earned)
-  .sort((a, b) => +new Date(a.earnedDateTime) - +new Date(b.earnedDateTime as string))[0];
+  .sort((a, b) => +new Date(b.earnedDateTime) - +new Date(a.earnedDateTime as string))[0];
 ```
 
 > The `+` operator before the `Date` object is really just to cast it to a number type, so Typescript will not complain about the arithmetic operation we are doing here.
@@ -231,12 +231,16 @@ The response looks like this:
 From this list, we just have to find the one we have fetched in a previous step, by comparing their IDs:
 
 ```typescript
-const trophy = allTitleTrophies.trophies.find(
+const trophyDetails = allTitleTrophies.trophies.find(
   (trophy) => trophy.trophyId === lastEarnedTrophy.trophyId
 );
 ```
 
-The only thing remaining is to return `lastPlayedTitle` and `trophy` from this whole function.
+The only thing remaining is to return all the information from this whole function:
+
+```typescript
+return { lastPlayedTitle, lastEarnedTrophy, trophyDetails };
+```
 
 # Creating an API route in Next.js
 
@@ -247,7 +251,7 @@ import getLastPlayedGame from "@lib/psn";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { lastPlayedTitle, trophy } = await getLastPlayedGame();
+  const { lastPlayedTitle, lastEarnedTrophy, trophyDetails } = await getLastPlayedGame();
 
   // Caching the results for 1 day, but revalidate after 1 hour.
   res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=3600");
@@ -255,12 +259,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   return res.status(200).json({
     title: lastPlayedTitle.trophyTitleName,
     platform: lastPlayedTitle.trophyTitlePlatform,
-    playedAt: lastPlayedTitle.lastUpdatedDateTime,
+    syncedAt: lastPlayedTitle.lastUpdatedDateTime,
     latestTrophy: {
-      name: trophy.trophyName,
-      text: trophy.trophyDetail,
-      icon: trophy.trophyIconUrl,
-      type: trophy.trophyType,
+      name: trophyDetails.trophyName,
+      text: trophyDetails.trophyDetail,
+      icon: trophyDetails.trophyIconUrl,
+      type: trophyDetails.trophyType,
+      earnedAt: lastEarnedTrophy.earnedDateTime,
     },
   });
 }
@@ -272,12 +277,13 @@ Querying the application's `/api/latestTrophy` endpoint, we now have a response 
 {
   "title": "GTA IV",
   "platform": "PS3",
-  "playedAt": "2022-04-17T06:50:25Z",
+  "syncedAt": "2022-04-17T06:50:25Z",
   "latestTrophy": {
     "name": "Off The Boat",
     "text": "You have completed the first mission.",
     "icon": "https://image.api.playstation.com/trophy/np/NPWR00132_00_00418E3A341F6601FE2B592B96542E57D66D440367/19AD250BDB2560C6615BBB3A7B1989ECE1AF121E.PNG",
-    "type": "bronze"
+    "type": "bronze",
+    "earnedAt": "2022-04-17T06:50:25Z"
   }
 }
 ```
@@ -305,7 +311,7 @@ export default function PSNWidget() {
   return (
     <div>
       <span>
-        Latest trophy earned in {data.title} ({data.platform}) at {data.playedAt}
+        Latest trophy earned in {data.title} ({data.platform}) at {data.latestTrophy.earnedAt}
       </span>
       <br />
       <img src={data.latestTrophy.icon} alt="Trophy icon" /> {data.latestTrophy.name} (
