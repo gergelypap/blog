@@ -16,7 +16,7 @@ function FooterLink({ href, text }: { href: string; text: string | React.ReactNo
   return (
     <span>
       <Link
-        className="text-gray-500 dark:text-gray-500 hover:text-gray-900 hover:no-underline transition-colors"
+        className="text-gray-500 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-200 hover:no-underline transition-colors"
         href={href}
       >
         {text}
