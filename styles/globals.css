@@ -11,12 +11,6 @@
     url("/fonts/Inter.woff2") format("woff2-variations");
 }
 
-@font-face {
-  font-family: "SF Mono";
-  font-display: optional;
-  src: local("SF Mono"), url("/fonts/SFMono.woff2") format("woff2");
-}
-
 @layer base {
   body {
     @apply text-gray-900 dark:text-gray-300 bg-gray-100 dark:bg-gray-900 leading-relaxed;
@@ -115,7 +109,7 @@
 }
 
 .rehype-code-title {
-  @apply font-mono text-sm inline-block py-2 px-3 rounded-t-md dark:text-gray-300 border-2 border-gray-300 dark:border-gray-700 select-none;
+  @apply font-mono text-xs sm:text-sm inline-block py-2 px-3 rounded-t-md dark:text-gray-300 border-2 border-gray-300 dark:border-gray-700 select-none;
   border-bottom: 0;
 
   + .prism-code {
@@ -125,5 +119,5 @@
 }
 
 .prism-code {
-  @apply dark:!bg-gray-900 !bg-gray-100 mb-5 rounded-md mt-0 border-2 border-gray-300 dark:border-gray-700 leading-relaxed text-sm rounded-md p-5 overflow-auto;
+  @apply dark:!bg-gray-900 !bg-gray-100 rounded-md border-gray-300 dark:border-gray-700 leading-relaxed overflow-auto p-3 border-2 my-5 text-xs sm:text-sm;
 }
