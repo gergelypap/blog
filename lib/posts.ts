@@ -1,11 +1,27 @@
-import type { Post, PostMetadata } from "@utils/types";
-import { readdirSync, readFileSync } from "fs";
+import type { Post, PostMetadata, PostThumbnail } from "@utils/types";
+import { existsSync, readdirSync, readFileSync } from "fs";
+import imageSize from "image-size";
 import { join } from "path";
 import readingTime from "reading-time";
 import { parseMDX } from "./mdx";
 
-const postsDirectory = join(process.cwd(), "posts");
+const rootDir = process.cwd();
+const postsDirectory = join(rootDir, "posts");
 const postDirs = readdirSync(postsDirectory);
+
+async function getThumbnail(dirname: string): Promise<PostThumbnail> {
+  const thumbnailExists = existsSync(join(postsDirectory, dirname, "thumbnail.jpg"));
+  let src, width, height;
+  if (thumbnailExists) {
+    ({ default: src } = await import(`posts/${dirname}/thumbnail.jpg`));
+    ({ width, height } = imageSize(`posts/${dirname}/thumbnail.jpg`));
+  } else {
+    src = "/img/default-thumbnail.jpg";
+    ({ width, height } = imageSize(join(rootDir, "public", src)));
+  }
+
+  return { src, width, height };
+}
 
 export async function getPostBySlug(slug: string): Promise<Post> {
   const dirname = postDirs.find((path) => path.slice(11) === slug);
@@ -17,10 +33,12 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 
   // Extract the creation date from the dirname.
   meta.createdAt = dirname.slice(0, 10);
+  const thumbnail = await getThumbnail(dirname);
 
   return {
     code,
     meta,
+    thumbnail,
     permalink: `/blog/${slug}`,
     readingTime: readingTime(fileContents),
   };

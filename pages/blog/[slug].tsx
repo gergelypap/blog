@@ -32,9 +32,9 @@ export default function BlogPostPage({ post }: Props) {
           description: post.meta.lead,
           images: [
             {
-              url: `${Config.appUrl}/img/default-thumbnail.jpg`,
-              width: 1145,
-              height: 599,
+              url: `${Config.appUrl}${post.thumbnail.src}`,
+              width: post.thumbnail.width,
+              height: post.thumbnail.height,
               alt: post.meta.title,
               type: "image/jpeg",
             },
@@ -45,7 +45,7 @@ export default function BlogPostPage({ post }: Props) {
         type="Blog"
         url={`${Config.appUrl}${post.permalink}`}
         title={post.meta.title}
-        images={[`${Config.appUrl}/img/default-thumbnail.jpg`]}
+        images={[`${Config.appUrl}${post.thumbnail.src}`]}
         datePublished={post.meta.createdAt}
         dateModified={post.meta.updatedAt || undefined}
         authorName="Gergely Pap"
