@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 const links = [
   { title: "Blog", path: "/blog" },
   { title: "Tags", path: "/tags" },
+  { title: "Games", path: "/games" },
 ];
 
 export default function Nav() {

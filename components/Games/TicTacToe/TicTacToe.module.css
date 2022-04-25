@@ -1,0 +1,10 @@
+.board {
+  @apply grid justify-center gap-3;
+  grid-template-columns: repeat(3, minmax(0, 80px));
+  grid-template-rows: repeat(3, minmax(0, 80px));
+}
+
+.tile {
+  @apply flex justify-center items-center rounded-md text-6xl bg-gradient-to-br from-green-500 to-blue-500 text-gray-100;
+  text-shadow: 0 1px theme("colors.gray.900");
+}
