@@ -55,7 +55,7 @@ function App({ Component, pageProps }: AppProps) {
   }, [router.events, isProduction]);
 
   return (
-    <ThemeProvider attribute="class">
+    <ThemeProvider attribute="class" defaultTheme="system">
       <DefaultSeo {...SEO} />
       {isProduction && (
         <>

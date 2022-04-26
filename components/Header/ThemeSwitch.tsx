@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
 
-  const isLight = resolvedTheme === "light";
+  const isLight = theme === "light";
 
   return (
     <button
