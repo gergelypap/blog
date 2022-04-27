@@ -10,6 +10,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const song = await response.json();
   const isPlaying = song.is_playing;
+  if (!song.item) {
+    return res.status(200).json({ isPlaying: false });
+  }
   const title = song.item.name;
   const artist = song.item.artists.map((a: { name: string }) => a.name).join(", ");
   const url = song.item.external_urls.spotify;
