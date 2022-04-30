@@ -3,19 +3,17 @@ import { useTheme } from "next-themes";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import lightTheme from "prism-react-renderer/themes/github";
 import darkTheme from "prism-react-renderer/themes/nightOwl";
-import React, { isValidElement, useEffect, useState } from "react";
+import { isValidElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 const CodeSnippet = ({ children }: Props) => {
-  const { theme } = useTheme();
-  const [resolvedTheme, setResolvedTheme] = useState("light");
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setResolvedTheme(theme);
-  }, [theme]);
+  useEffect(() => setMounted(true), []);
 
   if (!children || !isValidElement(children)) {
     throw new Error(`Static code snippet cannot render children of type ${typeof children}`);
@@ -24,7 +22,7 @@ const CodeSnippet = ({ children }: Props) => {
   const code = children.props.children;
   const language = children.props.className?.replace("language-", "").trim();
 
-  if (!code) {
+  if (!code || !mounted) {
     return <></>;
   }
 
