@@ -12,14 +12,7 @@ export default function Header() {
       </div>
       <Link className="hover:no-underline gap-3 inline-block mb-5" href="/">
         <div className="flex gap-3">
-          <Image
-            className="mr-5 block rounded-full ring-gray-400"
-            src="/logo.svg"
-            height="40"
-            width="40"
-            alt="Logo"
-            priority
-          />
+          <Image src="/logo.svg" height="40" width="40" alt="Logo" priority />
           <h1 className="mb-0 text-3xl inline-block text-gray-900 dark:text-gray-200">{Config.appName}</h1>
         </div>
       </Link>
