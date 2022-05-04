@@ -11,7 +11,7 @@
     "lint": "next lint --dir . --ext mdx --ext ts --ext tsx --ext js --ext jsx",
     "lint-types": "tsc --noemit",
     "generate-icons": "ts-node scripts/generate-icons.ts",
-    "watch-posts": "next-remote-watch ./posts",
+    "watch-posts": "next-remote-watch ./content",
     "prepare": "husky install"
   },
   "dependencies": {

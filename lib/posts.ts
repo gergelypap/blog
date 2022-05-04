@@ -4,7 +4,7 @@ import { join } from "path";
 import readingTime from "reading-time";
 import { parseMDX } from "./mdx";
 
-const postsDirectory = join(process.cwd(), "posts");
+const postsDirectory = join(process.cwd(), "content", "posts");
 const postDirs = readdirSync(postsDirectory);
 
 export async function getPostBySlug(slug: string): Promise<Post> {

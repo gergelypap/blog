@@ -8,7 +8,7 @@ const rootDir = process.cwd();
 export async function parseMDX<Frontmatter>(source: string, dirname: string) {
   const { code, frontmatter: meta } = await bundleMDX<Frontmatter>({
     source,
-    cwd: join(rootDir, "posts", dirname),
+    cwd: join(rootDir, "content", "posts", dirname),
     mdxOptions: (options) => {
       options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeCodeTitles];
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
