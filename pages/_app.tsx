@@ -36,7 +36,7 @@ const SEO = {
   },
 };
 
-const components = {
+const mdxComponents = {
   YouTube,
   PlayStation,
   pre: CodeSnippet,
@@ -67,7 +67,7 @@ function App({ Component, pageProps }: AppProps) {
           </Script>
         </>
       )}
-      <MDXProvider components={components}>
+      <MDXProvider components={mdxComponents}>
         <Component {...pageProps} />
       </MDXProvider>
     </ThemeProvider>
