@@ -13,14 +13,12 @@ export async function getPostBySlug(slug: string): Promise<Post> {
     throw new Error(`File ${slug} not found!`);
   }
   const fileContents = readFileSync(join(postsDirectory, dirname, "index.mdx"), "utf8");
-  const { code, meta } = await parseMDX<PostMetadata>(fileContents, dirname);
 
-  // Extract the creation date from the dirname.
-  meta.createdAt = dirname.slice(0, 10);
+  const source = await parseMDX(fileContents);
 
   return {
-    code,
-    meta,
+    source,
+    meta: source.frontmatter as PostMetadata,
     permalink: `/blog/${slug}`,
     readingTime: readingTime(fileContents),
   };
