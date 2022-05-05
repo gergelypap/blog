@@ -37,7 +37,10 @@
   "overrides": [
     {
       "files": "*.{md,mdx}",
-      "extends": ["plugin:mdx/recommended"]
+      "extends": ["plugin:mdx/recommended"],
+      "rules": {
+        "react/jsx-no-undef": "off"
+      }
     }
   ]
 }

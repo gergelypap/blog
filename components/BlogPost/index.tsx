@@ -1,7 +1,7 @@
 import Link from "@components/Link";
-import MDX from "@components/MDX";
 import PageTitle from "@components/PageTitle";
 import type { Post } from "@utils/types";
+import { MDXRemote } from "next-mdx-remote";
 import PostDate from "./PostDate";
 import PostTags from "./PostTags";
 import ReadingTime from "./ReadingTime";
@@ -35,7 +35,7 @@ export default function Post({ post, full = false, fadeUp = false, id = undefine
         </div>
         {full && <PostTags tags={post.meta.tags} />}
       </header>
-      <section className="my-5">{full ? <MDX code={post.code} /> : <p>{post.meta.lead}</p>}</section>
+      <section className="my-5">{full ? <MDXRemote {...post.source} /> : <p>{post.meta.lead}</p>}</section>
       <footer>{full ? <Link href="/blog">← Back</Link> : <Link href={post.permalink}>Read more →</Link>}</footer>
     </article>
   );
