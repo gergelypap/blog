@@ -81,8 +81,12 @@ export function getSlugs(type: ContentType): string[] {
   });
 }
 
-export async function getPostsByTag(tag: string): Promise<Post[]> {
+export async function getContentByTag(tag: string) {
   const posts = (await getAllContent("post")) as Post[];
+  const snippets = (await getAllContent("snippet")) as SnippetContent[];
 
-  return posts.filter((post) => post.meta.tags.includes(tag));
+  return {
+    posts: posts.filter((post) => post.meta.tags.includes(tag)),
+    snippets: snippets.filter((snippet) => snippet.meta.tags.includes(tag)),
+  };
 }
