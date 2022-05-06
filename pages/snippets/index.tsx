@@ -1,7 +1,7 @@
-import Content from "@components/Content";
 import AnimatedWrapper from "@components/Content/AnimatedWrapper";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
+import SnippetBox from "@components/Snippet/SnippetBox";
 import { getAllContent } from "@lib/api";
 import Config from "@utils/config";
 import { SnippetContent } from "@utils/types";
@@ -12,7 +12,7 @@ interface Props {
   snippets: SnippetContent[];
 }
 
-export default function BlogPostsPage({ snippets }: Props) {
+export default function SnippetsPage({ snippets }: Props) {
   return (
     <DefaultLayout>
       <Head>
@@ -21,11 +21,13 @@ export default function BlogPostsPage({ snippets }: Props) {
       <section>
         <PageTitle>All snippets</PageTitle>
         {snippets.length ? (
-          snippets.map((snippet, i) => (
-            <AnimatedWrapper key={i} count={i}>
-              <Content content={snippet} />
-            </AnimatedWrapper>
-          ))
+          <section className="sm:grid sm:grid-cols-3 sm:gap-5">
+            {snippets.map((snippet, i) => (
+              <AnimatedWrapper key={i} count={i}>
+                <SnippetBox content={snippet} />
+              </AnimatedWrapper>
+            ))}
+          </section>
         ) : (
           <p>No snippets found.</p>
         )}

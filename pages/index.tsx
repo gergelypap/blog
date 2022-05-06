@@ -2,6 +2,7 @@ import Content from "@components/Content";
 import AnimatedWrapper from "@components/Content/AnimatedWrapper";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
+import SnippetBox from "@components/Snippet/SnippetBox";
 import { getAllContent } from "@lib/api";
 import Config from "@utils/config";
 import type { Post, SnippetContent } from "@utils/types";
@@ -36,7 +37,7 @@ export default function Home({ posts, snippets }: Props) {
         <section className="sm:grid sm:grid-cols-3 sm:gap-10">
           {snippets.map((snippet, i) => (
             <AnimatedWrapper key={i} count={i}>
-              <Content content={snippet} />
+              <SnippetBox content={snippet} />
             </AnimatedWrapper>
           ))}
         </section>

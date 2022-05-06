@@ -19,7 +19,7 @@ const backLinks = {
 
 export default function Content({ content, full = false }: Props) {
   return (
-    <article>
+    <article className="mb-10">
       {full ? (
         <PageTitle>{content.meta.title}</PageTitle>
       ) : (
