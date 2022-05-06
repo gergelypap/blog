@@ -1,8 +1,7 @@
-import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import type { ReadTimeResults } from "reading-time";
 
 export type Post = {
-  source: MDXRemoteSerializeResult;
+  code: string;
   meta: PostMetadata;
   permalink: string;
   readingTime: ReadTimeResults;

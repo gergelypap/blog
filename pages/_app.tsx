@@ -1,14 +1,9 @@
-import PlayStation from "@components/Footer/PlayStation";
-import CodeSnippet from "@components/MDX/CodeSnippet";
-import YouTube from "@components/MDX/YouTube";
-import { MDXProvider } from "@mdx-js/react";
 import "@styles/globals.css";
 import Config from "@utils/config";
 import useAnalytics from "hooks/useAnalytics";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
-import Image from "next/image";
 import Script from "next/script";
 
 const SEO = {
@@ -36,13 +31,6 @@ const SEO = {
   },
 };
 
-const mdxComponents = {
-  YouTube,
-  PlayStation,
-  pre: CodeSnippet,
-  Image,
-};
-
 const analyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -67,9 +55,7 @@ function App({ Component, pageProps }: AppProps) {
           </Script>
         </>
       )}
-      <MDXProvider components={mdxComponents}>
-        <Component {...pageProps} />
-      </MDXProvider>
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 }
