@@ -4,10 +4,10 @@ import rehypeCodeTitles from "rehype-code-titles";
 
 const rootDir = process.cwd();
 
-export async function parseMDX<Frontmatter>(source: string, dirname: string) {
+export async function parseMDX<Frontmatter>(source: string, cwd: string) {
   const { code, frontmatter: meta } = await bundleMDX<Frontmatter>({
     source,
-    cwd: join(rootDir, "content", "posts", dirname),
+    cwd,
     mdxOptions: (options) => {
       options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeCodeTitles];
 

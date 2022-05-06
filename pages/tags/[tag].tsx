@@ -2,7 +2,7 @@ import BlogPost from "@components/BlogPost";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import Tag from "@components/Tag";
-import { getPostsByTag } from "@lib/posts";
+import { getPostsByTag } from "@lib/api";
 import Config from "@utils/config";
 import type { Post } from "@utils/types";
 import { GetStaticPaths, GetStaticProps } from "next";

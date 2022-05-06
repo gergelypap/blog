@@ -1,41 +1,41 @@
-import BlogPost from "@components/BlogPost";
 import DefaultLayout from "@components/Layout/DefaultLayout";
+import Snippet from "@components/Snippet";
 import { getContentBySlug, getSlugs } from "@lib/api";
 import Config from "@utils/config";
-import type { Post } from "@utils/types";
+import type { SnippetContent } from "@utils/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ArticleJsonLd, NextSeo } from "next-seo";
 import Head from "next/head";
 
 interface Props {
-  post: Post;
+  snippet: SnippetContent;
 }
 
-export default function BlogPostPage({ post }: Props) {
+export default function SnippetPage({ snippet }: Props) {
   return (
     <DefaultLayout>
       <Head>
         <title>
-          {post.meta.title} | {Config.appName}
+          {snippet.meta.title} | {Config.appName}
         </title>
       </Head>
 
       <NextSeo
-        title={post.meta.title}
+        title={snippet.meta.title}
         titleTemplate={`%s | ${Config.appName}`}
-        description={post.meta.lead}
-        canonical={`${Config.appUrl}${post.permalink}`}
+        description={snippet.meta.lead}
+        canonical={`${Config.appUrl}${snippet.permalink}`}
         openGraph={{
           site_name: Config.appName,
-          url: `${Config.appUrl}${post.permalink}`,
-          title: post.meta.title,
-          description: post.meta.lead,
+          url: `${Config.appUrl}${snippet.permalink}`,
+          title: snippet.meta.title,
+          description: snippet.meta.lead,
           images: [
             {
               url: `${Config.appUrl}/img/default-thumbnail.jpg`,
               width: 1145,
               height: 599,
-              alt: post.meta.title,
+              alt: snippet.meta.title,
               type: "image/jpeg",
             },
           ],
@@ -43,32 +43,32 @@ export default function BlogPostPage({ post }: Props) {
       />
       <ArticleJsonLd
         type="Blog"
-        url={`${Config.appUrl}${post.permalink}`}
-        title={post.meta.title}
+        url={`${Config.appUrl}${snippet.permalink}`}
+        title={snippet.meta.title}
         images={[`${Config.appUrl}/img/default-thumbnail.jpg`]}
-        datePublished={post.meta.createdAt}
-        dateModified={post.meta.updatedAt || undefined}
+        datePublished={snippet.meta.createdAt}
+        dateModified={snippet.meta.updatedAt || undefined}
         authorName="Gergely Pap"
-        description={post.meta.lead}
+        description={snippet.meta.lead}
       />
-      <BlogPost post={post} full />
+      <Snippet snippet={snippet} full />
     </DefaultLayout>
   );
 }
 
 export const getStaticProps: GetStaticProps<Props, { slug: string }> = async ({ params }) => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const post = (await getContentBySlug(params!.slug, "post")) as Post;
+  const snippet = (await getContentBySlug(params!.slug, "snippet")) as SnippetContent;
 
   return {
     props: {
-      post,
+      snippet,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = getSlugs("post").map((slug) => ({
+  const paths = getSlugs("snippet").map((slug) => ({
     params: {
       slug,
     },

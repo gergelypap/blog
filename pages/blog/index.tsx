@@ -1,7 +1,7 @@
 import BlogPost from "@components/BlogPost";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
-import { getPosts } from "@lib/posts";
+import { getAllContent } from "@lib/api";
 import Config from "@utils/config";
 import type { Post } from "@utils/types";
 import type { GetStaticProps } from "next";
@@ -43,7 +43,7 @@ export default function BlogPostsPage({ posts }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getPosts();
+  const posts = await getAllContent("post");
 
   return {
     props: {
