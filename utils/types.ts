@@ -1,8 +1,10 @@
+import { ContentType } from "@lib/api";
 import type { ReadTimeResults } from "reading-time";
 
 export type MDXContent = {
   code: string;
   meta: Metadata;
+  type: ContentType;
 };
 
 export type Post = MDXContent & {

@@ -4,7 +4,7 @@ interface Props {
   tags: string[];
 }
 
-export default function PostTags({ tags }: Props) {
+export default function ContentTags({ tags }: Props) {
   return (
     <span className="flex flex-wrap gap-3">
       {tags.map((tag, i) => (

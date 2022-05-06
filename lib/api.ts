@@ -10,7 +10,7 @@ const paths = {
   snippet: join(process.cwd(), "content", "snippets"),
 };
 
-type ContentType = keyof typeof paths;
+export type ContentType = keyof typeof paths;
 
 type ReadFileResult = {
   fileContents: string;
@@ -35,6 +35,7 @@ export async function getContentBySlug(slug: string, type: ContentType): Promise
 
   const content = {
     code,
+    type,
     meta: {
       ...(meta as Metadata),
       createdAt: dirname.slice(0, 10),

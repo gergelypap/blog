@@ -1,4 +1,4 @@
-import BlogPost from "@components/BlogPost";
+import Content from "@components/Content";
 import SEO from "@components/Content/SEO";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import { getContentBySlug, getSlugs } from "@lib/api";
@@ -20,7 +20,7 @@ export default function BlogPostPage({ post }: Props) {
         </title>
       </Head>
       <SEO content={post} />
-      <BlogPost post={post} full />
+      <Content content={post} full />
     </DefaultLayout>
   );
 }

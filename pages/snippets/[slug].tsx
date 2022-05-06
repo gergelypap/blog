@@ -1,6 +1,6 @@
+import Content from "@components/Content";
 import SEO from "@components/Content/SEO";
 import DefaultLayout from "@components/Layout/DefaultLayout";
-import Snippet from "@components/Snippet";
 import { getContentBySlug, getSlugs } from "@lib/api";
 import Config from "@utils/config";
 import type { SnippetContent } from "@utils/types";
@@ -20,7 +20,7 @@ export default function SnippetPage({ snippet }: Props) {
         </title>
       </Head>
       <SEO content={snippet} />
-      <Snippet snippet={snippet} full />
+      <Content content={snippet} full />
     </DefaultLayout>
   );
 }

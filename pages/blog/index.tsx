@@ -1,4 +1,5 @@
-import BlogPost from "@components/BlogPost";
+import Content from "@components/Content";
+import AnimatedWrapper from "@components/Content/AnimatedWrapper";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import { getAllContent } from "@lib/api";
@@ -33,7 +34,11 @@ export default function BlogPostsPage({ posts }: Props) {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         {filteredPosts.length ? (
-          filteredPosts.map((post, i) => <BlogPost key={i} id={++i} post={post} fadeUp />)
+          filteredPosts.map((post, i) => (
+            <AnimatedWrapper key={i} count={i}>
+              <Content content={post} />
+            </AnimatedWrapper>
+          ))
         ) : (
           <p>No posts found.</p>
         )}

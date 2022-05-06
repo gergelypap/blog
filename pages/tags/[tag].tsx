@@ -1,4 +1,5 @@
-import BlogPost from "@components/BlogPost";
+import Content from "@components/Content";
+import AnimatedWrapper from "@components/Content/AnimatedWrapper";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import Tag from "@components/Tag";
@@ -32,7 +33,11 @@ export default function TagsPage({ content, tag }: Props) {
         />
       </PageTitle>
       {content.posts.length > 0 ? (
-        content.posts.map((post, i) => <BlogPost key={i} id={++i} post={post} fadeUp />)
+        content.posts.map((post, i) => (
+          <AnimatedWrapper key={i} count={i}>
+            <Content content={post} />
+          </AnimatedWrapper>
+        ))
       ) : (
         <p>No posts found.</p>
       )}
