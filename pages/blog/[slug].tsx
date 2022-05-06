@@ -1,10 +1,10 @@
 import BlogPost from "@components/BlogPost";
+import SEO from "@components/Content/SEO";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import { getContentBySlug, getSlugs } from "@lib/api";
 import Config from "@utils/config";
 import type { Post } from "@utils/types";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { ArticleJsonLd, NextSeo } from "next-seo";
 import Head from "next/head";
 
 interface Props {
@@ -19,38 +19,7 @@ export default function BlogPostPage({ post }: Props) {
           {post.meta.title} | {Config.appName}
         </title>
       </Head>
-
-      <NextSeo
-        title={post.meta.title}
-        titleTemplate={`%s | ${Config.appName}`}
-        description={post.meta.lead}
-        canonical={`${Config.appUrl}${post.permalink}`}
-        openGraph={{
-          site_name: Config.appName,
-          url: `${Config.appUrl}${post.permalink}`,
-          title: post.meta.title,
-          description: post.meta.lead,
-          images: [
-            {
-              url: `${Config.appUrl}/img/default-thumbnail.jpg`,
-              width: 1145,
-              height: 599,
-              alt: post.meta.title,
-              type: "image/jpeg",
-            },
-          ],
-        }}
-      />
-      <ArticleJsonLd
-        type="Blog"
-        url={`${Config.appUrl}${post.permalink}`}
-        title={post.meta.title}
-        images={[`${Config.appUrl}/img/default-thumbnail.jpg`]}
-        datePublished={post.meta.createdAt}
-        dateModified={post.meta.updatedAt || undefined}
-        authorName="Gergely Pap"
-        description={post.meta.lead}
-      />
+      <SEO content={post} />
       <BlogPost post={post} full />
     </DefaultLayout>
   );
