@@ -38,11 +38,12 @@ export default function Footer() {
           <FooterLink href="/tags" text="Tags" />
         </FooterBlock>
         <FooterBlock title="Social">
-          <FooterLink href="https://github.com/gergelypap" text="Github" />
           <FooterLink href="https://twitter.com/gergelypap" text="Twitter" />
           <FooterLink href="https://www.linkedin.com/in/gpap/" text="LinkedIn" />
+          <FooterLink href="https://profile.codersrank.io/user/gergelypap" text="CodersRank" />
         </FooterBlock>
         <FooterBlock title="Coding">
+          <FooterLink href="https://github.com/gergelypap" text="Github" />
           <FooterLink href="https://www.codewars.com/users/gpap" text="Codewars" />
           <FooterLink href="https://codepen.io/gpap" text="Codepen" />
         </FooterBlock>
