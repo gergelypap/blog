@@ -1,18 +1,18 @@
 import { prettyDate } from "@utils/date";
-import type { Post, SnippetContent } from "@utils/types";
+import type { Post, Snippet } from "contentlayer/generated";
 
 interface Props {
-  content: Post | SnippetContent;
+  content: Post | Snippet;
 }
 
 export default function ContentDate({ content }: Props) {
-  let hoverText = `Published at ${prettyDate(content.meta.createdAt)}`;
-  if (content.meta.updatedAt) hoverText += ` and updated at ${prettyDate(content.meta.updatedAt)}`;
+  let hoverText = `Published at ${prettyDate(content.createdAt)}`;
+  if (content.updatedAt) hoverText += ` and updated at ${prettyDate(content.updatedAt)}`;
 
   return (
-    <time title={hoverText} dateTime={content.meta.createdAt}>
-      {prettyDate(content.meta.createdAt)}
-      {content.meta.updatedAt && "*"}
+    <time title={hoverText} dateTime={content.createdAt}>
+      {prettyDate(content.createdAt)}
+      {content.updatedAt && "*"}
     </time>
   );
 }

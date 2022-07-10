@@ -2,9 +2,9 @@ import Content from "@components/Content";
 import AnimatedWrapper from "@components/Content/AnimatedWrapper";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
-import { getAllContent } from "@lib/api";
 import Config from "@utils/config";
-import type { Post } from "@utils/types";
+import { allPosts, type Post } from "contentlayer/generated";
+import { compareDesc } from "date-fns";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { useState } from "react";
@@ -16,7 +16,7 @@ interface Props {
 export default function BlogPostsPage({ posts }: Props) {
   const [searchValue, setSearchValue] = useState("");
   const filteredPosts = posts.filter((post) =>
-    `${post.meta.title} ${post.meta.lead}`.toLowerCase().includes(searchValue.toLowerCase())
+    `${post.title} ${post.lead}`.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
@@ -48,7 +48,7 @@ export default function BlogPostsPage({ posts }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getAllContent("post");
+  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
 
   return {
     props: {

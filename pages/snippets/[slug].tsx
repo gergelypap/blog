@@ -1,14 +1,13 @@
 import Content from "@components/Content";
 import SEO from "@components/Content/SEO";
 import DefaultLayout from "@components/Layout/DefaultLayout";
-import { getContentBySlug, getSlugs } from "@lib/api";
 import Config from "@utils/config";
-import type { SnippetContent } from "@utils/types";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { allSnippets, type Snippet } from "contentlayer/generated";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 
 interface Props {
-  snippet: SnippetContent;
+  snippet: Snippet;
 }
 
 export default function SnippetPage({ snippet }: Props) {
@@ -16,7 +15,7 @@ export default function SnippetPage({ snippet }: Props) {
     <DefaultLayout>
       <Head>
         <title>
-          {snippet.meta.title} | {Config.appName}
+          {snippet.title} | {Config.appName}
         </title>
       </Head>
       <SEO content={snippet} />
@@ -25,9 +24,8 @@ export default function SnippetPage({ snippet }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps<Props, { slug: string }> = async ({ params }) => {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const snippet = (await getContentBySlug(params!.slug, "snippet")) as SnippetContent;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const snippet = allSnippets.find((snippet) => snippet.slug === params!.slug);
 
   return {
     props: {
@@ -37,11 +35,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async ({ 
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = getSlugs("snippet").map((slug) => ({
-    params: {
-      slug,
-    },
-  }));
+  const paths = allSnippets.map((snippet) => snippet.permalink);
 
   return {
     paths,

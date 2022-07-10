@@ -1,4 +1,4 @@
-import nature from "./nature.jpg";
+import nature from "../nature.jpg";
 
 export default function Demo() {
   return (

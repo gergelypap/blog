@@ -1,9 +1,8 @@
 import Content from "@components/Content";
 import SEO from "@components/Content/SEO";
 import DefaultLayout from "@components/Layout/DefaultLayout";
-import { getContentBySlug, getSlugs } from "@lib/api";
 import Config from "@utils/config";
-import type { Post } from "@utils/types";
+import { allPosts, type Post } from "contentlayer/generated";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 
@@ -16,7 +15,7 @@ export default function BlogPostPage({ post }: Props) {
     <DefaultLayout>
       <Head>
         <title>
-          {post.meta.title} | {Config.appName}
+          {post.title} | {Config.appName}
         </title>
       </Head>
       <SEO content={post} />
@@ -25,9 +24,8 @@ export default function BlogPostPage({ post }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps<Props, { slug: string }> = async ({ params }) => {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const post = (await getContentBySlug(params!.slug, "post")) as Post;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const post = allPosts.find((post) => post.slug === params!.slug);
 
   return {
     props: {
@@ -37,11 +35,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async ({ 
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = getSlugs("post").map((slug) => ({
-    params: {
-      slug,
-    },
-  }));
+  const paths = allPosts.map((post) => post.permalink);
 
   return {
     paths,

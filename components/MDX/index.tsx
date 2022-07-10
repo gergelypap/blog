@@ -1,6 +1,5 @@
-import { getMDXComponent } from "mdx-bundler/client";
+import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
-import { useMemo } from "react";
 import CodeSnippet from "./CodeSnippet";
 import YouTube from "./YouTube";
 
@@ -15,7 +14,7 @@ const components = {
 };
 
 export default function MDX({ code }: Props) {
-  const Component = useMemo(() => getMDXComponent(code), [code]);
+  const MDXContent = useMDXComponent(code);
 
-  return <Component components={components} />;
+  return <MDXContent components={components} />;
 }

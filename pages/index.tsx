@@ -3,15 +3,15 @@ import AnimatedWrapper from "@components/Content/AnimatedWrapper";
 import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import SnippetBox from "@components/Snippet/SnippetBox";
-import { getAllContent } from "@lib/api";
 import Config from "@utils/config";
-import type { Post, SnippetContent } from "@utils/types";
+import { allPosts, allSnippets, type Post, type Snippet } from "contentlayer/generated";
+import { compareDesc } from "date-fns";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 
 interface Props {
   posts: Post[];
-  snippets: SnippetContent[];
+  snippets: Snippet[];
 }
 
 export default function Home({ posts, snippets }: Props) {
@@ -49,8 +49,8 @@ export default function Home({ posts, snippets }: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const posts = (await getAllContent("post", 4)) as Post[];
-  const snippets = (await getAllContent("snippet", 3)) as SnippetContent[];
+  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
+  const snippets = allSnippets.sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
 
   return {
     props: {
