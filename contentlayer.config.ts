@@ -1,6 +1,8 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import { readFileSync } from "fs";
 import { join } from "path";
 import readingTime from "reading-time";
+import rehypePrettyCode, { Options } from "rehype-pretty-code";
 import { remarkMdxImages } from "remark-mdx-images";
 import remarkUnwrapImages from "remark-unwrap-images";
 
@@ -88,6 +90,26 @@ export const Snippet = defineDocumentType(() => ({
   },
 }));
 
+const rehypePrettyCodeOptions: Partial<Options> = {
+  theme: {
+    dark: JSON.parse(readFileSync("node_modules/shiki/themes/material-palenight.json").toString()),
+    light: JSON.parse(readFileSync("node_modules/shiki/themes/github-light.json").toString()),
+  },
+  onVisitHighlightedLine(node) {
+    node.properties.className.push("highlighted");
+  },
+  onVisitHighlightedWord(node) {
+    node.properties.className = ["word"];
+  },
+  onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and
+    // allow empty lines to be copy/pasted
+    if (node.children.length === 0) {
+      node.children = [{ type: "text", value: " " }];
+    }
+  },
+};
+
 export default makeSource({
   contentDirPath: "content",
   documentTypes: [Post, Snippet],
@@ -95,6 +117,7 @@ export default makeSource({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     remarkPlugins: [remarkUnwrapImages, remarkMdxImages],
+    rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
     esbuildOptions: (options) => {
       options.loader = {
         ...options.loader,

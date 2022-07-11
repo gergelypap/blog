@@ -50,7 +50,7 @@ I won't go into much details here, because the process is
 Just make sure you have acquired a valid SSO token. The best possible way is to store it in an
 environment variable in a `.env` file, which is auto-loaded by Next.js.
 
-```ini:.env
+```ini title=".env"
 PSN_SSO_TOKEN=<your 64 character token>
 ```
 
@@ -59,7 +59,7 @@ PSN_SSO_TOKEN=<your 64 character token>
 
 Now that we have the SSO token, let's create a file where we will authorize with PSN:
 
-```typescript:lib/psn.ts
+```typescript title="lib/psn.ts"
 import {
   exchangeCodeForAccessToken,
   exchangeNpssoForCode,
@@ -337,7 +337,7 @@ Querying the application's `/api/latestTrophy` endpoint, we now have a response 
 Finally, the fun stuff. With the API endpoint, we can build a simple React component. Something like
 this, and I leave the styling up to you:
 
-```tsx:components/PSNWidget.tsx
+```tsx title="components/PSNWidget.tsx"
 export default function PSNWidget() {
   const [game, setGame] = useState();
 

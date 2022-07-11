@@ -1,6 +1,5 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
-import CodeSnippet from "./CodeSnippet";
 import YouTube from "./YouTube";
 
 interface Props {
@@ -8,10 +7,9 @@ interface Props {
 }
 
 const components = {
-  pre: CodeSnippet,
   img: (props: { src: string; alt: string }) => {
     return (
-      <figure className="aspect-video	 relative my-7 block">
+      <figure className="aspect-video	relative my-7 block">
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image {...props} layout="fill" objectFit="contain" />
       </figure>

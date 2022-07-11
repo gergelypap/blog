@@ -21,7 +21,7 @@
   }
 
   ::selection {
-    @apply bg-green-400 text-black;
+    @apply bg-green-400/50 text-white;
   }
 
   a {
@@ -98,26 +98,69 @@
     border: 1px solid theme("colors.gray.400");
     box-shadow: 0 1px theme("colors.gray.400");
   }
+}
 
-  code {
-    @apply bg-gray-300 dark:bg-gray-700 rounded-md py-0.5 px-1.5 text-gray-700 dark:text-gray-300 text-sm;
+code {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-md py-0.5 px-1.5 text-gray-700 dark:text-gray-300 text-sm;
 
-    a & {
-      @apply !text-blue-500 dark:!text-blue-400;
+  a & {
+    @apply !text-blue-500 dark:!text-blue-400;
+  }
+}
+
+[data-rehype-pretty-code-fragment] {
+  @apply my-10;
+
+  pre > code {
+    display: grid;
+    padding: 1rem 0;
+    @apply dark:!bg-gray-800 !bg-gray-200 rounded-md leading-6 overflow-auto text-sm;
+
+    .line {
+      @apply px-5;
+    }
+
+    .highlighted {
+      @apply dark:bg-gray-700 bg-gray-300;
+
+      .word {
+        @apply dark:bg-gray-800 bg-gray-200;
+      }
+    }
+
+    .word {
+      @apply dark:bg-gray-700 bg-gray-300 rounded-md;
+      padding: 0.1rem 0.25rem;
+    }
+
+    &[data-line-numbers] {
+      counter-reset: line;
+
+      > .line::before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        width: 1rem;
+        margin: 0 1rem 0 -0.25rem;
+        text-align: right;
+        @apply dark:text-gray-500 text-gray-400;
+      }
     }
   }
 }
 
-.rehype-code-title {
-  @apply font-mono text-xs sm:text-sm inline-block py-2 px-3 rounded-t-md dark:text-gray-300 border-2 border-gray-300 dark:border-gray-700 select-none;
-  border-bottom: 0;
+[data-rehype-pretty-code-title] {
+  @apply font-mono text-sm py-2 px-4 dark:bg-gray-800 bg-gray-200 inline-block rounded-tl-md rounded-tr-md select-none dark:text-gray-400 text-gray-500;
 
-  + .prism-code {
-    margin-top: -1px;
-    border-top-left-radius: 0;
+  + pre > code {
+    @apply rounded-tl-none;
   }
 }
 
-.prism-code {
-  @apply dark:!bg-gray-900 !bg-gray-100 rounded-md border-gray-300 dark:border-gray-700 leading-relaxed overflow-auto p-3 border-2 my-5 text-xs sm:text-sm;
+html.dark [data-rehype-pretty-code-fragment] [data-theme="light"] {
+  display: none;
+}
+
+html.light [data-rehype-pretty-code-fragment] [data-theme="dark"] {
+  display: none;
 }
