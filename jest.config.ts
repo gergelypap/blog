@@ -13,6 +13,7 @@ const paths: { [key: string]: string[] } = tsConfig.compilerOptions.paths;
 Object.entries(paths).map((path) => {
   const key = path[0].replace(/^@([a-z]+)\/\*$/, "^@$1/(.*)$");
   const value = path[1][0].replace(/^([a-z]+)\/\*$/, "<rootDir>/$1/$$1");
+  // eslint-disable-next-line security/detect-object-injection
   moduleNameMapper[key] = value;
 });
 

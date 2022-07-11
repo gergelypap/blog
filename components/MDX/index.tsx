@@ -1,6 +1,5 @@
-import { getMDXComponent } from "mdx-bundler/client";
+import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
-import { useMemo } from "react";
 import CodeSnippet from "./CodeSnippet";
 import YouTube from "./YouTube";
 
@@ -10,12 +9,20 @@ interface Props {
 
 const components = {
   pre: CodeSnippet,
+  img: (props: { src: string; alt: string }) => {
+    return (
+      <figure className="aspect-video	 relative my-7 block">
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <Image {...props} layout="fill" objectFit="contain" />
+      </figure>
+    );
+  },
   Image,
   YouTube,
 };
 
 export default function MDX({ code }: Props) {
-  const Component = useMemo(() => getMDXComponent(code), [code]);
+  const MDXContent = useMDXComponent(code);
 
-  return <Component components={components} />;
+  return <MDXContent components={components} />;
 }

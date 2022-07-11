@@ -1,0 +1,25 @@
+diff --git a/node_modules/@contentlayer/core/dist/.DS_Store b/node_modules/@contentlayer/core/dist/.DS_Store
+new file mode 100644
+index 0000000..b0f3291
+Binary files /dev/null and b/node_modules/@contentlayer/core/dist/.DS_Store differ
+diff --git a/node_modules/@contentlayer/core/dist/markdown/mdx.js b/node_modules/@contentlayer/core/dist/markdown/mdx.js
+index fe06e4f..599fada 100644
+--- a/node_modules/@contentlayer/core/dist/markdown/mdx.js
++++ b/node_modules/@contentlayer/core/dist/markdown/mdx.js
+@@ -15,6 +15,7 @@ export const bundleMDX = ({ mdxString, options, contentDirPath, rawDocumentData,
+     // TODO don't use `process.cwd()` but instead `HasCwd`
+     path.isAbsolute(contentDirPath) ? contentDirPath : path.join(process.cwd(), contentDirPath);
+     const cwd = cwd_ ?? getCwdFromContentDirPath();
++    
+     const mdxOptions = {
+         mdxOptions: (opts) => {
+             opts.rehypePlugins = [...(opts.rehypePlugins ?? []), ...(rehypePlugins ?? [])];
+@@ -25,7 +26,7 @@ export const bundleMDX = ({ mdxString, options, contentDirPath, rawDocumentData,
+             ];
+             return opts;
+         },
+-        cwd,
++        cwd: path.join(cwd, rawDocumentData.flattenedPath),
+         // NOTE `restOptions` should be spread at the end to allow for user overrides
+         ...restOptions,
+     };

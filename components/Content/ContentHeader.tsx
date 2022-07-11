@@ -3,7 +3,7 @@ import ContentTags from "./ContentTags";
 
 interface Props {
   children?: ReactNode;
-  tags: string[] | false;
+  tags: string[];
 }
 
 export default function ContentHeader({ children, tags }: Props) {

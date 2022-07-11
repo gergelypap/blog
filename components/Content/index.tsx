@@ -1,38 +1,31 @@
-import ContentDate from "@components/Content/ContentDate";
-import ContentHeader from "@components/Content/ContentHeader";
 import ContentTitleLink from "@components/Content/ContentTitleLink";
 import ReadingTime from "@components/Content/ReadingTime";
+import Link from "@components/Link";
 import MDX from "@components/MDX";
 import PageTitle from "@components/PageTitle";
-import { Post, SnippetContent } from "@utils/types";
-import Link from "next/link";
+import { Snippet, type Post } from "contentlayer/generated";
+import ContentDate from "./ContentDate";
+import ContentHeader from "./ContentHeader";
 
 interface Props {
-  content: Post | SnippetContent;
+  content: Post | Snippet;
   full?: boolean;
 }
-
-const backLinks = {
-  post: "/blog",
-  snippet: "/snippets",
-};
 
 export default function Content({ content, full = false }: Props) {
   return (
     <article className="mb-10">
       {full ? (
-        <PageTitle>{content.meta.title}</PageTitle>
+        <PageTitle>{content.title}</PageTitle>
       ) : (
-        <ContentTitleLink permalink={content.permalink}>{content.meta.title}</ContentTitleLink>
+        <ContentTitleLink permalink={content.permalink}>{content.title}</ContentTitleLink>
       )}
-      <ContentHeader tags={full && content.meta.tags}>
+      <ContentHeader tags={full && content.tags ? content.tags : []}>
         <ContentDate content={content} />
-        {content.type === "post" && <ReadingTime data={(content as Post).readingTime} />}
+        {content.type === "Post" && <ReadingTime data={content.readingTime} />}
       </ContentHeader>
-      <section className="my-5">{full ? <MDX code={content.code} /> : <p>{content.meta.lead}</p>}</section>
-      <footer>
-        {full ? <Link href={backLinks[content.type]}>← Back</Link> : <Link href={content.permalink}>Read more →</Link>}
-      </footer>
+      <section className="my-5">{full ? <MDX code={content.body.code} /> : <p>{content.lead}</p>}</section>
+      <footer>{!full && <Link href={content.permalink}>Read more →</Link>}</footer>
     </article>
   );
 }

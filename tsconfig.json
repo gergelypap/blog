@@ -22,9 +22,10 @@
       "@lib/*": ["lib/*"],
       "@type/*": ["type/*"],
       "@utils/*": ["utils/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
-  "include": ["next-env.d.ts", "index.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "index.d.ts", "**/*.ts", "**/*.tsx", ".contentlayer/generated"],
   "exclude": ["node_modules"]
 }

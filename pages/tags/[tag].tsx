@@ -3,16 +3,15 @@ import DefaultLayout from "@components/Layout/DefaultLayout";
 import PageTitle from "@components/PageTitle";
 import SnippetBox from "@components/Snippet/SnippetBox";
 import Tag from "@components/Tag";
-import { getContentByTag } from "@lib/api";
 import Config from "@utils/config";
-import type { Post, SnippetContent } from "@utils/types";
+import { allPosts, allSnippets, type Post, type Snippet } from "contentlayer/generated";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 
 interface Props {
   content: {
     posts: Post[];
-    snippets: SnippetContent[];
+    snippets: Snippet[];
   };
   tag: string;
 }
@@ -45,14 +44,16 @@ export default function TagsPage({ content, tag }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps<Props, { tag: string }> = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const tag = params!.tag;
-  const content = await getContentByTag(tag);
+  const tag = params!.tag as string;
 
   return {
     props: {
-      content,
+      content: {
+        posts: allPosts.filter((content) => content.tags.includes(tag)),
+        snippets: allSnippets.filter((content) => content.tags.includes(tag)),
+      },
       tag,
     },
   };
