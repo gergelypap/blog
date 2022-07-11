@@ -1,10 +1,25 @@
+import type { ComputedFieldResolver } from "contentlayer/core";
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import { readFileSync } from "fs";
 import { join } from "path";
 import readingTime from "reading-time";
-import rehypePrettyCode, { Options } from "rehype-pretty-code";
+import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 import { remarkMdxImages } from "remark-mdx-images";
 import remarkUnwrapImages from "remark-unwrap-images";
+
+const dateResolver: ComputedFieldResolver = (doc) => {
+  const match = doc._raw.sourceFileDir.match(/\d{4}-\d{2}-\d{2}/);
+
+  return match ? match[0] : null;
+};
+
+const slugResolver: ComputedFieldResolver = (doc) => {
+  const dir = doc._raw.sourceFileDir.split("/").reverse()[0];
+  const datePattern = /^\d{4}-\d{2}-\d{2}-/;
+
+  // If it starts with date, remove it so the URL looks like `/blog/some-slug`.
+  return datePattern.test(dir) ? dir.replace(datePattern, "") : dir;
+};
 
 export const Post = defineDocumentType(() => ({
   name: "Post",
@@ -23,6 +38,10 @@ export const Post = defineDocumentType(() => ({
       type: "date",
       required: false,
     },
+    published: {
+      type: "boolean",
+      required: true,
+    },
     tags: {
       type: "list",
       required: true,
@@ -34,15 +53,15 @@ export const Post = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => doc._raw.sourceFileDir.replace(/^[a-z]+\/\d{4}-\d{2}-\d{2}-/, ""),
+      resolve: slugResolver,
     },
     permalink: {
       type: "string",
-      resolve: (doc) => "/blog/" + doc._raw.sourceFileDir.replace(/^[a-z]+\/\d{4}-\d{2}-\d{2}-/, ""),
+      resolve: (doc) => "/blog/" + slugResolver(doc),
     },
     createdAt: {
       type: "date",
-      resolve: (doc) => (doc._raw.sourceFileDir.match(/\d{4}-\d{2}-\d{2}/) as string[])[0],
+      resolve: dateResolver,
     },
     readingTime: {
       type: "json",
@@ -77,15 +96,15 @@ export const Snippet = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => doc._raw.sourceFileDir.replace(/^[a-z]+\/\d{4}-\d{2}-\d{2}-/, ""),
+      resolve: slugResolver,
     },
     permalink: {
       type: "string",
-      resolve: (doc) => "/snippets/" + doc._raw.sourceFileDir.replace(/^[a-z]+\/\d{4}-\d{2}-\d{2}-/, ""),
+      resolve: (doc) => "/snippets/" + slugResolver(doc),
     },
     createdAt: {
       type: "date",
-      resolve: (doc) => (doc._raw.sourceFileDir.match(/\d{4}-\d{2}-\d{2}/) as string[])[0],
+      resolve: dateResolver,
     },
   },
 }));

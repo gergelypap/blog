@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       content: {
-        posts: allPosts.filter((content) => content.tags.includes(tag)),
+        posts: allPosts.filter((content) => content.published && content.tags.includes(tag)),
         snippets: allSnippets.filter((content) => content.tags.includes(tag)),
       },
       tag,

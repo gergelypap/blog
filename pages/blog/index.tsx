@@ -48,7 +48,9 @@ export default function BlogPostsPage({ posts }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
+  const posts = allPosts
+    .filter((post) => post.published)
+    .sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
 
   return {
     props: {

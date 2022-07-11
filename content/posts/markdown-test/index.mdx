@@ -1,0 +1,326 @@
+---
+title: Markdown Test
+lead: This content does not appear publicly and only serves as testing Markdown/MDX content.
+published: false
+tags: []
+---
+
+import Demo from "./Demo";
+
+# Heading 1
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, omnis. Atque delectus iste
+voluptates temporibus dignissimos. Eligendi fugit voluptates tenetur facere obcaecati optio nihil
+minima ipsam animi aliquid? Tenetur, perspiciatis.
+
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut repellendus illum nobis distinctio,
+tempore vero at accusamus provident praesentium quia velit similique odit modi ipsam molestias enim
+vitae doloribus corrupti fuga, culpa, iusto repellat libero necessitatibus amet. Placeat, minus
+magnam.
+
+Some link https://github.com
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+# Link in [heading](#) text
+
+# [Full link heading](#)
+
+# Code in `heading`
+
+# Code link in [`heading`](#)
+
+# Interactive component
+
+This is a counter button:
+
+<Demo />
+
+# Images
+
+Image loaded as `![alt text](./image.jpg "title")`:
+
+![alt text](./image.jpg "title")
+
+Linked image loaded as `[![alt text](./image.jpg "title")](url)`
+
+[![alt text](./image.jpg "title")](#)
+
+Image loaded via `next/image`:
+
+```jsx
+import importedImage from "./image.jpg";
+
+<Image src={importedImage} alt="some image" width="640" height="360" />;
+```
+
+import importedImage from "./image.jpg";
+
+<Image src={importedImage} alt="some image" width="640" height="360" />
+
+# Text
+
+**This is bold text**
+
+_This text is italicized_
+
+~This was mistaken text~
+
+~~This was mistaken text~~
+
+**This text is _extremely_ important**
+
+**_All this text is important_**
+
+Normal text <sub>This is a subscript text</sub> normal text <sup>This is a superscript text</sup>
+
+Some <kbd>Ctrl</kbd> + <kbd>Backspace</kbd> keys.
+
+> Quote: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias nobis, quasi odit in
+> dignissimos sed facere quibusdam culpa architecto vero! Eaque ipsum nulla minima hic vero alias
+> ut, molestiae officiis.
+
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis, tempora?
+
+> Quote with [links](#) and `inline code` and [`linked code`](#) and **bold text** and _italic text_
+> and ~~strikethrough text~~ and **bold combined with _italics_ text** and also **_very important
+> text_** normal text <sub>This is a subscript text</sub> normal text
+>
+> <sup>This is a superscript text</sup> and Some <kbd>Ctrl</kbd> + <kbd>Backspace</kbd> keys.
+
+Horizontal rule:
+
+---
+
+Unordered list with - signs:
+
+- George Washington
+- John Adams
+- Thomas Jefferson
+
+Ordered list:
+
+1. first
+2. second
+3. third
+
+Nested list:
+
+1. First list item
+   - First nested list item
+     - Second nested list item
+2. Second item
+   1. first nested
+      - some item
+      - some item
+        - some deeply nested item
+   2. second nested
+      - some item
+      - some item
+   3. third nested
+
+List starting with 100:
+
+100. First list item
+101. Second list item
+
+Nested starting with 100:
+
+100. First list item
+     - First nested list item
+       - Second nested list item
+
+Github task list:
+
+- [x] #739
+- [ ] https://github.com/octo-org/octo-repo/issues/740
+- [ ] Add delight to the experience when all tasks are complete :tada:
+- [ ] \(Optional) Open a followup issue
+
+Github mention people and teams:
+
+@github/support What do you think about these updates?
+
+Github emojis:
+
+@octocat :+1: This PR looks great - it's ready to merge! :shipit:
+
+Issue or PR: https://github.com/jlord/sheetsee.js/issues/26
+
+PR number: #26
+
+GH- and issue or pull request number: GH-26
+
+Username/repo: jlord/sheetsee.js#26
+
+Organization/repo: github/linguist#4039
+
+Commit URL: https://github.com/jlord/sheetsee.js/commit/a5c3785ed8d6a35868bc169f07e40e889087fd2e
+
+Commit SHA: a5c3785ed8d6a35868bc169f07e40e889087fd2e
+
+User@SHA: jlord@a5c3785ed8d6a35868bc169f07e40e889087fd2e
+
+Username/Repostiroy@SHA: jlord/sheetsee.js@a5c3785ed8d6a35868bc169f07e40e889087fd2e
+
+# Footnotes
+
+Here is a simple footnote[^1].
+
+A footnote can also have multiple lines[^2].
+
+You can also use words, to fit your writing style more closely[^note].
+
+[^1]: My reference.
+[^2]:
+    Every new line should be prefixed with 2 spaces.  
+    This allows you to have a footnote with multiple lines.
+
+[^note]:
+    Named footnotes will still render with numbers instead of the text but allow easier
+    identification and linking.  
+    This footnote also has been made with a different syntax using 4 spaces for new lines.
+
+# Comments
+
+Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure, quasi!
+
+TODO
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, eum!
+
+# Ignore formatting
+
+Like this: `Let's rename \*our-new-project\* to \*our-old-project\*.`
+
+Let's rename \*our-new-project\* to \*our-old-project\*.
+
+# Tables
+
+Basic table:
+
+| First Header | Second Header |
+| ------------ | ------------- |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
+Basic table without indentation:
+
+| Command    | Description                                    |
+| ---------- | ---------------------------------------------- |
+| git status | List all new or modified files                 |
+| git diff   | Show file differences that haven't been staged |
+
+Alignment:
+
+| Left-aligned | Center-aligned | Right-aligned |
+| :----------- | :------------: | ------------: |
+| git status   |   git status   |    git status |
+| git diff     |    git diff    |      git diff |
+
+Include pipe:
+
+| Name     | Character |
+| -------- | --------- |
+| Backtick | `         |
+| Pipe     | \|        |
+
+# Collapsed sections with `<details>`
+
+**[!!!] CAUSES HYDRATION MISMATCH**
+
+```
+<details>
+  <summary>CLICK ME</summary>
+  <p>
+
+#### We can hide anything, even code!
+
+  </p>
+</details>
+```
+
+# Code blocks
+
+No formatting:
+
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
+
+JavaScript formatting:
+
+```js
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
+
+Code block with title, highlighted text, words and line numbers:
+
+```typescript showLineNumbers /response/ {4-7,11} title="Some title"
+const getAccessToken = async () => {
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${basic}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(`?grant_type=refresh_token&refresh_token=${refreshToken}`),
+  });
+
+  return response.json();
+};
+```
+
+Shell command:
+
+```shell
+$ cat file.txt | grep "some text"
+```
+
+Ruby:
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+
+Code block inside code block:
+
+````
+```
+Look! You can see my backticks.
+```
+````
+
+Diagram:
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+# Math (needs LaTeX)
+
+This sentence uses `$` delimiters to show math inline: $\sqrt{3-1}+(1+x)^2$
+
+```math
+\sqrt{3}
+```
+
+To split <span>$</span>100 in half, we calculate $100/2$
