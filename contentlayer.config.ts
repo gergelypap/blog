@@ -4,6 +4,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import readingTime from "reading-time";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
+import remarkGfm from "remark-gfm";
 import { remarkMdxImages } from "remark-mdx-images";
 import remarkUnwrapImages from "remark-unwrap-images";
 
@@ -135,7 +136,7 @@ export default makeSource({
   mdx: {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    remarkPlugins: [remarkUnwrapImages, remarkMdxImages],
+    remarkPlugins: [remarkUnwrapImages, remarkMdxImages, remarkGfm],
     rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
     esbuildOptions: (options) => {
       options.loader = {
