@@ -16,7 +16,7 @@ export default function SnippetsPage({ snippets }: Props) {
   return (
     <DefaultLayout>
       <Head>
-        <title>Snippets | {Config.appName}</title>
+        <title>{`Snippets | ${Config.appName}`}</title>
       </Head>
       <section>
         <PageTitle>All snippets</PageTitle>

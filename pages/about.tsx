@@ -8,7 +8,7 @@ export default function About() {
   return (
     <DefaultLayout>
       <Head>
-        <title>About | {Config.appName}</title>
+        <title>{`About | ${Config.appName}`}</title>
       </Head>
       <PageTitle>About</PageTitle>
       <p>

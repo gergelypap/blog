@@ -13,7 +13,7 @@ export default function TagsListingPage({ tags }: Props) {
   return (
     <DefaultLayout>
       <Head>
-        <title>Tags | {Config.appName}</title>
+        <title>{`Tags | ${Config.appName}`}</title>
       </Head>
       <PageTitle>Tags</PageTitle>
       {tags.length ? (

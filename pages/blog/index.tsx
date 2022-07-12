@@ -22,7 +22,7 @@ export default function BlogPostsPage({ posts }: Props) {
   return (
     <DefaultLayout>
       <Head>
-        <title>Blog | {Config.appName}</title>
+        <title>{`Blog | ${Config.appName}`}</title>
       </Head>
       <section>
         <PageTitle>All blog posts</PageTitle>

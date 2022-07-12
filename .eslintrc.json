@@ -39,7 +39,8 @@
       "files": "*.{md,mdx}",
       "extends": ["plugin:mdx/recommended"],
       "rules": {
-        "react/jsx-no-undef": "off"
+        "react/jsx-no-undef": "off",
+        "jsx-a11y/anchor-has-content": "off"
       }
     }
   ]
