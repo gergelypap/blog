@@ -153,8 +153,8 @@ export default makeSource({
         ".webp": "file",
         ".gif": "file",
       };
-      options.outdir = join(process.cwd(), ".next", "static", "media");
-      options.publicPath = "/_next/static/media";
+      options.outdir = join(process.cwd(), "public/img/generated");
+      options.publicPath = "/img/generated";
       options.write = true;
 
       return options;
