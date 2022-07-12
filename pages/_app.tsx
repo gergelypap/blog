@@ -32,15 +32,14 @@ const SEO = {
 };
 
 const analyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
-const isProduction = process.env.NODE_ENV === "production";
 
 function App({ Component, pageProps }: AppProps) {
-  useAnalytics(isProduction);
+  useAnalytics(Config.isProduction);
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system">
       <DefaultSeo {...SEO} />
-      {isProduction && (
+      {Config.isProduction && (
         <>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`} strategy="afterInteractive" />
           <Script id="google-analytics" strategy="afterInteractive">
