@@ -3,7 +3,9 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import { readFileSync } from "fs";
 import { join } from "path";
 import readingTime from "reading-time";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode, { type Options } from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { remarkMdxImages } from "remark-mdx-images";
 import remarkUnwrapImages from "remark-unwrap-images";
@@ -137,7 +139,11 @@ export default makeSource({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     remarkPlugins: [remarkUnwrapImages, remarkMdxImages, remarkGfm],
-    rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
+    rehypePlugins: [
+      [rehypePrettyCode, rehypePrettyCodeOptions],
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { behavior: "wrap" }],
+    ],
     esbuildOptions: (options) => {
       options.loader = {
         ...options.loader,

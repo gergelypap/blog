@@ -29,7 +29,11 @@
   }
 
   a {
-    @apply text-blue-600 dark:text-blue-500;
+    @apply text-blue-500;
+
+    :where(h1, h2, h3, h4, h5, h6) & {
+      @apply text-inherit;
+    }
 
     &:hover {
       @apply underline;
@@ -137,7 +141,7 @@ code {
   }
 
   a & {
-    @apply !text-blue-500 dark:!text-blue-400;
+    @apply text-blue-500 dark:text-blue-500;
   }
 }
 
@@ -197,4 +201,35 @@ html.dark [data-rehype-pretty-code-fragment] [data-theme="light"] {
 
 html.light [data-rehype-pretty-code-fragment] [data-theme="dark"] {
   display: none;
+}
+
+/* Heading anchor links */
+h1[id],
+h2[id],
+h3[id],
+h4[id],
+h5[id],
+h6[id] {
+  /* Offset fix */
+  padding-top: 1rem;
+  margin-top: -1rem;
+
+  > a > code {
+    color: inherit;
+  }
+  @media screen(md) {
+    position: relative;
+
+    > a::before {
+      content: "¶";
+      position: absolute;
+      left: -1em;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    > a:hover::before {
+      opacity: 1;
+    }
+  }
 }
