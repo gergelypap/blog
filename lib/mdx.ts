@@ -3,6 +3,7 @@ import { readFileSync } from "fs";
 import type { ESBuildOptions } from "mdx-bundler/dist/types";
 import { join } from "path";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePresetMinify from "rehype-preset-minify";
 import rehypePrettyCode, { type Options as RehypePrettyCodeOptions } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
@@ -36,6 +37,7 @@ const mdxOptions: MDXOptions = {
     [rehypePrettyCode, rehypePrettyCodeOptions],
     rehypeSlug,
     [rehypeAutolinkHeadings, { behavior: "wrap" }],
+    rehypePresetMinify,
   ],
   esbuildOptions: (options: ESBuildOptions) => {
     options.loader = {
