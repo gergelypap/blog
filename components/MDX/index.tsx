@@ -9,13 +9,20 @@ interface Props {
 const components = {
   img: (props: { src: string; alt: string }) => {
     return (
-      <figure className="aspect-video	relative my-7 block">
+      <figure className="aspect-video	relative my-10 block">
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image {...props} layout="fill" objectFit="contain" />
       </figure>
     );
   },
-  Image,
+  Image: (props: { src: string; alt: string; width: number; height: number }) => {
+    return (
+      <figure className="my-10 text-center">
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <Image {...props} />
+      </figure>
+    );
+  },
   YouTube,
 };
 
