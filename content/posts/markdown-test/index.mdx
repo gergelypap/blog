@@ -291,6 +291,23 @@ Shell command:
 $ cat file.txt | grep "some text"
 ```
 
+Diff:
+
+```diff
+ async function main() {
+   const file = await unified()
+     .use(rehypeParse, {fragment: true})
++    .use(rehypeHighlight, {subset: false})
+     .use(rehypeSanitize, {
+       ...defaultSchema,
+       attributes: {
+         ...defaultSchema.attributes,
+-        code: [
+-          ...(defaultSchema.attributes.code || []),
+-          // List of all allowed languages:
+-          ['className', 'hljs', 'language-js', 'language-css', 'language-md']
+```
+
 Ruby:
 
 ```ruby
