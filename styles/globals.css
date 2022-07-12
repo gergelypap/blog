@@ -132,7 +132,7 @@ ul.contains-task-list {
 }
 
 code {
-  @apply bg-gray-300 dark:bg-gray-700 rounded-md text-gray-700 dark:text-gray-300;
+  @apply bg-gray-200 dark:bg-gray-700 rounded-md text-gray-700 dark:text-gray-300;
   padding: 0.2em 0.4em;
   font-size: 0.9em;
 
@@ -203,18 +203,9 @@ html.light [data-rehype-pretty-code-fragment] [data-theme="dark"] {
   display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  pre[data-theme="light"],
-  code[data-theme="light"] {
-    display: none;
-  }
-}
-
-@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
-  pre[data-theme="dark"],
-  code[data-theme="dark"] {
-    display: none;
-  }
+/* JavaScript is disabled */
+html:not(.light, .dark) [data-rehype-pretty-code-fragment] [data-theme="dark"] {
+  display: none;
 }
 
 /* Heading anchor links */
